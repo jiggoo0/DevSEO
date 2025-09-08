@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "moduleResolution": "Node",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "useDefineForClassFields": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "@home/*": ["Home/*"],
+      "@assets/*": ["assets/*"],
+      "@styles/*": ["styles/*"],
+      "@data/*": ["data/*"],
+      "@components/*": ["components/*"],
+      "@common/*": ["utils/common/*"],
+      "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
+      "@layout/*": ["Layout/*"],
+      "@router/*": ["Router/*"],
+      "@api/*": ["api/*"],
+      "@services/*": ["services/*"],
+      "@__mocks__/*": ["__mocks__/*"],
+      "@config/*": ["config/*"]
+    },
+    "outDir": "./dist",
+    "rootDir": "./",
+    "types": ["vite/client", "node"]
+  },
+  "include": ["src", "server.ts"],
+  "exclude": ["node_modules", "dist"]
+}
