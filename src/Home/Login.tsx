@@ -3,12 +3,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
-import { users, UserData } from '@/data/users';
 import { useAuth } from '@/hooks/useAuth';
+import { users, UserData } from '@/data/users';
 
 const adminRoutes = [
   { label: 'Dashboard', path: '/admin/dashboard' },
-  { label: 'Secret Page', path: '/admin/secret' },
+  { label: 'Admin Tools', path: '/admin/secret' },
 ];
 
 const Login: React.FC = () => {
@@ -30,21 +30,44 @@ const Login: React.FC = () => {
 
     try {
       const trimmedUsername = username.trim();
-      const userData: UserData | undefined = users[trimmedUsername];
-      if (!userData) throw new Error('ไม่พบผู้ใช้นี้ในระบบ');
 
-      const match = await bcrypt.compare(password, userData.hash);
-      if (!match) throw new Error('รหัสผ่านไม่ถูกต้อง');
+      /** ---------- Production API Login ---------- */
+      const isProd = process.env.NODE_ENV === 'production';
 
-      const authUser = {
-        username: trimmedUsername,
-        role: userData.role as 'admin' | 'manager' | 'user',
-      };
+      let authUser: { username: string; role: 'admin' | 'manager' | 'user' };
 
-      // Admin จะยังไม่ redirect อัตโนมัติ
+      if (isProd) {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: trimmedUsername, password }),
+        });
+
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.message || 'Login failed');
+        }
+
+        const data = await res.json();
+        authUser = { username: data.username, role: data.role };
+      } else {
+        /** ---------- Dev Mode: Mock users + bcrypt ---------- */
+        const userData: UserData | undefined = users[trimmedUsername];
+        if (!userData) throw new Error('ไม่พบผู้ใช้นี้ในระบบ');
+
+        const match = await bcrypt.compare(password, userData.hash);
+        if (!match) throw new Error('รหัสผ่านไม่ถูกต้อง');
+
+        authUser = {
+          username: trimmedUsername,
+          role: userData.role as 'admin' | 'manager' | 'user',
+        };
+      }
+
+      /** ---------- Handle Admin Choice ---------- */
       if (authUser.role === 'admin') {
         setShowAdminChoice(true);
-        setUser(authUser); // เก็บใน context แต่ยังไม่เซฟ localStorage
+        setUser(authUser);
       } else {
         localStorage.setItem('user', JSON.stringify(authUser));
         setUser(authUser);
@@ -58,9 +81,8 @@ const Login: React.FC = () => {
   };
 
   const handleAdminConfirm = () => {
-    const authUser = users[username.trim()];
-    if (!authUser) return;
     const user = { username: username.trim(), role: 'admin' as const };
+    setUser(user);
     localStorage.setItem('user', JSON.stringify(user));
     navigate(adminRedirect, { replace: true });
   };
@@ -114,7 +136,9 @@ const Login: React.FC = () => {
           </form>
         ) : (
           <div className="space-y-4">
-            <p className="text-center">เลือกหน้าที่ต้องการเข้า (Admin)</p>
+            <p className="text-center font-semibold">
+              กรุณาเลือกหน้าที่ Admin ที่ต้องการเข้าใช้งาน
+            </p>
             <select
               className="input input-bordered w-full"
               value={adminRedirect}

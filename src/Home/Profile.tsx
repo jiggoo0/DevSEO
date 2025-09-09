@@ -12,7 +12,7 @@ const Profile: FC = () => {
   const [email, setEmail] = useState(user?.email ?? '');
   const [message, setMessage] = useState('');
 
-  // Sync state when user data changes
+  /** Sync state when user changes */
   useEffect(() => {
     if (!user) return;
     setUsername(user.username ?? '');

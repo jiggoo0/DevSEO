@@ -9,14 +9,17 @@ import { dirname, resolve } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Env flags
+// Env detection
 const isTermux = Boolean(process.env.TERMUX_VERSION);
 const isProduction = process.env.NODE_ENV === 'production';
 
-// Base API URL
-const VITE_API_URL: string = process.env.VITE_API_URL || 'http://localhost:3000';
+// Default env fallback
+const VITE_API_URL = process.env.VITE_API_URL || 'http://localhost:4000';
+const VITE_APP_BASE_URL = process.env.VITE_APP_BASE_URL || '/';
 
 export default defineConfig({
+  base: VITE_APP_BASE_URL,
+
   plugins: [
     react(),
     tsconfigPaths(),
@@ -24,26 +27,21 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: process.env.VITE_APP_NAME || 'JP VisoulDocs',
+        name: process.env.VITE_APP_NAME || 'VisoulDocs',
         short_name: 'VisoulDocs',
         description: 'Enterprise-grade document management & dashboard',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
-        scope: process.env.VITE_APP_BASE_URL || '/',
-        start_url: process.env.VITE_APP_BASE_URL || '/',
+        scope: VITE_APP_BASE_URL,
+        start_url: VITE_APP_BASE_URL,
         icons: [
           { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
           { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
-          },
+          { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
         ],
       },
-      disable: !isProduction || isTermux,
+      disable: !isProduction || isTermux, // ปิด PWA บน dev หรือ Termux
     }),
   ],
 

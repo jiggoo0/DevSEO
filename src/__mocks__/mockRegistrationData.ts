@@ -3,7 +3,7 @@ import type { RegistrationPreviewProps } from '@home/AdminTools/RegistrationPrev
 
 export const mockRegistrationData: RegistrationPreviewProps = {
   registrationNumber: '0105551234567',
-  businessName: 'ร้านค้า ABC',
+  businessName: '291,633.00 THB',
   ownerName: 'นายสมชาย ใจดี',
   address: {
     houseNumber: '123/45',

@@ -7,7 +7,7 @@ import FallbackLoader from '@/utils/common/FallbackLoader';
 
 const Home: FC = () => {
   return (
-    <div className="flex flex-col gap-12">
+    <main className="flex flex-col gap-12">
       {homeSections
         .filter((section: HomeSection) => section.enabled)
         .map((section: HomeSection) => {
@@ -19,13 +19,15 @@ const Home: FC = () => {
               className="scroll-mt-20"
               aria-label={section.id}
             >
-              <Suspense fallback={<FallbackLoader message={`⏳ กำลังโหลดส่วน ${section.id}...`} />}>
-                <SectionComponent />
+              <Suspense
+                fallback={<FallbackLoader message={`⏳ กำลังโหลดส่วน "${section.id}"...`} />}
+              >
+                {SectionComponent ? <SectionComponent /> : null}
               </Suspense>
             </section>
           );
         })}
-    </div>
+    </main>
   );
 };
 

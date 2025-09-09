@@ -23,7 +23,7 @@ const Settings: FC = () => {
     }
 
     // ✅ Mock update password
-    // ใน production: เรียก API เพื่ออัปเดตรหัสผ่าน
+    // Production: เรียก API อัปเดตรหัสผ่านจริง
     setMessage('บันทึกรหัสผ่านเรียบร้อย ✅');
     setPassword('');
     setConfirmPassword('');

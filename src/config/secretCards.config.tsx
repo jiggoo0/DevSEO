@@ -10,6 +10,17 @@ import mockRegistrationData from '@__mocks__/mockRegistrationData';
 import mockSalaryCertificate from '@__mocks__/mockSalaryCertificate';
 import mockMedicalCertificate from '@__mocks__/mockMedicalCertificate';
 
+// ✅ import 1–4
+import PoliceReport from '@/Home/AdminTools/PoliceReport';
+import CourtOrder from '@/Home/AdminTools/CourtOrder';
+import CompanyAccount from '@/Home/AdminTools/CompanyAccount';
+import KBankLive from '@/Home/AdminTools/KBankLive';
+
+import { mockPoliceReport } from '@__mocks__/mockPoliceReport';
+import { mockCourtOrder } from '@__mocks__/mockCourtOrder';
+import { mockCompanyAccount } from '@__mocks__/mockCompanyAccount';
+import { mockKBankLive } from '@__mocks__/mockKBankLive';
+
 // Lazy-loaded components
 const RegistrationPreview = lazy(
   () => import('@/Home/AdminTools/RegistrationPreview/RegistrationPreview'),
@@ -122,6 +133,44 @@ export const getLazyCards = (user: User, effectiveRole: EffectiveRole): LazyCard
             ),
           )}
         </>
+      ),
+      delay: nextDelay(),
+    },
+
+    // ✅ เพิ่มรายการ 1–4
+    {
+      title: 'Police Report',
+      component: wrapBlur(
+        withFallback(<PoliceReport data={mockPoliceReport} />),
+        shouldBlur,
+        'เฉพาะแอดมินเท่านั้น',
+      ),
+      delay: nextDelay(),
+    },
+    {
+      title: 'Court Order',
+      component: wrapBlur(
+        withFallback(<CourtOrder data={mockCourtOrder} />),
+        shouldBlur,
+        'เฉพาะแอดมินเท่านั้น',
+      ),
+      delay: nextDelay(),
+    },
+    {
+      title: 'Company Account',
+      component: wrapBlur(
+        withFallback(<CompanyAccount data={mockCompanyAccount} />),
+        shouldBlur,
+        'เฉพาะแอดมินเท่านั้น',
+      ),
+      delay: nextDelay(),
+    },
+    {
+      title: 'KBank Live',
+      component: wrapBlur(
+        withFallback(<KBankLive data={mockKBankLive} />),
+        shouldBlur,
+        'เฉพาะแอดมินเท่านั้น',
       ),
       delay: nextDelay(),
     },
