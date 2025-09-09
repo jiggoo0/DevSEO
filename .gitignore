@@ -1,6 +1,4 @@
-# -------------------------------
 # Logs
-# -------------------------------
 logs/
 *.log
 npm-debug.log*
@@ -8,16 +6,12 @@ yarn-debug.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# -------------------------------
 # Runtime / Temp data
-# -------------------------------
 *.local
 .backup/
 *.bak
 
-# -------------------------------
 # Build output
-# -------------------------------
 dist/
 dist-ssr/
 build/
@@ -25,22 +19,17 @@ out/
 coverage/
 tsconfig.tsbuildinfo
 
-# -------------------------------
 # Dependencies
-# -------------------------------
 node_modules/
 
-# -------------------------------
 # Environment variables
-# -------------------------------
 .env
 .env.local
 .env.*.local
 .env.production
 .env.example
-# -------------------------------
+
 # IDE / Editor settings
-# -------------------------------
 .vscode/
 !.vscode/extensions.json
 .idea/
@@ -51,49 +40,35 @@ node_modules/
 *.sln
 *.sw?
 
-# -------------------------------
 # OS generated files
-# -------------------------------
 Thumbs.db
 ehthumbs.db
 Icon?
 Desktop.ini
 
-# -------------------------------
 # Deployment / Vercel
-# -------------------------------
 .vercel/
 
-# -------------------------------
 # Lockfiles
-# -------------------------------
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
 .pnpm-debug.log
 
-# -------------------------------
 # SSL / Keys
-# -------------------------------
 *.pem
 *.crt
 *.key
 *.cert
 
-# -------------------------------
 # Archives
-# -------------------------------
 *.zip
 *.tar.gz
 *.tgz
 *.7z
 
-# -------------------------------
 # Tailwind / PostCSS / Vite cache
-# -------------------------------
 node_modules/.vite/
 
-# -------------------------------
 # Miscellaneous
-# -------------------------------
 .vercel

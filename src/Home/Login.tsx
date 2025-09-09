@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
 import { useAuth } from '@/hooks/useAuth';
@@ -11,7 +11,7 @@ const adminRoutes = [
   { label: 'Admin Tools', path: '/admin/secret' },
 ];
 
-const Login: React.FC = () => {
+const Login: FC = () => {
   const navigate = useNavigate();
   const { setUser } = useAuth();
 
@@ -30,47 +30,37 @@ const Login: React.FC = () => {
 
     try {
       const trimmedUsername = username.trim();
-
-      /** ---------- Production API Login ---------- */
-      const isProd = process.env.NODE_ENV === 'production';
-
       let authUser: { username: string; role: 'admin' | 'manager' | 'user' };
 
-      if (isProd) {
+      if (process.env.NODE_ENV === 'production') {
+        // Production API login
         const res = await fetch('/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: trimmedUsername, password }),
         });
-
         if (!res.ok) {
           const data = await res.json().catch(() => ({}));
           throw new Error(data.message || 'Login failed');
         }
-
         const data = await res.json();
         authUser = { username: data.username, role: data.role };
       } else {
-        /** ---------- Dev Mode: Mock users + bcrypt ---------- */
+        // Dev Mode: Mock login
         const userData: UserData | undefined = users[trimmedUsername];
         if (!userData) throw new Error('ไม่พบผู้ใช้นี้ในระบบ');
-
         const match = await bcrypt.compare(password, userData.hash);
         if (!match) throw new Error('รหัสผ่านไม่ถูกต้อง');
-
-        authUser = {
-          username: trimmedUsername,
-          role: userData.role as 'admin' | 'manager' | 'user',
-        };
+        authUser = { username: trimmedUsername, role: userData.role as 'admin' | 'manager' | 'user' };
       }
 
-      /** ---------- Handle Admin Choice ---------- */
+      // Handle admin role
       if (authUser.role === 'admin') {
         setShowAdminChoice(true);
         setUser(authUser);
       } else {
-        localStorage.setItem('user', JSON.stringify(authUser));
         setUser(authUser);
+        localStorage.setItem('user', JSON.stringify(authUser));
         navigate(authUser.role === 'manager' ? '/manager' : '/user', { replace: true });
       }
     } catch (err: unknown) {

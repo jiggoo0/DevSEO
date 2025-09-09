@@ -1,5 +1,5 @@
 // server/data/users.ts
-import bcrypt from 'bcryptjs';
+import _bcrypt from 'bcryptjs';
 
 export interface UserData {
   username: string;

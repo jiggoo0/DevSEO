@@ -9,29 +9,9 @@
   "arrowParens": "always",
   "endOfLine": "lf",
   "overrides": [
-    {
-      "files": "*.ts",
-      "options": {
-        "parser": "typescript"
-      }
-    },
-    {
-      "files": "*.tsx",
-      "options": {
-        "parser": "typescript"
-      }
-    },
-    {
-      "files": "*.js",
-      "options": {
-        "parser": "babel"
-      }
-    },
-    {
-      "files": "*.jsx",
-      "options": {
-        "parser": "babel"
-      }
-    }
+    { "files": "*.ts", "options": { "parser": "typescript" } },
+    { "files": "*.tsx", "options": { "parser": "typescript" } },
+    { "files": "*.js", "options": { "parser": "babel" } },
+    { "files": "*.jsx", "options": { "parser": "babel" } }
   ]
 }

@@ -5,11 +5,12 @@
   "type": "module",
   "sideEffects": false,
   "engines": {
-    "node": ">=18.0.0"
+    "node": "22.x",
+    "pnpm": "10.x"
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npx tsc --project tsconfig.server.json",
+    "build": "vite build",
     "preview": "vite preview",
     "start:server:dev": "ts-node --esm server/index.ts",
     "build:server": "npx tsc --project tsconfig.server.json",
@@ -19,7 +20,8 @@
     "clean": "scripts/clean.sh && pnpm install",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --fix --no-warn-ignored",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "deploy":"bash ./scripts/deploy.sh"
   },
   "dependencies": {
     "@faker-js/faker": "10.0.0",
