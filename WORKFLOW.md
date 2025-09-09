@@ -38,11 +38,3 @@ AI มี ศักยภาพสูงพอ สำหรับงานนี
 สามารถ แก้ไข, สร้าง, ปรับปรุง Component และ Config ให้ production-ready ได้
 ⚠️ กำชับย้ำคำสั่ง ว่าโค้ดทุกตัวคือโค้ดเว็ปไซต์ที่ใช้งานอยู่ปัจจุบัน สิ่งที่ต้องทำ Format Code ให้ตรง Logic หรือแนวทางที่ให้ไป ส่วนถ้าเป็น การตั้งค่า Config & Data ตั้งค่าให้แม่นโดยอ้างอิงข้อมูลปัจจุบัน ทางเทคนิ ตัวแปรและสูตรคำนวน ⚠️
 สามารถ สร้างรายงานสรุปและตรวจสอบสภาพโปรเจกต์ อัตโนมัติ
-VITE_APP_TITLE=JP - VISOUL & DOSC
-VITE_APP_DESCRIPTION=ระบบบริการและแพลตฟอร์มด้วย React + TypeScript + Vite
-VITE_APP_THEME_COLOR=#3b82f6
-VITE_APP_FAVICON=/logo.webp
-VITE_APP_APPLE_ICON=/apple-touch-icon.png
-VITE_APP_MANIFEST=/manifest.webmanifest
-VITE_APP_OG_IMAGE=/logo.webp
-VITE_APP_BASE_URL=https://404notfontjp.vercel.app/

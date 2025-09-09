@@ -12,9 +12,9 @@ term_log() { echo -e "$1"; }
 # -----------------------------
 if [ -f .env ]; then
   while IFS='=' read -r key value; do
-    [[ "$key" =~ ^#.*$ ]] && continue
+    [[ "$key" =~ ^#.*$ || -z "$key" ]] && continue
     if [[ "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
-      export "$key=$value"
+      export "$key"="$value"
     fi
   done < <(grep -v '^\s*$' .env)
 fi
@@ -73,12 +73,16 @@ done
 ALIAS_STATUS="Not checked ❌"
 if [ -f scripts/alias.ts ]; then
   NODE_VER=$(node -v)
-  TSNODE_VER=$(ts-node -v 2>/dev/null || echo "N/A")
-  OUTPUT=$(node -r ts-node/register scripts/alias.ts --check 2>&1 || true)
-  if echo "$OUTPUT" | grep -q "❌"; then
-    ALIAS_STATUS="❌ alias issues (Node: $NODE_VER, ts-node: $TSNODE_VER)"
+  if command -v ts-node >/dev/null 2>&1; then
+    TSNODE_VER=$(ts-node -v)
+    OUTPUT=$(node -r ts-node/register scripts/alias.ts --check 2>&1 || true)
+    if echo "$OUTPUT" | grep -q "❌"; then
+      ALIAS_STATUS="❌ alias issues (Node: $NODE_VER, ts-node: $TSNODE_VER)"
+    else
+      ALIAS_STATUS="✅ all imports alias ok (Node: $NODE_VER, ts-node: $TSNODE_VER)"
+    fi
   else
-    ALIAS_STATUS="✅ all imports alias ok (Node: $NODE_VER, ts-node: $TSNODE_VER)"
+    ALIAS_STATUS="❌ ts-node not installed"
   fi
 fi
 
@@ -87,7 +91,11 @@ fi
 # -----------------------------
 TREE_TOP="src"
 if [ -d "$TREE_TOP" ]; then
-  TREE_CONTENT=$(command -v tree >/dev/null 2>&1 && tree -L 10 "$TREE_TOP" || find "$TREE_TOP" -maxdepth 10 -print)
+  if command -v tree >/dev/null 2>&1; then
+    TREE_CONTENT=$(tree -I "node_modules|dist|.git" -L 10 "$TREE_TOP")
+  else
+    TREE_CONTENT=$(find "$TREE_TOP" -maxdepth 10 -not -path "*/node_modules/*" -not -path "*/dist/*" -print)
+  fi
 else
   TREE_CONTENT="> ❌ $TREE_TOP folder not found"
 fi
@@ -96,7 +104,7 @@ fi
 # 6️⃣ Project Info
 # -----------------------------
 GITHUB_URL="${GITHUB_URL:-https://github.com/jiggoo0/vite-react}"
-DEVELOPER_EMAIL="${DEVELOPER_EMAIL:-you@example.com}"
+DEVELOPER_EMAIL="${DEVELOPER_EMAIL:-jiggo0@outlook.co.th}"
 WEBSITE_URL="${WEBSITE_URL:-https://404notfontjp.vercel.app/}"
 VERCEL_ACCOUNT="${VERCEL_ACCOUNT:-jiggoos-projects}"
 VERCEL_PROJECT_NAME="${VERCEL_PROJECT_NAME:-vite-react}"
@@ -152,7 +160,6 @@ $PROJECT_INFO
 - ROADMAP.md & WORKFLOW.md included if present
 EOF
 
-# Append RODEMAP.md and WORKFLOW.md if exists
 for file in ROADMAP.md WORKFLOW.md; do
   [ -f "$file" ] && echo -e "\n## 📝 $file\n$(cat "$file")" >> "$REPORT"
 done
