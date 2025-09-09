@@ -1,0 +1,50 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  vercel-deploy:
+    name: Deploy Production
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      # 3. Install pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm@10
+
+      # 4. Set Vercel environment variables
+      - name: Set Vercel env
+        run: |
+          echo "VERCEL_TOKEN=${{ secrets.VERCEL_TOKEN }}" >> $GITHUB_ENV
+          echo "VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }}" >> $GITHUB_ENV
+
+      # 5. Run deploy script
+      - name: Deploy to Vercel
+        run: bash ./scripts/deploy.sh
+
+      # 6. Upload deploy URL as artifact
+      - name: Upload deploy URL
+        uses: actions/upload-artifact@v4
+        with:
+          name: vercel-deploy-url
+          path: DEPLOY_URL.txt
+
+      # 7. Comment deployment URL on PR / commit
+      - name: Comment deployment URL
+        if: github.event_name == 'push'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: DEPLOY_URL.txt

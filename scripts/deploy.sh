@@ -1,57 +1,78 @@
 #!/usr/bin/env bash
-# scripts/deploy.sh - Vercel CI/CD simplified (no OIDC)
+# -----------------------------
+# Full CI/CD Deploy Script for Vercel
+# -----------------------------
 set -euo pipefail
 
-# -----------------------------
-# Path setup
-# -----------------------------
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ENV_FILE="$ROOT_DIR/.env.production"
+DEPLOY_LOG="$ROOT_DIR/DEPLOY_URL.txt"
 
 # -----------------------------
 # Load .env.production
 # -----------------------------
 if [[ -f "$ENV_FILE" ]]; then
   echo "🔑 Loading environment from $ENV_FILE"
-  export $(grep -v '^#' "$ENV_FILE" | xargs)
+  set -a
+  source "$ENV_FILE"
+  set +a
 else
   echo "❌ Missing $ENV_FILE"
   exit 1
 fi
 
 # -----------------------------
-# Validate Vercel token
+# Validate required variables
 # -----------------------------
 : "${VERCEL_TOKEN:?VERCEL_TOKEN not set}"
 : "${VERCEL_PROJECT_ID:?VERCEL_PROJECT_ID not set}"
+: "${VITE_API_URL:?VITE_API_URL not set}"
+: "${VITE_APP_NAME:?VITE_APP_NAME not set}"
+: "${VITE_APP_BASE_URL:?VITE_APP_BASE_URL not set}"
 
 # -----------------------------
-# Install deps & build
+# Install dependencies & build
 # -----------------------------
 echo "📦 Installing dependencies..."
 pnpm install
 
-echo "🔨 Building project..."
-pnpm run build
+echo "🔨 Building backend..."
+tsc -p "$ROOT_DIR/tsconfig.json"     # Backend → dist-server/
+
+echo "🔨 Building frontend..."
+vite build                           # Frontend → dist/
 
 # -----------------------------
-# Determine deploy target
+# Ensure on main branch
 # -----------------------------
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-DEPLOY_TARGET="preview"
-[[ "$BRANCH" == "main" ]] && DEPLOY_TARGET="production"
-echo "🌿 Deploying branch '$BRANCH' → $DEPLOY_TARGET"
+if [[ "$BRANCH" != "main" ]]; then
+  echo "❌ You must be on branch 'main' to deploy production."
+  exit 1
+fi
 
 # -----------------------------
 # Deploy to Vercel
 # -----------------------------
-DEPLOY_CMD="npx vercel --yes --token $VERCEL_TOKEN"
-[[ "$DEPLOY_TARGET" == "production" ]] && DEPLOY_CMD+=" --prod" || DEPLOY_CMD+=" --prebuilt"
+echo "🌿 Deploying branch '$BRANCH' → production (force rebuild)"
+DEPLOY_URL=$(npx vercel --yes --token "$VERCEL_TOKEN" --prod --force)
 
-echo "🚀 Running deployment..."
-DEPLOY_URL=$($DEPLOY_CMD)
-
+# -----------------------------
+# Log deploy URL
+# -----------------------------
+echo "$DEPLOY_URL" | tee "$DEPLOY_LOG"
 echo "✅ Deployment finished"
 echo "🔗 $DEPLOY_URL"
+
+# -----------------------------
+# Check if production site is live
+# -----------------------------
+echo "🔍 Checking if production site is live..."
+HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$DEPLOY_URL")
+if [[ "$HTTP_STATUS" == "200" ]]; then
+  echo "🌟 Production site is live! HTTP $HTTP_STATUS"
+else
+  echo "⚠️ Production site returned HTTP $HTTP_STATUS"
+fi
 
 echo "🎉 Deploy script completed."
