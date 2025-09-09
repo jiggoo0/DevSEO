@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# -----------------------------
-# Full CI/CD Deploy Script for Vercel
-# -----------------------------
+# scripts/deploy.sh - Vercel CI/CD (force production deploy, log URL & integration)
 set -euo pipefail
 
+# -----------------------------
+# Path setup
+# -----------------------------
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ENV_FILE="$ROOT_DIR/.env.production"
 DEPLOY_LOG="$ROOT_DIR/DEPLOY_URL.txt"
@@ -13,9 +14,7 @@ DEPLOY_LOG="$ROOT_DIR/DEPLOY_URL.txt"
 # -----------------------------
 if [[ -f "$ENV_FILE" ]]; then
   echo "🔑 Loading environment from $ENV_FILE"
-  set -a
-  source "$ENV_FILE"
-  set +a
+  export $(grep -v '^#' "$ENV_FILE" | xargs)
 else
   echo "❌ Missing $ENV_FILE"
   exit 1
@@ -26,21 +25,18 @@ fi
 # -----------------------------
 : "${VERCEL_TOKEN:?VERCEL_TOKEN not set}"
 : "${VERCEL_PROJECT_ID:?VERCEL_PROJECT_ID not set}"
-: "${VITE_API_URL:?VITE_API_URL not set}"
-: "${VITE_APP_NAME:?VITE_APP_NAME not set}"
-: "${VITE_APP_BASE_URL:?VITE_APP_BASE_URL not set}"
+
+# Optional: Vercel Integration deploy URL
+: "${VERCEL_INTEGRATION_URL:=}"  # หากใช้ integration API
 
 # -----------------------------
-# Install dependencies & build
+# Install deps & build
 # -----------------------------
 echo "📦 Installing dependencies..."
 pnpm install
 
-echo "🔨 Building backend..."
-tsc -p "$ROOT_DIR/tsconfig.json"     # Backend → dist-server/
-
-echo "🔨 Building frontend..."
-vite build                           # Frontend → dist/
+echo "🔨 Building project..."
+pnpm run build
 
 # -----------------------------
 # Ensure on main branch
@@ -52,27 +48,26 @@ if [[ "$BRANCH" != "main" ]]; then
 fi
 
 # -----------------------------
-# Deploy to Vercel
+# Force production deploy (CLI)
 # -----------------------------
-echo "🌿 Deploying branch '$BRANCH' → production (force rebuild)"
-DEPLOY_URL=$(npx vercel --yes --token "$VERCEL_TOKEN" --prod --force)
-
-# -----------------------------
-# Log deploy URL
-# -----------------------------
+echo "🌿 Deploying branch '$BRANCH' → production (force rebuild via CLI)"
+DEPLOY_CMD="npx vercel --yes --token $VERCEL_TOKEN --prod --force"
+DEPLOY_URL=$($DEPLOY_CMD)
 echo "$DEPLOY_URL" | tee "$DEPLOY_LOG"
-echo "✅ Deployment finished"
+echo "✅ CLI Deployment finished"
 echo "🔗 $DEPLOY_URL"
 
 # -----------------------------
-# Check if production site is live
+# Optional: Deploy via Integration API
 # -----------------------------
-echo "🔍 Checking if production site is live..."
-HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$DEPLOY_URL")
-if [[ "$HTTP_STATUS" == "200" ]]; then
-  echo "🌟 Production site is live! HTTP $HTTP_STATUS"
-else
-  echo "⚠️ Production site returned HTTP $HTTP_STATUS"
+if [[ -n "$VERCEL_INTEGRATION_URL" ]]; then
+  echo "🌿 Triggering Integration API deploy..."
+  RESPONSE=$(curl -s -X POST "$VERCEL_INTEGRATION_URL" \
+      -H "Authorization: Bearer $VERCEL_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"environment":"production"}')
+  echo "🔗 Integration API response:"
+  echo "$RESPONSE" | jq
 fi
 
 echo "🎉 Deploy script completed."
