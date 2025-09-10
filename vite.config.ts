@@ -11,6 +11,7 @@ const __dirname = dirname(__filename);
 const isTermux = Boolean(process.env.TERMUX_VERSION);
 const isProduction = process.env.NODE_ENV === 'production';
 
+// Client-side environment variables
 const VITE_APP_BASE_URL = process.env.VITE_APP_BASE_URL || '/';
 const VITE_APP_NAME = process.env.VITE_APP_NAME || 'VisoulDocs';
 
@@ -21,7 +22,7 @@ export default defineConfig({
     tsconfigPaths(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg','favicon.ico','robots.txt','apple-touch-icon.png'],
       manifest: {
         name: VITE_APP_NAME,
         short_name: 'VisoulDocs',
@@ -53,13 +54,12 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5173,
-    strictPort: true,
-    proxy: {}
+    strictPort: true
   },
   build: {
     outDir: 'dist',
     target: 'esnext',
-    sourcemap: true,
+    sourcemap: false,
     minify: 'esbuild',
     cssCodeSplit: true,
     chunkSizeWarningLimit: 2000,
@@ -72,8 +72,10 @@ export default defineConfig({
     },
     manifest: true
   },
-  cacheDir: 'node_modules/.vite',
-  optimizeDeps: {
-    include: ['react', 'react-dom']
+  optimizeDeps: { include: ['react', 'react-dom'] },
+  define: {
+    'import.meta.env.VITE_APP_BASE_URL': JSON.stringify(VITE_APP_BASE_URL),
+    'import.meta.env.VITE_APP_NAME': JSON.stringify(VITE_APP_NAME),
+    'import.meta.env.VITE_API_URL': JSON.stringify(process.env.VITE_API_URL) // ใช้ client-side
   }
 });

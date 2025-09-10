@@ -23,9 +23,12 @@ const Login: FC = () => {
   const [adminRedirect, setAdminRedirect] = useState(adminRoutes[0].path);
   const [showAdminChoice, setShowAdminChoice] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const loginUser = async (username: string, password: string) => {
     if (process.env.NODE_ENV === 'production') {
-      const res = await fetch('/api/auth/login', {
+      // Production: fetch serverless function
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -36,8 +39,9 @@ const Login: FC = () => {
         throw new Error(data.message || 'Login failed');
       }
 
-      return await res.json(); // { username, role }
+      return await res.json(); // { username, role, token }
     } else {
+      // Local: use mock users + bcrypt
       const userData: UserData | undefined = users[username];
       if (!userData) throw new Error('ไม่พบผู้ใช้นี้ในระบบ');
 

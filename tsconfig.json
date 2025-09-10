@@ -33,10 +33,9 @@
       "@__mocks__/*": ["__mocks__/*"],
       "@config/*": ["config/*"]
     },
-    "outDir": "./dist",
     "rootDir": "./",
     "types": ["vite/client", "node"]
   },
-  "include": ["src", "server.ts"],
+  "include": ["src", "server", "server/**/*.ts"], 
   "exclude": ["node_modules", "dist"]
 }

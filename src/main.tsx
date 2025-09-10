@@ -54,23 +54,23 @@ root.render(
   </React.StrictMode>,
 );
 
-// -------------------- Dev Info (optional, dummy) --------------------
+// -------------------- Dev / Production Info --------------------
 if (import.meta.env.DEV) {
   console.groupCollapsed('📦 JP-System App Info');
-  console.info('🚀 Version:', 'dev'); // dummy
-  console.info('📝 Build Time:', new Date().toISOString()); // dummy
-  console.info('🔧 Mode:', 'development');
-  console.info('🌍 Base URL:', '/');
+  console.info('🚀 Version:', import.meta.env.VITE_APP_VERSION || 'dev');
+  console.info('📝 Build Time:', new Date().toISOString());
+  console.info('🔧 Mode:', import.meta.env.MODE);
+  console.info('🌍 Base URL:', import.meta.env.VITE_APP_BASE_URL || '/');
   console.groupEnd();
 }
 
 // -------------------- Service Worker --------------------
-// ปิดหรือคอมเมนต์ออก เพราะ project standalone ไม่ต้องพึ่ง SW
-// if ('serviceWorker' in navigator && import.meta.env.PROD) {
-//   navigator.serviceWorker
-//     .register(`/sw.js`)
-//     .then((reg) => console.log('✅ SW registered:', reg.scope))
-//     .catch((err) => console.error('❌ SW registration failed:', err));
-// }
+// Production-only, ปิดใน dev / Termux
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  navigator.serviceWorker
+    .register(`/sw.js`)
+    .then((reg) => console.log('✅ SW registered:', reg.scope))
+    .catch((err) => console.error('❌ SW registration failed:', err));
+}
 
 export {};
