@@ -16,7 +16,7 @@
     "build:server": "tsc --project tsconfig.server.json",
     "start:server": "node dist-server/index.js",
     "check": "tsc --noEmit",
-     "clean": "scripts/clean.sh && pnpm install",
+    "clean": "scripts/clean.sh && pnpm install",
     "fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "format": "prettier --write .",
