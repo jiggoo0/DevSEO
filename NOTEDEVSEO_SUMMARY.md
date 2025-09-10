@@ -1,7 +1,7 @@
 # 📊 Project Summary Report
-Date: 2025-09-07 18:31:04  
-Branch: N/A  
-Git Status: Not a git repo ❌
+Date: 2025-09-10 12:24:19  
+Branch: main  
+Git Status: Uncommitted / untracked changes ❌
 
 ## 1️⃣ Dependencies
 | Dependency | Status | Version |
@@ -307,12 +307,12 @@ src
 | Project Name | jp-visouldocs |
 | Version | 7.1.1 |
 | Description | N/A |
-| GitHub URL | https://github.com/your/repo |
-| Developer Email | you@example.com |
-| Website URL | https://yourwebsite.com |
+| GitHub URL | https://github.com/jiggoo0/vite-react |
+| Developer Email | jiggo0@outlook.co.th |
+| Website URL | https://404notfontjp.vercel.app/ |
 | Vercel Account | jiggoos-projects |
 | Vercel Project Name | vite-react |
-| Vercel Project ID | your-vercel-id |
+| Vercel Project ID | prj_MBF9hbw032OzD2gDVkUQ7mvoYA2t |
 
 ## 6️⃣ Notes
 - RODEMAP.md & WORKFLOW.md included if present
