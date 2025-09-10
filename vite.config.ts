@@ -9,28 +9,17 @@ import { dirname, resolve } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// -----------------------------
-// Env Detection
-// -----------------------------
 const isTermux = Boolean(process.env.TERMUX_VERSION);
 const isProduction = process.env.NODE_ENV === "production";
 
-// -----------------------------
-// Default Env Fallback
-// -----------------------------
-const VITE_API_URL = process.env.VITE_API_URL || "http://localhost:4000";
-const VITE_APP_BASE_URL = process.env.VITE_APP_BASE_URL || "/";
+// ตั้ง base path เป็น relative path สำหรับ SPA
+const VITE_APP_BASE_URL = process.env.VITE_APP_BASE_URL || "./";
 const VITE_APP_NAME = process.env.VITE_APP_NAME || "VisoulDocs";
+const VITE_API_URL = process.env.VITE_API_URL || "http://localhost:4000";
 
-// -----------------------------
-// Server-side Secure Access (OIDC JWT)
-// -----------------------------
 const VERCEL_OIDC_TOKEN = process.env.VERCEL_OIDC_TOKEN || "";
 const isBackendSecure = Boolean(VERCEL_OIDC_TOKEN) && isProduction;
 
-// -----------------------------
-// Vite Config Export
-// -----------------------------
 export default defineConfig({
   base: VITE_APP_BASE_URL,
 
@@ -39,12 +28,7 @@ export default defineConfig({
     tsconfigPaths(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: [
-        "favicon.svg",
-        "favicon.ico",
-        "robots.txt",
-        "apple-touch-icon.png",
-      ],
+      includeAssets: ["favicon.svg","favicon.ico","robots.txt","apple-touch-icon.png"],
       manifest: {
         name: VITE_APP_NAME,
         short_name: "VisoulDocs",
@@ -57,16 +41,11 @@ export default defineConfig({
         icons: [
           { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
           { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
-          {
-            src: "pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any maskable",
-          },
-        ],
+          { src: "pwa-512x512.png", sizes: "512x512", type: "image/png", purpose: "any maskable" }
+        ]
       },
       disable: !isProduction || isTermux,
-    }),
+    })
   ],
 
   resolve: {
@@ -86,7 +65,7 @@ export default defineConfig({
       "@services": resolve(__dirname, "src/services"),
       "@__mocks__": resolve(__dirname, "src/__mocks__"),
       "@config": resolve(__dirname, "src/config"),
-    },
+    }
   },
 
   server: {
@@ -97,8 +76,6 @@ export default defineConfig({
       "/api": {
         target: VITE_API_URL,
         changeOrigin: true,
-        // ❌ อย่าลบ /api ถ้า backend expect prefix นี้
-        // rewrite: (path) => path.replace(/^\/api/, ""),
         configure: (proxy) => {
           if (isBackendSecure) {
             proxy.on("proxyReq", (proxyReq, req) => {
@@ -133,8 +110,5 @@ export default defineConfig({
   },
 
   cacheDir: "node_modules/.vite",
-
-  optimizeDeps: {
-    include: ["react", "react-dom"],
-  },
+  optimizeDeps: { include: ["react", "react-dom"] },
 });
