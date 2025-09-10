@@ -1,3 +1,5 @@
+// src/data/users.ts
+
 export interface UserData {
   hash: string;
   role: 'admin' | 'manager' | 'user';

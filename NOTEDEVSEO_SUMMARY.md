@@ -1,43 +1,39 @@
 # 📊 Project Summary Report
-
-Date: 2025-09-10 18:29:07  
+Date: 2025-09-11 03:09:28  
 Branch: main  
 Git Status: Uncommitted / untracked changes ❌
 
 ## 1️⃣ Dependencies
-
-| Dependency  | Status | Version |
-| ----------- | ------ | ------- |
-| react       | ✅     | ^19.1.1 |
-| react-dom   | ✅     | ^19.1.1 |
-| vite        | ✅     | ^7.1.5  |
-| tailwindcss | ✅     | 3.4.17  |
-| daisyui     | ✅     | ^3.9.4  |
-| typescript  | ✅     | 5.9.2   |
-| eslint      | ✅     | ^9.35.0 |
-| prettier    | ✅     | ^3.6.2  |
+| Dependency | Status | Version |
+|------------|--------|---------|
+| react | ✅ | ^19.1.1 |
+| react-dom | ✅ | ^19.1.1 |
+| vite | ✅ | ^7.1.5 |
+| tailwindcss | ✅ | 3.4.17 |
+| daisyui | ✅ | ^3.9.4 |
+| typescript | ✅ | 5.9.2 |
+| eslint | ✅ | ^9.35.0 |
+| prettier | ✅ | ^3.6.2 |
 
 ## 2️⃣ Config Files
-
-| Config File        | Status    |
-| ------------------ | --------- |
-| tsconfig.json      | ✅ exists |
+| Config File | Status |
+|------------|--------|
+| tsconfig.json | ✅ exists |
 | tailwind.config.ts | ✅ exists |
-| vite.config.ts     | ✅ exists |
-| .prettierrc        | ✅ exists |
-| .gitignore         | ✅ exists |
+| vite.config.ts | ✅ exists |
+| .prettierrc | ✅ exists |
+| .gitignore | ✅ exists |
 
 ## 3️⃣ Alias Check
-
 - ✅ all imports alias ok (Node: v22.19.0, ts-node: N/A)
 
 ## 4️⃣ Project Tree (src, depth 10)
-
 ```
 src
 ├── App
 │   ├── ChatProvider.tsx
-│   └── RootApp.tsx
+│   ├── RootApp.tsx
+│   └── types.ts
 ├── Home
 │   ├── AdminTools
 │   │   ├── CompanyAccount
@@ -79,7 +75,9 @@ src
 │   │   │   └── types
 │   │   │       └── PoliceReport.ts
 │   │   ├── RegistrationPreview
-│   │   │   └── RegistrationPreview.tsx
+│   │   │   ├── RegistrationPreview.d.ts
+│   │   │   ├── RegistrationPreview.tsx
+│   │   │   └── types.ts
 │   │   ├── Reviews
 │   │   │   ├── ReviewsGallery.tsx
 │   │   │   └── ui
@@ -87,6 +85,7 @@ src
 │   │   ├── SalaryCertificate
 │   │   │   ├── SalaryCertificate.tsx
 │   │   │   └── types
+│   │   │       ├── salaryCertificate.d.ts
 │   │   │       └── salaryCertificate.ts
 │   │   └── SpecialBranchCertificate
 │   │       └── SpecialBranchCertificate.tsx
@@ -156,6 +155,9 @@ src
 │   │   ├── SecretSection
 │   │   │   ├── AuditTrailViewer.tsx
 │   │   │   ├── KbankIOSNotification.tsx
+│   │   │   ├── KbankNotificationCard
+│   │   │   │   └── types.ts
+│   │   │   ├── KbankNotificationCard.d.ts
 │   │   │   ├── KbankNotificationCard.tsx
 │   │   │   └── SecretDescription.tsx
 │   │   ├── SellingPoints
@@ -249,6 +251,8 @@ src
 ├── animations
 │   └── motionVariants.ts
 ├── api
+│   ├── Chat
+│   │   └── types.ts
 │   └── server.ts
 ├── assets
 │   ├── images
@@ -296,7 +300,6 @@ src
 │   ├── declarations.d.ts
 │   └── sqljs.d.ts
 ├── utils
-│   ├── auth.ts
 │   ├── calculations.ts
 │   ├── cn.ts
 │   ├── common
@@ -315,32 +318,29 @@ src
 │   │   └── SocialIcons.tsx
 │   ├── exportCard.ts
 │   ├── index.ts
-│   └── wsClient.ts
+│   └── wsClient.tsx
 └── vite-env.d.ts
 
-73 directories, 210 files
+75 directories, 216 files
 ```
 
 ## 5️⃣ Project Info
-
-| Item                | Value                                 |
-| ------------------- | ------------------------------------- |
-| Project Name        | jp-visouldocs                         |
-| Version             | 7.1.1                                 |
-| Description         | N/A                                   |
-| GitHub URL          | https://github.com/jiggoo0/vite-react |
-| Developer Email     | you@example.com                       |
-| Website URL         | https://404notfontjp.vercel.app/      |
-| Vercel Account      | jiggoos-projects                      |
-| Vercel Project Name | vite-react                            |
-| Vercel Project ID   | prj_MBF9hbw032OzD2gDVkUQ7mvoYA2t      |
+| Item | Value |
+|------|-------|
+| Project Name | projectsdevseo |
+| Version | 7.1.1 |
+| Description | N/A |
+| GitHub URL | https://github.com/jiggoo0/vite-react |
+| Developer Email | you@example.com |
+| Website URL | https://404notfontjp.vercel.app/ |
+| Vercel Account | jiggoos-projects |
+| Vercel Project Name | vite-react |
+| Vercel Project ID | prj_MBF9hbw032OzD2gDVkUQ7mvoYA2t |
 
 ## 6️⃣ Notes
-
 - ROADMAP.md & WORKFLOW.md included if present
 
 ## 📝 ROADMAP.md
-
 📋 JP - VISOUL & DOSC – Business Overview & Technical Logic
 1️⃣ ข้อมูลธุรกิจพื้นฐาน
 ชื่อธุรกิจ: JP - VISOUL & DOSC
@@ -450,6 +450,7 @@ Types & Hooks: ใช้ซ้ำทั่วทั้งระบบ
 # Home Project Structure
 
 _Generated at: Mon Sep 1 18:18:14 +07 2025_
+
 
 ## Directory Tree
 
@@ -726,7 +727,6 @@ graph TD
 ```
 
 ## 📝 WORKFLOW.md
-
 🎯 เป้าหมายหลัก
 สร้าง ปรับแต่ง และแก้ไข Components ด้วย React + TypeScript + Vite + TailwindCSS/DaisyUI ให้มีคุณสมบัติ:
 
