@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# scripts/deploy.sh - Vercel CI/CD (force production deploy, log URL & integration)
+# scripts/deploy.sh - Vercel CI/CD (force production deploy, log URL)
 set -euo pipefail
 
 # -----------------------------
@@ -21,13 +21,10 @@ else
 fi
 
 # -----------------------------
-# Validate required variables
+# Validate Vercel token
 # -----------------------------
 : "${VERCEL_TOKEN:?VERCEL_TOKEN not set}"
 : "${VERCEL_PROJECT_ID:?VERCEL_PROJECT_ID not set}"
-
-# Optional: Vercel Integration deploy URL
-: "${VERCEL_INTEGRATION_URL:=}"  # หากใช้ integration API
 
 # -----------------------------
 # Install deps & build
@@ -48,26 +45,19 @@ if [[ "$BRANCH" != "main" ]]; then
 fi
 
 # -----------------------------
-# Force production deploy (CLI)
+# Force production deploy
 # -----------------------------
-echo "🌿 Deploying branch '$BRANCH' → production (force rebuild via CLI)"
+echo "🌿 Deploying branch '$BRANCH' → production (force rebuild)"
 DEPLOY_CMD="npx vercel --yes --token $VERCEL_TOKEN --prod --force"
+
+echo "🚀 Running deployment..."
 DEPLOY_URL=$($DEPLOY_CMD)
+
+# -----------------------------
+# Log deploy URL
+# -----------------------------
 echo "$DEPLOY_URL" | tee "$DEPLOY_LOG"
-echo "✅ CLI Deployment finished"
+
+echo "✅ Deployment finished"
 echo "🔗 $DEPLOY_URL"
-
-# -----------------------------
-# Optional: Deploy via Integration API
-# -----------------------------
-if [[ -n "$VERCEL_INTEGRATION_URL" ]]; then
-  echo "🌿 Triggering Integration API deploy..."
-  RESPONSE=$(curl -s -X POST "$VERCEL_INTEGRATION_URL" \
-      -H "Authorization: Bearer $VERCEL_TOKEN" \
-      -H "Content-Type: application/json" \
-      -d '{"environment":"production"}')
-  echo "🔗 Integration API response:"
-  echo "$RESPONSE" | jq
-fi
-
 echo "🎉 Deploy script completed."

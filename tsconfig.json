@@ -37,6 +37,6 @@
     "rootDir": "./",
     "types": ["vite/client", "node"]
   },
-  "include": ["src"],
+  "include": ["src", "server.ts"],
   "exclude": ["node_modules", "dist"]
 }
