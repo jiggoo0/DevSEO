@@ -23,33 +23,15 @@ const Login: FC = () => {
   const [adminRedirect, setAdminRedirect] = useState(adminRoutes[0].path);
   const [showAdminChoice, setShowAdminChoice] = useState(false);
 
-  const API_URL = import.meta.env.VITE_API_URL;
-
+  // ใช้ local data + bcrypt ตลอด
   const loginUser = async (username: string, password: string) => {
-    if (process.env.NODE_ENV === 'production') {
-      // Production: fetch serverless function
-      const res = await fetch(`${API_URL}/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
+    const userData: UserData | undefined = users[username];
+    if (!userData) throw new Error('ไม่พบผู้ใช้นี้ในระบบ');
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.message || 'Login failed');
-      }
+    const match = await bcrypt.compare(password, userData.hash);
+    if (!match) throw new Error('รหัสผ่านไม่ถูกต้อง');
 
-      return await res.json(); // { username, role, token }
-    } else {
-      // Local: use mock users + bcrypt
-      const userData: UserData | undefined = users[username];
-      if (!userData) throw new Error('ไม่พบผู้ใช้นี้ในระบบ');
-
-      const match = await bcrypt.compare(password, userData.hash);
-      if (!match) throw new Error('รหัสผ่านไม่ถูกต้อง');
-
-      return { username, role: userData.role } as const;
-    }
+    return { username, role: userData.role } as const;
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
