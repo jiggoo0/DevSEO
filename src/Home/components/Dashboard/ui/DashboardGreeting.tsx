@@ -1,8 +1,8 @@
 // src/Home/components/Dashboard/ui/DashboardGreeting.tsx
-"use client";
+'use client';
 
-import { FC } from "react";
-import PageSection from "@/Home/components/common/PageSection";
+import { FC } from 'react';
+import PageSection from '@/Home/components/common/PageSection';
 
 interface DashboardGreetingProps {
   username: string;

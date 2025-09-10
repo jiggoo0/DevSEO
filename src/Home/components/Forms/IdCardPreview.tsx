@@ -1,5 +1,5 @@
 // src/Home/components/Forms/IdCardPreview.tsx
-import { FC } from "react";
+import { FC } from 'react';
 
 export interface IdCardData {
   name: string;

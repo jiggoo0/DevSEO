@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import { availableServices, upcomingServices, type ServiceType } from "@/config/jpServices.config";
-import FeatureAwards from "./FeatureAwards";
-import FeatureList from "./FeatureList";
-import ComplianceFAQ from "./ComplianceFAQ";
-import SectionContainer from "@/utils/common/SectionContainer";
+import { FC } from 'react';
+import { availableServices, upcomingServices, type ServiceType } from '@/config/jpServices.config';
+import FeatureAwards from './FeatureAwards';
+import FeatureList from './FeatureList';
+import ComplianceFAQ from './ComplianceFAQ';
+import SectionContainer from '@/utils/common/SectionContainer';
 
 const createLineLink = (message: string) =>
   `https://lin.ee/sOKDUEg?text=${encodeURIComponent(message)}`;
@@ -19,7 +19,7 @@ const ServiceCard: FC<{ service: ServiceType }> = ({ service }) => {
       tabIndex={0}
       aria-label={`บริการ: ${service.title}`}
       className={`group relative flex flex-col overflow-hidden rounded-2xl border border-base-200 bg-base-100 shadow-sm transition-shadow hover:shadow-lg focus-within:ring-2 focus-within:ring-primary ${
-        !service.available ? "opacity-80 hover:opacity-100" : ""
+        !service.available ? 'opacity-80 hover:opacity-100' : ''
       }`}
     >
       <img
@@ -102,6 +102,6 @@ const ServicesSection: FC = () => {
   );
 };
 
-ServicesSection.displayName = "ServicesSection";
+ServicesSection.displayName = 'ServicesSection';
 
 export default ServicesSection;

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState, useMemo } from "react";
-import { ApplicantData, exampleApplicant } from "@/data/applicantData";
-import { defaultConfig } from "@/config/assessmentConfig";
-import { calculateDTI, calculateCreditScore, assessCreditStatus } from "@/utils/calculations";
-import ResultCard from "./ResultCard";
+import React, { useState, useMemo } from 'react';
+import { ApplicantData, exampleApplicant } from '@/data/applicantData';
+import { defaultConfig } from '@/config/assessmentConfig';
+import { calculateDTI, calculateCreditScore, assessCreditStatus } from '@/utils/calculations';
+import ResultCard from './ResultCard';
 
 const CreditAssessmentForm: React.FC = () => {
   const [applicant, setApplicant] = useState<ApplicantData>(exampleApplicant);
@@ -14,7 +14,7 @@ const CreditAssessmentForm: React.FC = () => {
   const score = useMemo(() => calculateCreditScore(applicant, defaultConfig), [applicant]);
   const status = useMemo(
     () => assessCreditStatus(score.totalScore, defaultConfig.creditThreshold),
-    [score]
+    [score],
   );
 
   // Update debts

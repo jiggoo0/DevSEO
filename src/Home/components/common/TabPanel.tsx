@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { FC, ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { FC, ReactNode } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface TabPanelProps {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface TabPanelProps {
   className?: string;
 }
 
-const TabPanel: FC<TabPanelProps> = ({ children, isActive, className = "" }) => {
+const TabPanel: FC<TabPanelProps> = ({ children, isActive, className = '' }) => {
   return (
     <AnimatePresence initial={false}>
       {isActive && (
@@ -18,7 +18,7 @@ const TabPanel: FC<TabPanelProps> = ({ children, isActive, className = "" }) => 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
           className={`w-full ${className}`}
           role="tabpanel"
         >
@@ -29,6 +29,6 @@ const TabPanel: FC<TabPanelProps> = ({ children, isActive, className = "" }) => 
   );
 };
 
-TabPanel.displayName = "TabPanel";
+TabPanel.displayName = 'TabPanel';
 
 export default TabPanel;

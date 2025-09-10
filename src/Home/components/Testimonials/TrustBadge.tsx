@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import { cn } from "@/utils/cn";
+import { FC } from 'react';
+import { cn } from '@/utils/cn';
 
 interface TrustBadgeProps {
   /** จำนวนลูกค้าหรือสถิติ */
@@ -12,12 +12,12 @@ interface TrustBadgeProps {
   className?: string;
 }
 
-const TrustBadge: FC<TrustBadgeProps> = ({ count, label = "ลูกค้ามั่นใจในเรา", className }) => {
+const TrustBadge: FC<TrustBadgeProps> = ({ count, label = 'ลูกค้ามั่นใจในเรา', className }) => {
   return (
     <div
       className={cn(
-        "flex flex-col md:flex-row items-center gap-2 md:gap-3 px-4 py-2 border border-gray-300 bg-white text-gray-900",
-        className
+        'flex flex-col md:flex-row items-center gap-2 md:gap-3 px-4 py-2 border border-gray-300 bg-white text-gray-900',
+        className,
       )}
       role="status"
       aria-roledescription="statistic"

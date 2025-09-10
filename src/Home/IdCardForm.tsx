@@ -1,33 +1,34 @@
-"use client";
+// src/Home/components/IdCardForm.tsx
+'use client';
 
-import { FC, memo, ChangeEvent, useState, useEffect } from "react";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import clsx from "clsx";
-import CardWrapper from "@home/components/common/CardWrapper";
-import WithBlurIfUser from "@home/components/common/WithBlurIfUser";
-import { MOCK_ID_CARD } from "@__mocks__/mockIdCardData";
+import { FC, memo, ChangeEvent, useState, useEffect } from 'react';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import clsx from 'clsx';
+import CardWrapper from '@Home/components/common/CardWrapper';
+import WithBlurIfUser from '@Home/components/common/WithBlurIfUser';
+import { MOCK_ID_CARD } from '@__mocks__/mockIdCardData';
 
 /** ------------------------------
  * Zod schema for ID Card form validation
  * ----------------------------- */
 const IdCardSchema = z.object({
-  fullName: z.string().min(1, "กรุณากรอกชื่อ-สกุล"),
-  idNumber: z.string().regex(/^\d{13}$/, "เลขบัตรประชาชนต้องมี 13 หลัก"),
-  birthDate: z.string().min(1, "กรุณากรอกวันเกิด"),
-  address: z.string().min(1, "กรุณากรอกที่อยู่"),
+  fullName: z.string().min(1, 'กรุณากรอกชื่อ-สกุล'),
+  idNumber: z.string().regex(/^\d{13}$/, 'เลขบัตรประชาชนต้องมี 13 หลัก'),
+  birthDate: z.string().min(1, 'กรุณากรอกวันเกิด'),
+  address: z.string().min(1, 'กรุณากรอกที่อยู่'),
   photo: z.string().optional(),
 });
 
 export type IdCardData = z.infer<typeof IdCardSchema>;
 
 interface Props {
-  role?: "admin" | "manager" | "user";
+  role?: 'admin' | 'manager' | 'user';
   onChange?: (data: IdCardData) => void;
 }
 
-const IdCardForm: FC<Props> = ({ role = "user", onChange }) => {
+const IdCardForm: FC<Props> = ({ role = 'user', onChange }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const {
@@ -47,7 +48,7 @@ const IdCardForm: FC<Props> = ({ role = "user", onChange }) => {
   useEffect(() => {
     onChange?.({
       ...watchedData,
-      photo: imagePreview || watchedData.photo || "",
+      photo: imagePreview || watchedData.photo || '',
     });
   }, [watchedData, imagePreview, onChange]);
 
@@ -57,10 +58,10 @@ const IdCardForm: FC<Props> = ({ role = "user", onChange }) => {
     setImagePreview(URL.createObjectURL(file));
 
     setTimeout(() => {
-      setValue("fullName", "สมชาย ใจดี");
-      setValue("idNumber", "1234567890123");
-      setValue("birthDate", "1990-01-01");
-      setValue("address", "123/45 ถนนสุขุมวิท");
+      setValue('fullName', 'สมชาย ใจดี');
+      setValue('idNumber', '1234567890123');
+      setValue('birthDate', '1990-01-01');
+      setValue('address', '123/45 ถนนสุขุมวิท');
     }, 1000);
   };
 
@@ -70,11 +71,11 @@ const IdCardForm: FC<Props> = ({ role = "user", onChange }) => {
   };
 
   const onSubmit: SubmitHandler<IdCardData> = (data) => {
-    console.log("Submitted:", data);
-    alert("บันทึกข้อมูลเรียบร้อย!");
+    console.log('Submitted:', data);
+    alert('บันทึกข้อมูลเรียบร้อย!');
   };
 
-  const isBlurred = role !== "admin";
+  const isBlurred = role !== 'admin';
 
   return (
     <CardWrapper>
@@ -110,27 +111,27 @@ const IdCardForm: FC<Props> = ({ role = "user", onChange }) => {
           </div>
 
           {/* Form Fields */}
-          {(["fullName", "idNumber", "birthDate", "address"] as const).map((field) => (
+          {(['fullName', 'idNumber', 'birthDate', 'address'] as const).map((field) => (
             <div key={field}>
               <label className="font-medium">
-                {field === "fullName"
-                  ? "ชื่อ-สกุล"
-                  : field === "idNumber"
-                    ? "เลขบัตรประชาชน"
-                    : field === "birthDate"
-                      ? "วันเกิด"
-                      : "ที่อยู่"}
+                {field === 'fullName'
+                  ? 'ชื่อ-สกุล'
+                  : field === 'idNumber'
+                    ? 'เลขบัตรประชาชน'
+                    : field === 'birthDate'
+                      ? 'วันเกิด'
+                      : 'ที่อยู่'}
               </label>
               <Controller
                 name={field}
                 control={control}
                 render={({ field }) =>
-                  field.name === "address" ? (
+                  field.name === 'address' ? (
                     <textarea {...field} className="w-full border rounded-md p-2" />
                   ) : (
                     <input
                       {...field}
-                      type={field.name === "birthDate" ? "date" : "text"}
+                      type={field.name === 'birthDate' ? 'date' : 'text'}
                       className="w-full border rounded-md p-2"
                     />
                   )
@@ -140,11 +141,11 @@ const IdCardForm: FC<Props> = ({ role = "user", onChange }) => {
             </div>
           ))}
 
-          {role === "admin" && (
+          {role === 'admin' && (
             <button
               type="submit"
               className={clsx(
-                "w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                'w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition',
               )}
             >
               บันทึก
@@ -156,5 +157,5 @@ const IdCardForm: FC<Props> = ({ role = "user", onChange }) => {
   );
 };
 
-IdCardForm.displayName = "IdCardForm";
+IdCardForm.displayName = 'IdCardForm';
 export default memo(IdCardForm);

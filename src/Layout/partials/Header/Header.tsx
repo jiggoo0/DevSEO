@@ -1,14 +1,15 @@
 // src/Layout/partials/Header.tsx
-"use client";
+'use client';
 
-import { FC } from "react";
-import { Link } from "react-router-dom";
-import clsx from "clsx";
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
-import Logo from "@layout/ui/Logo";
-import ThemeToggle from "@layout/ui/ThemeToggle";
-import LogoutButton from "@home/components/common/LogoutButton";
-import { useAuth } from "@hooks/useAuth";
+// ✅ แก้ path alias ให้ตรงตัวพิมพ์ใหญ่-เล็ก
+import Logo from '@Layout/ui/Logo';
+import ThemeToggle from '@Layout/ui/ThemeToggle';
+import LogoutButton from '@Home/components/common/LogoutButton';
+import { useAuth } from '@hooks/useAuth';
 
 /* ==============================
    Header Component
@@ -20,8 +21,8 @@ const Header: FC = () => {
     <header
       role="banner"
       className={clsx(
-        "sticky top-0 z-50 w-full border-b border-base-content/10",
-        "bg-base-100 shadow-sm transition-colors duration-300"
+        'sticky top-0 z-50 w-full border-b border-base-content/10',
+        'bg-base-100 shadow-sm transition-colors duration-300',
       )}
     >
       <div className="mx-auto max-w-7xl flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
@@ -37,8 +38,8 @@ const Header: FC = () => {
           <Link
             to="/form"
             className={clsx(
-              "btn btn-outline btn-sm transition-all duration-200",
-              "hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              'btn btn-outline btn-sm transition-all duration-200',
+              'hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
             )}
           >
             ประเมินลูกค้า
@@ -52,8 +53,8 @@ const Header: FC = () => {
               to="/login"
               aria-label="Login"
               className={clsx(
-                "btn btn-primary btn-sm transition-all duration-200",
-                "hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                'btn btn-primary btn-sm transition-all duration-200',
+                'hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
               )}
             >
               เข้าสู่ระบบ
@@ -65,5 +66,5 @@ const Header: FC = () => {
   );
 };
 
-Header.displayName = "Header";
+Header.displayName = 'Header';
 export default Header;

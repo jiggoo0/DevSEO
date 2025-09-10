@@ -1,27 +1,52 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import bcrypt from "bcryptjs";
-import { users, UserData } from "@/data/users";
-import { useAuth } from "@/hooks/useAuth";
+import React, { useState, FC } from 'react';
+import { useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs';
+import { useAuth } from '@/hooks/useAuth';
+import { users, UserData } from '@/data/users';
 
 const adminRoutes = [
-  { label: "Dashboard", path: "/admin/dashboard" },
-  { label: "Secret Page", path: "/admin/secret" },
+  { label: 'Dashboard', path: '/admin/dashboard' },
+  { label: 'Admin Tools', path: '/admin/tools' },
 ];
 
-const Login: React.FC = () => {
+const Login: FC = () => {
   const navigate = useNavigate();
   const { setUser } = useAuth();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [adminRedirect, setAdminRedirect] = useState(adminRoutes[0].path);
   const [showAdminChoice, setShowAdminChoice] = useState(false);
+
+  const loginUser = async (username: string, password: string) => {
+    if (process.env.NODE_ENV === 'production') {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || 'Login failed');
+      }
+
+      return await res.json(); // { username, role }
+    } else {
+      const userData: UserData | undefined = users[username];
+      if (!userData) throw new Error('ไม่พบผู้ใช้นี้ในระบบ');
+
+      const match = await bcrypt.compare(password, userData.hash);
+      if (!match) throw new Error('รหัสผ่านไม่ถูกต้อง');
+
+      return { username, role: userData.role } as const;
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,38 +55,28 @@ const Login: React.FC = () => {
 
     try {
       const trimmedUsername = username.trim();
-      const userData: UserData | undefined = users[trimmedUsername];
-      if (!userData) throw new Error("ไม่พบผู้ใช้นี้ในระบบ");
+      const authUser = await loginUser(trimmedUsername, password);
 
-      const match = await bcrypt.compare(password, userData.hash);
-      if (!match) throw new Error("รหัสผ่านไม่ถูกต้อง");
+      localStorage.setItem('user', JSON.stringify(authUser));
+      setUser(authUser);
 
-      const authUser = {
-        username: trimmedUsername,
-        role: userData.role as "admin" | "manager" | "user",
-      };
-
-      // Admin จะยังไม่ redirect อัตโนมัติ
-      if (authUser.role === "admin") {
+      if (authUser.role === 'admin') {
         setShowAdminChoice(true);
-        setUser(authUser); // เก็บใน context แต่ยังไม่เซฟ localStorage
+        setAdminRedirect(adminRoutes[0].path);
       } else {
-        localStorage.setItem("user", JSON.stringify(authUser));
-        setUser(authUser);
-        navigate(authUser.role === "manager" ? "/manager" : "/user", { replace: true });
+        navigate(authUser.role === 'manager' ? '/manager' : '/user', { replace: true });
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+      setError(err instanceof Error ? err.message : 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
     } finally {
       setLoading(false);
     }
   };
 
   const handleAdminConfirm = () => {
-    const authUser = users[username.trim()];
-    if (!authUser) return;
-    const user = { username: username.trim(), role: "admin" as const };
-    localStorage.setItem("user", JSON.stringify(user));
+    const user = { username: username.trim(), role: 'admin' as const };
+    localStorage.setItem('user', JSON.stringify(user));
+    setUser(user);
     navigate(adminRedirect, { replace: true });
   };
 
@@ -90,7 +105,7 @@ const Login: React.FC = () => {
             />
             <div className="relative">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 placeholder="รหัสผ่าน"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -104,17 +119,19 @@ const Login: React.FC = () => {
                 className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-gray-500 dark:text-gray-300"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
-                {showPassword ? "ซ่อน" : "แสดง"}
+                {showPassword ? 'ซ่อน' : 'แสดง'}
               </button>
             </div>
 
             <button type="submit" className="btn btn-primary w-full" disabled={loading}>
-              {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
+              {loading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'}
             </button>
           </form>
         ) : (
           <div className="space-y-4">
-            <p className="text-center">เลือกหน้าที่ต้องการเข้า (Admin)</p>
+            <p className="text-center font-semibold">
+              กรุณาเลือกหน้าที่ Admin ที่ต้องการเข้าใช้งาน
+            </p>
             <select
               className="input input-bordered w-full"
               value={adminRedirect}

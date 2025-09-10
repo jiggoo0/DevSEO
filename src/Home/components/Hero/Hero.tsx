@@ -1,9 +1,9 @@
 // src/Home/components/Hero/Hero.tsx
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { HeroBackground, HeroBadge, HeroStats } from "@/Home/components/Hero";
-import CTAButtons from "@/Home/components/common/CTAButtons";
+import { motion } from 'framer-motion';
+import { HeroBackground, HeroBadge, HeroStats } from '@/Home/components/Hero';
+import CTAButtons from '@/Home/components/common/CTAButtons';
 
 /** =======================
  * Hero Section Component
@@ -26,7 +26,7 @@ const Hero = () => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.6 }}
           className="text-3xl sm:text-5xl font-bold leading-tight tracking-tight"
         >
@@ -37,7 +37,7 @@ const Hero = () => {
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
+          transition={{ delay: 0.1, duration: 0.5, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.6 }}
           className="mx-auto max-w-xl text-neutral-400 text-base sm:text-lg"
         >

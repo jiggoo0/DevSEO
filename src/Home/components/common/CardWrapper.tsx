@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { FC, ReactNode } from "react";
-import clsx from "clsx";
+import { FC, ReactNode } from 'react';
+import clsx from 'clsx';
 
 interface CardWrapperProps {
   children: ReactNode;
@@ -22,8 +22,8 @@ const CardWrapper: FC<CardWrapperProps> = ({
   className,
   rounded = true,
   shadow = true,
-  padding = "p-4",
-  bgColor = "bg-white dark:bg-gray-800",
+  padding = 'p-4',
+  bgColor = 'bg-white dark:bg-gray-800',
   responsive = true,
 }) => {
   return (
@@ -31,11 +31,11 @@ const CardWrapper: FC<CardWrapperProps> = ({
       className={clsx(
         bgColor,
         padding,
-        rounded && "rounded-xl",
-        shadow && "shadow-sm hover:shadow-md transition-shadow duration-300 ease-in-out",
-        responsive && "w-full sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto",
-        "border border-gray-200 dark:border-gray-700",
-        className
+        rounded && 'rounded-xl',
+        shadow && 'shadow-sm hover:shadow-md transition-shadow duration-300 ease-in-out',
+        responsive && 'w-full sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto',
+        'border border-gray-200 dark:border-gray-700',
+        className,
       )}
       data-testid="card-wrapper"
     >
@@ -44,6 +44,6 @@ const CardWrapper: FC<CardWrapperProps> = ({
   );
 };
 
-CardWrapper.displayName = "CardWrapper";
+CardWrapper.displayName = 'CardWrapper';
 
 export default CardWrapper;

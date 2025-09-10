@@ -1,34 +1,34 @@
 // src/Home/Profile.tsx
-"use client";
+'use client';
 
-import React, { FC, useState, useEffect, FormEvent } from "react";
-import PageSection from "@/Home/components/common/PageSection";
-import { useAuth } from "@/hooks/useAuth";
+import React, { FC, useState, useEffect, FormEvent } from 'react';
+import PageSection from '@/Home/components/common/PageSection';
+import { useAuth } from '@/hooks/useAuth';
 
 const Profile: FC = () => {
   const { user, updateUser } = useAuth();
 
-  const [username, setUsername] = useState(user?.username ?? "");
-  const [email, setEmail] = useState(user?.email ?? "");
-  const [message, setMessage] = useState("");
+  const [username, setUsername] = useState(user?.username ?? '');
+  const [email, setEmail] = useState(user?.email ?? '');
+  const [message, setMessage] = useState('');
 
-  // Sync state when user data changes
+  /** Sync state when user changes */
   useEffect(() => {
     if (!user) return;
-    setUsername(user.username ?? "");
-    setEmail(user.email ?? "");
+    setUsername(user.username ?? '');
+    setEmail(user.email ?? '');
   }, [user]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     if (!username.trim() || !email.trim()) {
-      setMessage("กรุณากรอกข้อมูลให้ครบถ้วน");
+      setMessage('กรุณากรอกข้อมูลให้ครบถ้วน');
       return;
     }
 
     updateUser?.({ username, email });
-    setMessage("บันทึกข้อมูลเรียบร้อย ✅");
+    setMessage('บันทึกข้อมูลเรียบร้อย ✅');
   };
 
   return (

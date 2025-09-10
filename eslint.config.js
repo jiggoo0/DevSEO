@@ -1,58 +1,120 @@
 // eslint.config.js
-import js from "@eslint/js";
-import tseslint from "typescript-eslint";
-import prettier from "eslint-config-prettier";
-import globals from "globals";
+import js from '@eslint/js';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import globals from 'globals';
+import prettier from 'eslint-config-prettier';
+import reactPlugin from 'eslint-plugin-react';
 
-export default tseslint.config(
+export default [
+  // -----------------------------
+  // Base JS rules
+  // -----------------------------
   js.configs.recommended,
-  ...tseslint.configs.recommended,
-  prettier,
+
+  // -----------------------------
+  // TypeScript rules
+  // -----------------------------
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      parser: tseslint.parser,
-    },
-    rules: {
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-      ],
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-    },
-  },
-  {
-    files: ["*.config.js", "*.config.cjs", ".prettier.config.js", "postcss.config.cjs"],
-    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
+      },
       globals: {
-        module: "readonly",
-        require: "readonly",
-        __dirname: "readonly",
-        process: "readonly",
+        ...globals.browser,
+        ...globals.node,
       },
     },
+    plugins: { '@typescript-eslint': tsPlugin },
     rules: {
-      "no-undef": "off",
+      ...tsPlugin.configs.recommended.rules,
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
   },
+
+  // -----------------------------
+  // JSX / React rules
+  // -----------------------------
   {
-    files: ["scripts/**/*.{js,ts}"],
+    files: ['**/*.tsx'],
     languageOptions: {
-      globals: globals.node,
+      parser: tsParser,
+      parserOptions: { ecmaFeatures: { jsx: true } },
+      globals: { React: 'readonly' }, // ⬅️ เพิ่ม global React
     },
+    plugins: { react: reactPlugin },
     rules: {
-      "no-irregular-whitespace": "off",
+      'react/react-in-jsx-scope': 'off', // ไม่ต้อง import React ใน JSX/TSX
+      'react/jsx-uses-vars': 'error',
+      'react/jsx-uses-react': 'off',
     },
   },
+
+  // -----------------------------
+  // Prettier integration
+  // -----------------------------
   {
-    ignores: [
-      "dev-dist/",
-      "dist/",
-      "node_modules/",
-      "**/*.d.ts",
-      "**/*.spec.ts",
-      "**/*.test.{ts,tsx}",
-    ],
-  }
-);
+    files: ['**/*.{js,ts,tsx}'],
+    rules: { ...prettier.rules },
+  },
+
+  // -----------------------------
+  // Config files
+  // -----------------------------
+  {
+    files: ['*.config.js', '*.config.cjs', '.prettier.config.js', 'postcss.config.cjs'],
+    languageOptions: {
+      globals: {
+        module: 'readonly',
+        require: 'readonly',
+        __dirname: 'readonly',
+        process: 'readonly',
+      },
+    },
+    rules: { 'no-undef': 'off' },
+  },
+
+  // -----------------------------
+  // Scripts folder
+  // -----------------------------
+  {
+    files: ['scripts/**/*.{js,ts}'],
+    languageOptions: { globals: globals.node },
+    rules: { 'no-irregular-whitespace': 'off' },
+  },
+
+  // -----------------------------
+  // Test files
+  // -----------------------------
+  {
+    files: ['**/*.test.{js,ts,tsx}', '**/*.spec.ts'],
+    languageOptions: { globals: { ...globals.mocha } },
+    rules: { 'no-console': 'off' },
+  },
+
+  // -----------------------------
+  // Ignore folders
+  // -----------------------------
+  {
+    ignores: ['node_modules/', 'dist/', 'dist-server/', 'dev-dist/', '**/*.d.ts'],
+  },
+
+  // -----------------------------
+  // Linter options
+  // -----------------------------
+  {
+    linterOptions: {
+      noInlineConfig: true,
+      reportUnusedDisableDirectives: 'warn',
+    },
+  },
+];

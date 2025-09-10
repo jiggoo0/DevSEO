@@ -1,14 +1,7 @@
 {
+  "extends": "./tsconfig.node.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "outDir": "dist-server",
-    "rootDir": "server",
-    "strict": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "outDir": "dist/server"
   },
-  "include": ["server/**/*"]
+  "include": ["src/api", "src/services"]
 }

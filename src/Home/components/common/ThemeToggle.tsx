@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from 'react';
 
 const ThemeToggle: FC = () => {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     // ตรวจสอบ theme จาก localStorage หรือ system preference
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     if (savedTheme) {
       setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
     } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setTheme(prefersDark ? "dark" : "light");
-      document.documentElement.classList.toggle("dark", prefersDark);
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(prefersDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', prefersDark);
     }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
+    const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem('theme', newTheme);
   };
 
   return (
@@ -31,7 +31,7 @@ const ThemeToggle: FC = () => {
       aria-label="Toggle Theme"
       className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 transition-colors hover:bg-gray-300 dark:hover:bg-gray-700"
     >
-      {theme === "light" ? (
+      {theme === 'light' ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6 text-yellow-500"
@@ -66,6 +66,6 @@ const ThemeToggle: FC = () => {
   );
 };
 
-ThemeToggle.displayName = "ThemeToggle";
+ThemeToggle.displayName = 'ThemeToggle';
 
 export default ThemeToggle;

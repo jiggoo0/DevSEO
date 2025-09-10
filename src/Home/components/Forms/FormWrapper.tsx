@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { ReactNode, useState } from "react";
-import clsx from "clsx";
+import React, { ReactNode, useState } from 'react';
+import clsx from 'clsx';
 
 type FormWrapperProps = {
   title?: string;
@@ -13,12 +13,12 @@ type FormWrapperProps = {
 };
 
 const FormWrapper: React.FC<FormWrapperProps> = ({
-  title = "ฟอร์ม",
-  description = "",
+  title = 'ฟอร์ม',
+  description = '',
   children,
   onSubmit,
   className,
-  submitLabel = "บันทึก",
+  submitLabel = 'บันทึก',
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,10 +35,10 @@ const FormWrapper: React.FC<FormWrapperProps> = ({
 
     try {
       if (onSubmit) await onSubmit();
-      setSuccess("บันทึกข้อมูลสำเร็จ");
+      setSuccess('บันทึกข้อมูลสำเร็จ');
     } catch (err: unknown) {
       if (err instanceof Error) setError(err.message);
-      else setError("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+      else setError('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
     } finally {
       setLoading(false);
     }
@@ -47,8 +47,8 @@ const FormWrapper: React.FC<FormWrapperProps> = ({
   return (
     <div
       className={clsx(
-        "p-6 rounded-2xl shadow-md bg-white dark:bg-gray-900 transition-colors",
-        className
+        'p-6 rounded-2xl shadow-md bg-white dark:bg-gray-900 transition-colors',
+        className,
       )}
     >
       {title && (
@@ -68,11 +68,11 @@ const FormWrapper: React.FC<FormWrapperProps> = ({
             type="submit"
             disabled={loading}
             className={clsx(
-              "px-4 py-2 rounded-lg text-white transition-colors",
-              loading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+              'px-4 py-2 rounded-lg text-white transition-colors',
+              loading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700',
             )}
           >
-            {loading ? "กำลังบันทึก..." : submitLabel}
+            {loading ? 'กำลังบันทึก...' : submitLabel}
           </button>
         </div>
       </form>

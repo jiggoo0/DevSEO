@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcrypt from 'bcryptjs';
 
 export interface UserData {
   username: string;
@@ -8,13 +8,13 @@ export interface UserData {
 
 export const users: Record<string, UserData> = {
   admin: {
-    username: "admin",
-    role: "admin",
-    hash: bcrypt.hashSync("password123", 10),
+    username: 'admin',
+    role: 'admin',
+    hash: bcrypt.hashSync('password123', 10),
   },
   user1: {
-    username: "user1",
-    role: "user",
-    hash: bcrypt.hashSync("mypassword", 10),
+    username: 'user1',
+    role: 'user',
+    hash: bcrypt.hashSync('mypassword', 10),
   },
 };

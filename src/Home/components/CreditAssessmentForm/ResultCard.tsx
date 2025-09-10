@@ -1,7 +1,7 @@
 // src/Home/components/CreditAssessmentForm/ResultCard.tsx
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
 interface ResultCardProps {
   dti: number; // อัตราส่วนหนี้ต่อรายได้ (%)
@@ -13,7 +13,7 @@ interface ResultCardProps {
 
 const ResultCard: React.FC<ResultCardProps> = ({ dti, score, status, debtScore, savingsScore }) => {
   // กำหนดสีพื้นหลังและตัวอักษรตามสถานะ
-  const statusColor = status === "ผ่าน" ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800";
+  const statusColor = status === 'ผ่าน' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800';
 
   return (
     <div className="p-4 border rounded-lg shadow-md mt-4 space-y-3 bg-white">
@@ -35,7 +35,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ dti, score, status, debtScore, 
 
       {savingsScore !== undefined && (
         <div>
-          <span className="font-semibold">คะแนนจากเงินออม/หลักประกัน:</span>{" "}
+          <span className="font-semibold">คะแนนจากเงินออม/หลักประกัน:</span>{' '}
           {savingsScore.toFixed(2)}
         </div>
       )}

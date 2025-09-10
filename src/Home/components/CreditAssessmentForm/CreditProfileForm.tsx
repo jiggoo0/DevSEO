@@ -1,9 +1,9 @@
 // src/Home/components/CreditAssessmentForm/CreditProfileForm.tsx
 
-"use client";
+'use client';
 
-import React, { useMemo } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import React, { useMemo } from 'react';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import {
   FormWrapper,
   FieldGroup,
@@ -11,7 +11,7 @@ import {
   SelectFieldUI,
   TextareaField,
   SubmitButton,
-} from "@/Home/components/Forms";
+} from '@/Home/components/Forms';
 
 export type CreditProfileData = {
   fullName: string;
@@ -39,20 +39,20 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
     reset,
   } = useForm<CreditProfileData>({
     defaultValues: {
-      fullName: "",
-      email: "",
-      phone: "",
-      occupation: "",
+      fullName: '',
+      email: '',
+      phone: '',
+      occupation: '',
       monthlyIncome: 0,
       existingDebt: 0,
-      paymentHistory: "",
-      creditRating: "",
-      notes: "",
+      paymentHistory: '',
+      creditRating: '',
+      notes: '',
     },
   });
 
-  const monthlyIncome = watch("monthlyIncome") || 0;
-  const existingDebt = watch("existingDebt") || 0;
+  const monthlyIncome = watch('monthlyIncome') || 0;
+  const existingDebt = watch('existingDebt') || 0;
 
   const debtToIncomeRatio = useMemo(() => {
     if (monthlyIncome <= 0) return 0;
@@ -60,9 +60,9 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
   }, [existingDebt, monthlyIncome]);
 
   const ratioColor = useMemo(() => {
-    if (debtToIncomeRatio > 50) return "text-red-600";
-    if (debtToIncomeRatio > 30) return "text-yellow-600";
-    return "text-green-600";
+    if (debtToIncomeRatio > 50) return 'text-red-600';
+    if (debtToIncomeRatio > 30) return 'text-yellow-600';
+    return 'text-green-600';
   }, [debtToIncomeRatio]);
 
   const handleFormSubmit: SubmitHandler<CreditProfileData> = async (data) => {
@@ -70,12 +70,12 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
       if (onSubmit) {
         onSubmit(data);
       }
-      console.log("Customer Credit Profile:", data);
-      alert("บันทึกแบบฟอร์มประเมินโปรไฟล์เรียบร้อยแล้ว");
+      console.log('Customer Credit Profile:', data);
+      alert('บันทึกแบบฟอร์มประเมินโปรไฟล์เรียบร้อยแล้ว');
       reset();
     } catch (error) {
-      console.error("เกิดข้อผิดพลาด:", error);
-      alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+      console.error('เกิดข้อผิดพลาด:', error);
+      alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
     }
   };
 
@@ -91,7 +91,7 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
           placeholder="กรอกชื่อ-นามสกุล"
           required
           error={errors.fullName?.message || undefined}
-          {...register("fullName", { required: "กรุณากรอกชื่อ-สกุล" })}
+          {...register('fullName', { required: 'กรุณากรอกชื่อ-สกุล' })}
         />
 
         <InputField
@@ -100,9 +100,9 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
           placeholder="example@email.com"
           required
           error={errors.email?.message || undefined}
-          {...register("email", {
-            required: "กรุณากรอกอีเมล",
-            pattern: { value: /^\S+@\S+$/i, message: "รูปแบบอีเมลไม่ถูกต้อง" },
+          {...register('email', {
+            required: 'กรุณากรอกอีเมล',
+            pattern: { value: /^\S+@\S+$/i, message: 'รูปแบบอีเมลไม่ถูกต้อง' },
           })}
         />
 
@@ -112,7 +112,7 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
           placeholder="เช่น 0812345678"
           required
           error={errors.phone?.message || undefined}
-          {...register("phone", { required: "กรุณากรอกเบอร์โทรศัพท์" })}
+          {...register('phone', { required: 'กรุณากรอกเบอร์โทรศัพท์' })}
         />
 
         <InputField
@@ -120,7 +120,7 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
           placeholder="กรอกอาชีพปัจจุบัน"
           required
           error={errors.occupation?.message || undefined}
-          {...register("occupation", { required: "กรุณากรอกอาชีพ" })}
+          {...register('occupation', { required: 'กรุณากรอกอาชีพ' })}
         />
 
         <InputField
@@ -129,9 +129,9 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
           placeholder="0"
           required
           error={errors.monthlyIncome?.message || undefined}
-          {...register("monthlyIncome", {
-            required: "กรุณากรอกรายได้ต่อเดือน",
-            min: { value: 0, message: "ต้องมากกว่า 0" },
+          {...register('monthlyIncome', {
+            required: 'กรุณากรอกรายได้ต่อเดือน',
+            min: { value: 0, message: 'ต้องมากกว่า 0' },
           })}
         />
 
@@ -141,9 +141,9 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
           placeholder="0"
           required
           error={errors.existingDebt?.message || undefined}
-          {...register("existingDebt", {
-            required: "กรุณากรอกหนี้สินปัจจุบัน",
-            min: { value: 0, message: "ต้องมากกว่า 0" },
+          {...register('existingDebt', {
+            required: 'กรุณากรอกหนี้สินปัจจุบัน',
+            min: { value: 0, message: 'ต้องมากกว่า 0' },
           })}
         />
 
@@ -159,17 +159,17 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
         <Controller
           control={control}
           name="paymentHistory"
-          rules={{ required: "กรุณาเลือกประวัติการชำระ" }}
+          rules={{ required: 'กรุณาเลือกประวัติการชำระ' }}
           render={({ field }) => (
             <SelectFieldUI
               {...field}
               label="ประวัติการชำระ"
               required
               options={[
-                { label: "ดีมาก", value: "excellent" },
-                { label: "ดี", value: "good" },
-                { label: "ปานกลาง", value: "average" },
-                { label: "ไม่ดี", value: "poor" },
+                { label: 'ดีมาก', value: 'excellent' },
+                { label: 'ดี', value: 'good' },
+                { label: 'ปานกลาง', value: 'average' },
+                { label: 'ไม่ดี', value: 'poor' },
               ]}
               error={errors.paymentHistory?.message || undefined}
             />
@@ -179,17 +179,17 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
         <Controller
           control={control}
           name="creditRating"
-          rules={{ required: "กรุณาเลือกคะแนนเครดิต" }}
+          rules={{ required: 'กรุณาเลือกคะแนนเครดิต' }}
           render={({ field }) => (
             <SelectFieldUI
               {...field}
               label="คะแนนเครดิตปัจจุบัน"
               required
               options={[
-                { label: "A (ยอดเยี่ยม)", value: "A" },
-                { label: "B (ดี)", value: "B" },
-                { label: "C (พอใช้)", value: "C" },
-                { label: "D (ต้องปรับปรุง)", value: "D" },
+                { label: 'A (ยอดเยี่ยม)', value: 'A' },
+                { label: 'B (ดี)', value: 'B' },
+                { label: 'C (พอใช้)', value: 'C' },
+                { label: 'D (ต้องปรับปรุง)', value: 'D' },
               ]}
               error={errors.creditRating?.message || undefined}
             />
@@ -200,7 +200,7 @@ const CreditProfileForm: React.FC<CreditProfileFormProps> = ({ onSubmit }) => {
           label="หมายเหตุเพิ่มเติม"
           placeholder="กรอกข้อเสนอแนะหรือข้อมูลสำคัญอื่น ๆ"
           rows={4}
-          {...register("notes")}
+          {...register('notes')}
         />
       </FieldGroup>
 

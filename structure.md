@@ -1,6 +1,6 @@
 # Project Structure
 
-_Generated at: 2025-09-10 11:42:07_
+_Generated at: 2025-09-10 18:54:11_
 
 ```
 src
@@ -9,6 +9,16 @@ src
 │   └── RootApp.tsx
 ├── Home
 │   ├── AdminTools
+│   │   ├── CompanyAccount
+│   │   │   ├── CompanyAccount.tsx
+│   │   │   ├── index.ts
+│   │   │   └── types
+│   │   │       └── CompanyAccount.ts
+│   │   ├── CourtOrder
+│   │   │   ├── CourtOrder.tsx
+│   │   │   ├── index.ts
+│   │   │   └── types
+│   │   │       └── CourtOrder.ts
 │   │   ├── DriverLicense
 │   │   │   ├── DriverLicenseForm.tsx
 │   │   │   ├── DriverLicensePage.tsx
@@ -23,10 +33,20 @@ src
 │   │   ├── IdCardPreview
 │   │   │   ├── IdCardPreview.tsx
 │   │   │   └── IdCardSection.tsx
+│   │   ├── KBankLive
+│   │   │   ├── KBankLive.tsx
+│   │   │   ├── index.ts
+│   │   │   └── types
+│   │   │       └── KBankLive.ts
 │   │   ├── MedicalCertificate
 │   │   │   ├── MedicalCertificate.tsx
 │   │   │   └── types
 │   │   │       └── medicalCertificate.ts
+│   │   ├── PoliceReport
+│   │   │   ├── PoliceReport.tsx
+│   │   │   ├── index.ts
+│   │   │   └── types
+│   │   │       └── PoliceReport.ts
 │   │   ├── RegistrationPreview
 │   │   │   └── RegistrationPreview.tsx
 │   │   ├── Reviews
@@ -184,9 +204,13 @@ src
 ├── __mocks__
 │   ├── KbankIOSNotification.mock.ts
 │   ├── kbankIOSNotification.ts
+│   ├── mockCompanyAccount.ts
+│   ├── mockCourtOrder.ts
 │   ├── mockDriverLicenseData.ts
 │   ├── mockIdCardData.ts
+│   ├── mockKBankLive.ts
 │   ├── mockMedicalCertificate.ts
+│   ├── mockPoliceReport.ts
 │   ├── mockRegistrationData.ts
 │   ├── mockSalaryCertificate.ts
 │   ├── mockUserBoard.ts
@@ -194,16 +218,7 @@ src
 ├── animations
 │   └── motionVariants.ts
 ├── api
-│   ├── Chat
-│   │   ├── index.ts
-│   │   ├── messages.ts
-│   │   ├── send.ts
-│   │   └── types.ts
-│   ├── Chat.ts
-│   ├── echo.ts
-│   ├── index.ts
-│   ├── project.ts
-│   └── useChat.tsx
+│   └── server.ts
 ├── assets
 │   ├── images
 │   │   └── hero-bg.webp
@@ -245,7 +260,9 @@ src
 ├── types
 │   ├── IUser.ts
 │   ├── cardConfig.ts
+│   ├── custom.d.ts
 │   ├── dashboard.ts
+│   ├── declarations.d.ts
 │   └── sqljs.d.ts
 ├── utils
 │   ├── auth.ts
@@ -254,7 +271,6 @@ src
 │   ├── common
 │   │   ├── 403.tsx
 │   │   ├── BackToTop.tsx
-│   │   ├── ChatContext.tsx
 │   │   ├── ChatWidget.tsx
 │   │   ├── DisclaimerModal.tsx
 │   │   ├── ErrorBoundary.tsx

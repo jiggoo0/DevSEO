@@ -1,99 +1,37 @@
-# -------------------------------
-# Logs
-# -------------------------------
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# -------------------------------
-# Runtime / Temp data
-# -------------------------------
-*.local
-.backup/
-*.bak
-
-# -------------------------------
-# Build output
-# -------------------------------
-dist/
-dist-ssr/
-build/
-out/
-coverage/
-tsconfig.tsbuildinfo
-
-# -------------------------------
-# Dependencies
-# -------------------------------
+# Node modules
 node_modules/
 
-# -------------------------------
+# Build output
+dist/
+dist-server/
+
 # Environment variables
-# -------------------------------
 .env
 .env.local
 .env.*.local
-.env.production
-.env.example
-# -------------------------------
-# IDE / Editor settings
-# -------------------------------
-.vscode/
-!.vscode/extensions.json
-.idea/
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
-# -------------------------------
-# OS generated files
-# -------------------------------
-Thumbs.db
-ehthumbs.db
-Icon?
-Desktop.ini
-
-# -------------------------------
-# Deployment / Vercel
-# -------------------------------
+# Vercel
 .vercel/
+.vercelignore
 
-# -------------------------------
-# Lockfiles
-# -------------------------------
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-.pnpm-debug.log
+# IDE / Editor
+.vscode/
+*.code-workspace
 
-# -------------------------------
-# SSL / Keys
-# -------------------------------
-*.pem
-*.crt
-*.key
-*.cert
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# -------------------------------
-# Archives
-# -------------------------------
-*.zip
-*.tar.gz
-*.tgz
-*.7z
+# OS / System
+.DS_Store
+Thumbs.db
 
-# -------------------------------
-# Tailwind / PostCSS / Vite cache
-# -------------------------------
-node_modules/.vite/
+# TypeScript
+*.tsbuildinfo
 
-# -------------------------------
-# Miscellaneous
-# -------------------------------
-.vercel
+# Temporary / backup files
+*.bak
+*.tmp
+*.swp

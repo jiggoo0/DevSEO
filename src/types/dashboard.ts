@@ -1,7 +1,7 @@
 // src/utils/calculations.ts
-import { ApplicantData } from "../data/applicantData";
-import { AssessmentConfig } from "../config/assessmentConfig";
-import { getDebtToIncomeRatio, getCreditworthinessScore } from "../data/applicantData";
+import { ApplicantData } from '../data/applicantData';
+import { AssessmentConfig } from '../config/assessmentConfig';
+import { getDebtToIncomeRatio, getCreditworthinessScore } from '../data/applicantData';
 
 /**
  * คำนวณ DTI (Debt-to-Income Ratio)
@@ -53,9 +53,9 @@ export function calculateCreditScore(data: ApplicantData, config: AssessmentConf
  */
 export function assessCreditStatus(
   creditScore: number,
-  threshold: number = 70
-): "ผ่าน" | "ไม่ผ่าน" {
-  return creditScore >= threshold ? "ผ่าน" : "ไม่ผ่าน";
+  threshold: number = 70,
+): 'ผ่าน' | 'ไม่ผ่าน' {
+  return creditScore >= threshold ? 'ผ่าน' : 'ไม่ผ่าน';
 }
 
 /**
@@ -67,7 +67,7 @@ export function exampleUsage(data: ApplicantData, config: AssessmentConfig) {
   const status = assessCreditStatus(creditScore);
 
   return {
-    dti: dti.toFixed(2) + "%",
+    dti: dti.toFixed(2) + '%',
     creditScore,
     status,
   };

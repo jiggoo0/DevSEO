@@ -7,7 +7,7 @@ set -euo pipefail
 SRC_DIR="$(pwd)"
 DATE="$(date '+%Y-%m-%d-%H-%M-%S')"
 FOLDER_NAME="backup_${DATE}"
-ANDROID_BACKUP_DIR="/storage/emulated/0/Download/Backup"
+ANDROID_BACKUP_DIR="/storage/emulated/0/Download/Backup/DEVPROJECTS"
 ZIP_FILE="$ANDROID_BACKUP_DIR/${FOLDER_NAME}.zip"
 KEEP_COUNT=15
 
@@ -53,7 +53,10 @@ TEMP_BACKUP_DIR="$TEMP_BACKUP_PARENT/$FOLDER_NAME"
 mkdir -p "$TEMP_BACKUP_DIR"
 log "📁 Copying files to $TEMP_BACKUP_DIR ..."
 
-EXCLUDES=( "node_modules" ".git" "dist" ".backup" ".DS_Store" "*.log" ".env.local" ".next" ".cache" )
+# ------------------------------
+# EXCLUDE FILES/FOLDERS (KEEP .git)
+# ------------------------------
+EXCLUDES=( "node_modules" "dist" ".backup" ".DS_Store" "*.log" ".env.local" ".next" ".cache" )
 RSYNC_EXCLUDES=()
 for item in "${EXCLUDES[@]}"; do
   RSYNC_EXCLUDES+=("--exclude=$item")
@@ -65,6 +68,7 @@ rsync -a "${RSYNC_EXCLUDES[@]}" "$SRC_DIR/" "$TEMP_BACKUP_DIR/"
 # CREATE ZIP
 # ------------------------------
 log "📦 Creating ZIP at $ZIP_FILE ..."
+mkdir -p "$ANDROID_BACKUP_DIR"
 cd "$TEMP_BACKUP_PARENT"
 
 if command -v pv >/dev/null 2>&1; then
@@ -78,7 +82,6 @@ fi
 # CLEAN OLD BACKUPS
 # ------------------------------
 log "🧹 Cleaning old ZIP files on Android..."
-mkdir -p "$ANDROID_BACKUP_DIR"
 cd "$ANDROID_BACKUP_DIR"
 ls -1dt backup_*.zip 2>/dev/null | tail -n +$((KEEP_COUNT+1)) | xargs -r rm -f --
 

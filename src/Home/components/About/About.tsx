@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { motion, Variants, easeOut } from "framer-motion";
-import AboutTitle from "./ui/AboutTitle";
-import AboutDescription from "./ui/AboutDescription";
-import AboutImage from "./ui/AboutImage";
-import AboutQuote from "./ui/AboutQuote";
+import { motion, Variants, easeOut } from 'framer-motion';
+import AboutTitle from './ui/AboutTitle';
+import AboutDescription from './ui/AboutDescription';
+import AboutImage from './ui/AboutImage';
+import AboutQuote from './ui/AboutQuote';
 
 // ======================= Variants =======================
 const containerVariants: Variants = {

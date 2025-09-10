@@ -1,14 +1,14 @@
 // src/Home/CustomerAssessmentForm.tsx
-"use client";
+'use client';
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from 'react';
 import CreditProfileForm, {
   CreditProfileData,
-} from "./components/CreditAssessmentForm/CreditProfileForm";
-import { ApplicantData, exampleApplicant } from "@/data/applicantData";
-import { defaultConfig } from "@/config/assessmentConfig";
-import { calculateDTI, calculateCreditScore, assessCreditStatus } from "@/utils/calculations";
-import ResultCard from "./components/CreditAssessmentForm/ResultCard";
+} from './components/CreditAssessmentForm/CreditProfileForm';
+import { ApplicantData, exampleApplicant } from '@/data/applicantData';
+import { defaultConfig } from '@/config/assessmentConfig';
+import { calculateDTI, calculateCreditScore, assessCreditStatus } from '@/utils/calculations';
+import ResultCard from './components/CreditAssessmentForm/ResultCard';
 
 const CustomerAssessmentForm: React.FC = () => {
   const [profileData, setProfileData] = useState<CreditProfileData | null>(null);
@@ -16,14 +16,13 @@ const CustomerAssessmentForm: React.FC = () => {
 
   const dti = useMemo(() => calculateDTI(applicant), [applicant]);
 
-  // คืนค่า object
   const scoreDetails = useMemo(() => calculateCreditScore(applicant, defaultConfig), [applicant]);
-  const score = scoreDetails.totalScore; // ใช้ totalScore เป็น number
+  const score = scoreDetails.totalScore;
   const status = useMemo(() => assessCreditStatus(score, defaultConfig.creditThreshold), [score]);
 
   const handleProfileSubmit = (data: CreditProfileData) => {
     setProfileData(data);
-    console.log("Submitted Profile Data:", data);
+    console.log('Submitted Profile Data:', data);
   };
 
   const handleDebtChange = (index: number, value: number) => {
@@ -35,16 +34,16 @@ const CustomerAssessmentForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6">
+    <main className="max-w-3xl mx-auto p-6 space-y-6">
       <CreditProfileForm onSubmit={handleProfileSubmit} />
 
-      <div className="p-4 border-l-4 border-red-500 bg-red-50 text-red-700 text-sm">
-        <strong>หมายเหตุ:</strong> แบบฟอร์มในการประเมินใช้เทคนิคการคำนวณจาก DTI (Debt-to-Income
-        Ratio) ซึ่งเป็นข้อมูลปัจจุบันที่เชื่อถือได้ 100%. ผลลัพธ์ที่คุณเห็นคือผลการประเมินของคุณ
-        สิ่งที่เราทำให้คุณประเมินฟรีเพื่อไม่ให้คุณเสียเงินเสียทองกับเรื่องที่ไม่ควรเสีย.
+      <div className="p-4 border-l-4 border-red-500 bg-red-50 text-red-700 text-sm rounded">
+        <strong>หมายเหตุ:</strong> แบบฟอร์มประเมินใช้เทคนิคการคำนวณ DTI (Debt-to-Income Ratio)
+        ซึ่งข้อมูลเป็นปัจจุบันและเชื่อถือได้. ผลลัพธ์เป็นเพียงการประเมินเพื่อช่วยให้คุณวางแผนการเงิน
+        โดยไม่เสียค่าใช้จ่ายใด ๆ.
       </div>
 
-      <div className="p-6 border rounded-lg shadow-md space-y-4 bg-white">
+      <section className="p-6 border rounded-lg shadow-md space-y-4 bg-white">
         <h2 className="text-xl font-bold text-center">แบบประเมินความสามารถทางการเงิน</h2>
 
         <InputField
@@ -73,7 +72,7 @@ const CustomerAssessmentForm: React.FC = () => {
 
         <InputField
           label="คะแนนประวัติชำระหนี้ (0-35)"
-          description="ประเมินจากประวัติการชำระหนี้ที่ผ่านมา เช่น ชำระตรงเวลา ไม่มีค้างชำระ"
+          description="ประเมินจากประวัติการชำระหนี้ เช่น ชำระตรงเวลา ไม่มีค้างชำระ"
           value={applicant.paymentHistoryScore}
           onChange={(val) => setApplicant((prev) => ({ ...prev, paymentHistoryScore: val }))}
           min={0}
@@ -91,20 +90,20 @@ const CustomerAssessmentForm: React.FC = () => {
 
         <ResultCard
           dti={dti}
-          score={score} // number
+          score={score}
           status={status}
-          debtScore={scoreDetails.debtScore} // optional ถ้าต้องแสดง
-          savingsScore={scoreDetails.savingsScore} // optional
+          debtScore={scoreDetails.debtScore}
+          savingsScore={scoreDetails.savingsScore}
         />
-      </div>
+      </section>
 
       {profileData && (
-        <div className="p-4 border rounded-lg shadow-md bg-gray-50">
+        <section className="p-4 border rounded-lg shadow-md bg-gray-50">
           <h3 className="font-semibold mb-2">ข้อมูลโปรไฟล์ลูกค้าที่บันทึก</h3>
           <pre className="bg-gray-100 p-2 rounded">{JSON.stringify(profileData, null, 2)}</pre>
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 };
 

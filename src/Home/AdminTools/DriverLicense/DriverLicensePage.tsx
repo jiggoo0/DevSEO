@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { FC, useState, useEffect } from "react";
-import { useAuth } from "@/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import DriverLicenseForm from "./DriverLicenseForm";
-import DriverLicensePreviewWithActions from "./DriverLicensePreviewWithActions";
-import PageSection from "@/Home/components/common/PageSection";
-import LazyA4Card from "@/Home/components/common/LazyA4Card";
+import { FC, useState, useEffect } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import DriverLicenseForm from './DriverLicenseForm';
+import DriverLicensePreviewWithActions from './DriverLicensePreviewWithActions';
+import PageSection from '@/Home/components/common/PageSection';
+import LazyA4Card from '@/Home/components/common/LazyA4Card';
 
 /** ------------------------------
  * Type: Driver License Data
@@ -28,27 +28,27 @@ const DriverLicensePage: FC = () => {
   const navigate = useNavigate();
 
   const [licenseData, setLicenseData] = useState<DriverLicenseData>({
-    fullName: "",
-    idNumber: "",
-    dob: "",
-    issueDate: "",
-    expiryDate: "",
-    address: "",
-    photo: "",
-    licenseType: "",
-    bloodType: "",
+    fullName: '',
+    idNumber: '',
+    dob: '',
+    issueDate: '',
+    expiryDate: '',
+    address: '',
+    photo: '',
+    licenseType: '',
+    bloodType: '',
   });
 
   /** Redirect unauthenticated users */
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/login", { replace: true });
+      navigate('/login', { replace: true });
     }
   }, [isAuthenticated, navigate]);
 
   if (!isAuthenticated || !user) return null;
 
-  const isBlurred = user.role !== "admin";
+  const isBlurred = user.role !== 'admin';
 
   return (
     <main className="min-h-screen bg-gray-100 text-gray-900 px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -68,8 +68,8 @@ const DriverLicensePage: FC = () => {
           <DriverLicensePreviewWithActions
             isBlurred={isBlurred}
             data={licenseData}
-            onEdit={() => console.log("Edit clicked")}
-            onDownload={() => console.log("Download clicked")}
+            onEdit={() => console.log('Edit clicked')}
+            onDownload={() => console.log('Download clicked')}
           />
         </LazyA4Card>
       </PageSection>

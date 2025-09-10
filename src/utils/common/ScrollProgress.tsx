@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback } from 'react';
 
 /**
  * 📊 ScrollProgress
@@ -32,12 +32,12 @@ const ScrollProgress = () => {
     updateProgress();
 
     // listen scroll + resize
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
 
     return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
+      window.removeEventListener('scroll', updateProgress);
+      window.removeEventListener('resize', updateProgress);
     };
   }, [updateProgress]);
 

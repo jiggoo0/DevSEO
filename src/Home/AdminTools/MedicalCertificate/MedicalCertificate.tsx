@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { FC, memo, useRef } from "react";
-import { MedicalCertificateData } from "./types/medicalCertificate";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import { FC, memo, useRef } from 'react';
+import { MedicalCertificateData } from './types/medicalCertificate';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 interface MedicalCertificateProps {
   data: MedicalCertificateData;
 }
 
-const defaultText = "—";
+const defaultText = '—';
 const withFallback = (value?: string) => value?.trim() || defaultText;
 
 const MedicalCertificate: FC<MedicalCertificateProps> = ({ data }) => {
@@ -40,9 +40,9 @@ const MedicalCertificate: FC<MedicalCertificateProps> = ({ data }) => {
   const handleDownloadPNG = async () => {
     if (!certRef.current) return;
     const canvas = await html2canvas(certRef.current, { scale: 2 });
-    const link = document.createElement("a");
-    link.href = canvas.toDataURL("image/png");
-    link.download = "medical-certificate.png";
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = 'medical-certificate.png';
     link.click();
   };
 
@@ -50,12 +50,12 @@ const MedicalCertificate: FC<MedicalCertificateProps> = ({ data }) => {
   const handleDownloadPDF = async () => {
     if (!certRef.current) return;
     const canvas = await html2canvas(certRef.current, { scale: 2 });
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4');
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("medical-certificate.pdf");
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('medical-certificate.pdf');
   };
 
   return (
@@ -105,7 +105,7 @@ const MedicalCertificate: FC<MedicalCertificateProps> = ({ data }) => {
             <strong>สรุปความเห็นแพทย์:</strong> {withFallback(doctorSummary)}
           </p>
           <p>
-            <strong>หยุดพัก:</strong> ตั้งแต่ {withFallback(restFromDate)} ถึง{" "}
+            <strong>หยุดพัก:</strong> ตั้งแต่ {withFallback(restFromDate)} ถึง{' '}
             {withFallback(restToDate)}
           </p>
           {otherNote && (
@@ -145,6 +145,6 @@ const MedicalCertificate: FC<MedicalCertificateProps> = ({ data }) => {
   );
 };
 
-MedicalCertificate.displayName = "MedicalCertificate";
+MedicalCertificate.displayName = 'MedicalCertificate';
 
 export default memo(MedicalCertificate);

@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { Router } from 'express';
 
 const router = Router();
 
-router.get("/", (_req, res) => res.json({ message: "pong" }));
+router.get('/', (_req, res) => res.json({ message: 'pong' }));
 
 export default router;

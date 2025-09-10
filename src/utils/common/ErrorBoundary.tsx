@@ -1,7 +1,7 @@
 // src/utils/common/ErrorBoundary.tsx
-"use client";
+'use client';
 
-import { Component, ReactNode, ReactElement, ErrorInfo } from "react";
+import { Component, ReactNode, ReactElement, ErrorInfo } from 'react';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -23,7 +23,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    if (import.meta.env.DEV) console.error("💥 Uncaught error:", error, info);
+    if (import.meta.env.DEV) console.error('💥 Uncaught error:', error, info);
     this.props.onError?.(error, info);
   }
 
@@ -50,7 +50,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
             <h1 className="text-2xl sm:text-3xl font-bold mb-3">⚠️ เกิดข้อผิดพลาด</h1>
 
             <p className="mb-4 text-sm text-base-content/70 dark:text-gray-400">
-              {fallbackMessage || "ขอโทษในความไม่สะดวก กรุณารีเฟรชหน้าใหม่ หรือ ลองอีกครั้งภายหลัง"}
+              {fallbackMessage || 'ขอโทษในความไม่สะดวก กรุณารีเฟรชหน้าใหม่ หรือ ลองอีกครั้งภายหลัง'}
             </p>
 
             {error?.message && (

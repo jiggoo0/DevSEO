@@ -1,26 +1,26 @@
 // src/Router/ProtectedRoute.tsx
-"use client";
+'use client';
 
-import { FC, ReactNode } from "react";
-import { Navigate } from "react-router-dom";
-import { parseUserFromStorage, User } from "@/utils/auth";
+import { FC, ReactNode } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 
 export interface ProtectedRouteProps {
   children: ReactNode;
   /** Roles ที่สามารถเข้าถึงเส้นทางนี้ได้ */
-  allowedRoles: readonly User["role"][];
+  allowedRoles: readonly ('admin' | 'manager' | 'user')[];
 }
 
 /**
  * ProtectedRoute:
- * - ตรวจสอบการ login
+ * - ตรวจสอบการ login ผ่าน useAuth
  * - ตรวจสอบ role ของ user
  * - redirect ไปหน้า 403 หรือ login ตามกรณี
  */
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ children, allowedRoles }) => {
-  const user: User | null = parseUserFromStorage();
+  const { user, isAuthenticated } = useAuth();
 
-  if (!user) {
+  if (!isAuthenticated || !user) {
     // ยังไม่ login → redirect ไปหน้า login
     return <Navigate to="/login" replace />;
   }

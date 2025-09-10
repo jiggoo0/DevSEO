@@ -1,9 +1,9 @@
 // src/components/ui/LazyA4Card.tsx
-"use client";
+'use client';
 
-import { FC, ReactNode } from "react";
-import { motion } from "framer-motion";
-import clsx from "clsx";
+import { FC, ReactNode } from 'react';
+import { motion } from 'framer-motion';
+import clsx from 'clsx';
 
 interface LazyA4CardProps {
   title?: string;
@@ -33,11 +33,11 @@ const LazyA4Card: FC<LazyA4CardProps> = ({
   <motion.article
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.4, delay: delay / 1000, ease: "easeOut" }}
+    transition={{ duration: 0.4, delay: delay / 1000, ease: 'easeOut' }}
     viewport={{ once: true, amount: 0.3 }}
     className={clsx(
-      "relative w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm p-6",
-      className
+      'relative w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm p-6',
+      className,
     )}
   >
     {!hideTitle && title && (
@@ -48,6 +48,6 @@ const LazyA4Card: FC<LazyA4CardProps> = ({
   </motion.article>
 );
 
-LazyA4Card.displayName = "LazyA4Card";
+LazyA4Card.displayName = 'LazyA4Card';
 
 export default LazyA4Card;

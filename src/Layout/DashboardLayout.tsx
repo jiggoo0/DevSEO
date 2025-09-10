@@ -1,21 +1,24 @@
 // src/Layout/DashboardLayout.tsx
-// ==============================
-// Layout สำหรับ Dashboard Page
-// รองรับ Header, Sidebar (Responsive), และ Content
-// ==============================
+'use client';
 
-"use client";
-
-import React, { FC, ReactNode, useState } from "react";
-import ThemeToggle from "@/Home/components/common/ThemeToggle";
-import LogoutButton from "@/Home/components/common/LogoutButton";
-import TabPanel from "@/Home/components/common/TabPanel";
-import { Menu } from "lucide-react";
+import { FC, ReactNode, useState } from 'react';
+import ThemeToggle from '@/Home/components/common/ThemeToggle';
+import LogoutButton from '@/Home/components/common/LogoutButton';
+import TabPanel from '@/Home/components/common/TabPanel';
+import { Menu } from 'lucide-react';
 
 interface DashboardLayoutProps {
   children: ReactNode;
 }
 
+/**
+ * DashboardLayout
+ * -------------------------
+ * Layout สำหรับหน้า Dashboard
+ * - Header: Mobile toggle, ThemeToggle, LogoutButton
+ * - Sidebar: Desktop / Mobile drawer
+ * - Main content
+ */
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -59,21 +62,21 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
         </div>
       </header>
 
-      {/* Sidebar + Content */}
+      {/* Sidebar + Main Content */}
       <div className="flex flex-1">
         {/* Sidebar Desktop */}
         <aside className="hidden lg:block w-60 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 p-4">
-          <TabPanel isActive={true}>{sidebarContent}</TabPanel>
+          <TabPanel isActive>{sidebarContent}</TabPanel>
         </aside>
 
-        {/* Sidebar Mobile (Drawer style) */}
+        {/* Sidebar Mobile */}
         {isSidebarOpen && (
           <div className="fixed inset-0 z-30 flex lg:hidden">
             {/* Overlay */}
             <div className="flex-1 bg-black/40" onClick={() => setIsSidebarOpen(false)} />
-            {/* Sidebar content */}
+            {/* Sidebar Drawer */}
             <div className="w-64 bg-white dark:bg-slate-800 p-4 shadow-lg">
-              <TabPanel isActive={true}>{sidebarContent}</TabPanel>
+              <TabPanel isActive>{sidebarContent}</TabPanel>
             </div>
           </div>
         )}

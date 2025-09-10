@@ -51,7 +51,7 @@ export const validateConfig = (config: AssessmentConfig): boolean => {
  */
 export const calculateCreditScore = (
   data: ApplicantData,
-  config: AssessmentConfig = defaultConfig
+  config: AssessmentConfig = defaultConfig,
 ): number => {
   const { paymentHistory, debtRatio, savings, incomeStability } = data;
   const { maxDTI, weights } = config;
@@ -73,9 +73,9 @@ export const calculateCreditScore = (
  */
 export const assessCreditStatus = (
   score: number,
-  threshold: number = defaultConfig.creditThreshold
-): "APPROVED" | "REJECTED" => {
-  return score >= threshold ? "APPROVED" : "REJECTED";
+  threshold: number = defaultConfig.creditThreshold,
+): 'APPROVED' | 'REJECTED' => {
+  return score >= threshold ? 'APPROVED' : 'REJECTED';
 };
 
 /**

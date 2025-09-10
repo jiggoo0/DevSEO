@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { useState, useMemo, useCallback } from "react";
-import { portfolioItems } from "@/data/portfolioItems";
-import { cn } from "@/utils/cn";
-import PortfolioFilter from "./ui/PortfolioFilter";
-import PortfolioCTA from "./ui/PortfolioCTA";
-export { default as FilterButton } from "./ui/FilterButton";
+import { useState, useMemo, useCallback } from 'react';
+import { portfolioItems } from '@/data/portfolioItems';
+import { cn } from '@/utils/cn';
+import PortfolioFilter from './ui/PortfolioFilter';
+import PortfolioCTA from './ui/PortfolioCTA';
+export { default as FilterButton } from './ui/FilterButton';
 
 const PortfolioGallery: React.FC = () => {
   // สร้างรายการ categories แบบ unique
   const categories = useMemo(
     () => Array.from(new Set(portfolioItems.map((item) => item.category))),
-    []
+    [],
   );
 
-  const [activeCategory, setActiveCategory] = useState<string>(() => categories[0] ?? "");
+  const [activeCategory, setActiveCategory] = useState<string>(() => categories[0] ?? '');
 
   // กรอง items ตาม category
   const filteredItems = useMemo(
     () => portfolioItems.filter((item) => item.category === activeCategory),
-    [activeCategory]
+    [activeCategory],
   );
 
   const handleCategoryChange = useCallback((category: string) => {
@@ -48,8 +48,8 @@ const PortfolioGallery: React.FC = () => {
             tabIndex={0}
             aria-label={`Portfolio item: ${title}`}
             className={cn(
-              "overflow-hidden rounded-xl bg-white shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl focus-within:ring-2 focus-within:ring-primary",
-              "dark:bg-neutral-900 dark:shadow-gray-800/50"
+              'overflow-hidden rounded-xl bg-white shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl focus-within:ring-2 focus-within:ring-primary',
+              'dark:bg-neutral-900 dark:shadow-gray-800/50',
             )}
           >
             <img

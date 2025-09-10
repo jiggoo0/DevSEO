@@ -1,9 +1,9 @@
 // src/ThemeProvider/useTheme.ts
-"use client";
+'use client';
 
-import { useContext, useCallback } from "react";
-import { ThemeContext } from "./ThemeContext";
-import type { ThemeContextType } from "./ThemeContext";
+import { useContext, useCallback } from 'react';
+import { ThemeContext } from './ThemeContext';
+import type { ThemeContextType } from './ThemeContext';
 
 /**
  * 🎨 useTheme Hook
@@ -15,7 +15,7 @@ export const useTheme = (): ThemeContextType & { toggleTheme: () => void } => {
   const context = useContext(ThemeContext);
 
   if (!context) {
-    throw new Error("[useTheme] Hook must be used within <ThemeProvider>");
+    throw new Error('[useTheme] Hook must be used within <ThemeProvider>');
   }
 
   const { theme, setTheme } = context;
@@ -24,14 +24,14 @@ export const useTheme = (): ThemeContextType & { toggleTheme: () => void } => {
   const toggleTheme = useCallback(() => {
     const nextTheme = (current: typeof theme) => {
       switch (current) {
-        case "light":
-          return "dark";
-        case "dark":
-          return "business";
-        case "business":
-          return "system";
+        case 'light':
+          return 'dark';
+        case 'dark':
+          return 'business';
+        case 'business':
+          return 'system';
         default:
-          return "light";
+          return 'light';
       }
     };
     setTheme(nextTheme(theme));

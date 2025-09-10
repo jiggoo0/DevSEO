@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import { ArrowRight } from "lucide-react";
+import { FC } from 'react';
+import { ArrowRight } from 'lucide-react';
 
 interface PortfolioCTAProps {
   href: string;
@@ -27,6 +27,6 @@ const PortfolioCTA: FC<PortfolioCTAProps> = ({ href }) => {
   );
 };
 
-PortfolioCTA.displayName = "PortfolioCTA";
+PortfolioCTA.displayName = 'PortfolioCTA';
 
 export default PortfolioCTA;

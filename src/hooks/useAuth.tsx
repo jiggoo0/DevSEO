@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { FC, ReactNode, createContext, useContext, useState, useEffect, useCallback } from "react";
+import { FC, ReactNode, createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 // -------------------- Types --------------------
-export type UserRole = "admin" | "manager" | "user";
+export type UserRole = 'admin' | 'manager' | 'user';
 
 export type User = {
   username: string;
@@ -22,22 +22,22 @@ export type AuthContextType = {
 
 // -------------------- Helpers --------------------
 export const parseUserFromStorage = (): User | null => {
-  if (typeof window === "undefined") return null; // SSR safe
-  const raw = localStorage.getItem("user");
+  if (typeof window === 'undefined') return null; // SSR safe
+  const raw = localStorage.getItem('user');
   if (!raw) return null;
 
   try {
     const parsed = JSON.parse(raw);
     if (
       parsed &&
-      typeof parsed === "object" &&
-      typeof parsed.username === "string" &&
-      ["admin", "manager", "user"].includes(parsed.role)
+      typeof parsed === 'object' &&
+      typeof parsed.username === 'string' &&
+      ['admin', 'manager', 'user'].includes(parsed.role)
     ) {
       return parsed as User;
     }
   } catch (err) {
-    console.error("parseUserFromStorage error:", err);
+    console.error('parseUserFromStorage error:', err);
   }
   return null;
 };
@@ -47,7 +47,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within AuthProvider");
+  if (!context) throw new Error('useAuth must be used within AuthProvider');
   return context;
 };
 
@@ -66,8 +66,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const setUser = useCallback((u: User | null) => {
     setUserState(u);
-    if (u) localStorage.setItem("user", JSON.stringify(u));
-    else localStorage.removeItem("user");
+    if (u) localStorage.setItem('user', JSON.stringify(u));
+    else localStorage.removeItem('user');
   }, []);
 
   const isAuthenticated = !!user;
@@ -77,7 +77,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       if (!user) return false;
       return Array.isArray(roles) ? roles.includes(user.role) : roles === user.role;
     },
-    [user]
+    [user],
   );
 
   const logout = useCallback(() => {
@@ -90,7 +90,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       const updated = { ...user, ...data };
       setUser(updated);
     },
-    [user, setUser]
+    [user, setUser],
   );
 
   return (

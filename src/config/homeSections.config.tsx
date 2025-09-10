@@ -1,19 +1,19 @@
 // src/config/homeSections.config.tsx
-"use client";
+'use client';
 
-import { ReactNode, ComponentType, lazy } from "react";
-import Hero from "@/Home/components/Hero/Hero";
-import About from "@/Home/components/About/About";
-import SellingPoints from "@/Home/components/SellingPoints/SellingPoints";
-import SpeedGuaranteeBanner from "@/Home/components/SellingPoints/SpeedGuaranteeBanner";
-import ServicesSection from "@/Home/components/Services/ServicesSection";
-import TestimonialSlider from "@/Home/components/Testimonials/TestimonialSlider";
-import CaseStudyRedacted from "@/Home/components/Portfolio/CaseStudyRedacted";
-import UserBoard, { UserBoardDataReadonly } from "@/Home/components/UserBoard/UserBoard";
-import { caseStudies } from "@/data/caseStudies";
+import { ReactNode, ComponentType, lazy } from 'react';
+import Hero from '@/Home/components/Hero/Hero.tsx';
+import About from '@/Home/components/About/About.tsx';
+import SellingPoints from '@/Home/components/SellingPoints/SellingPoints.tsx';
+import SpeedGuaranteeBanner from '@/Home/components/SellingPoints/SpeedGuaranteeBanner.tsx';
+import ServicesSection from '@/Home/components/Services/ServicesSection.tsx';
+import TestimonialSlider from '@/Home/components/Testimonials/TestimonialSlider.tsx';
+import CaseStudyRedacted from '@/Home/components/Portfolio/CaseStudyRedacted.tsx';
+import UserBoard, { UserBoardDataReadonly } from '@/Home/components/UserBoard/UserBoard.tsx';
+import { caseStudies } from '@/data/caseStudies.ts';
 
 // Lazy-load heavy sections
-const PortfolioGallery = lazy(() => import("@/Home/components/Portfolio/PortfolioGallery"));
+const PortfolioGallery = lazy(() => import('@/Home/components/Portfolio/PortfolioGallery.tsx'));
 
 // Wrapper for consistent padding across sections
 export const SectionWrapper: ComponentType<{ children: ReactNode }> = ({ children }) => (
@@ -29,7 +29,7 @@ export interface HomeSection {
 // Ordered sections for the Home page
 export const homeSections: HomeSection[] = [
   {
-    id: "hero",
+    id: 'hero',
     enabled: true,
     content: () => (
       <SectionWrapper>
@@ -38,7 +38,7 @@ export const homeSections: HomeSection[] = [
     ),
   },
   {
-    id: "about",
+    id: 'about',
     enabled: true,
     content: () => (
       <SectionWrapper>
@@ -47,7 +47,7 @@ export const homeSections: HomeSection[] = [
     ),
   },
   {
-    id: "selling-points",
+    id: 'selling-points',
     enabled: true,
     content: () => (
       <SectionWrapper>
@@ -57,7 +57,7 @@ export const homeSections: HomeSection[] = [
     ),
   },
   {
-    id: "services",
+    id: 'services',
     enabled: true,
     content: () => (
       <SectionWrapper>
@@ -66,7 +66,7 @@ export const homeSections: HomeSection[] = [
     ),
   },
   {
-    id: "portfolio",
+    id: 'portfolio',
     enabled: true,
     content: () => (
       <SectionWrapper>
@@ -75,7 +75,7 @@ export const homeSections: HomeSection[] = [
     ),
   },
   {
-    id: "case-studies",
+    id: 'case-studies',
     enabled: true,
     content: () => (
       <SectionWrapper>
@@ -84,7 +84,7 @@ export const homeSections: HomeSection[] = [
     ),
   },
   {
-    id: "testimonials",
+    id: 'testimonials',
     enabled: true,
     content: () => (
       <SectionWrapper>
@@ -93,7 +93,7 @@ export const homeSections: HomeSection[] = [
     ),
   },
   {
-    id: "user-board",
+    id: 'user-board',
     enabled: true,
     content: () => (
       <SectionWrapper>

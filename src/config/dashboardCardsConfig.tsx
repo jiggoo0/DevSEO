@@ -26,27 +26,27 @@
 //   ],
 // }
 
-import { Building2, Landmark, CreditCard, Stethoscope, FileText } from "lucide-react";
+import { Building2, Landmark, CreditCard, Stethoscope, FileText } from 'lucide-react';
 
 // --------------------------
 // User Roles
 // --------------------------
 export enum UserRole {
-  Admin = "admin",
-  Manager = "manager",
-  User = "user",
+  Admin = 'admin',
+  Manager = 'manager',
+  User = 'user',
 }
 
 // --------------------------
 // Dashboard Categories
 // --------------------------
 export enum DashboardCategory {
-  Registry = "registry",
-  Company = "company",
-  Certificate = "certificate",
-  Statement = "statement",
-  Medical = "medical",
-  Other = "other",
+  Registry = 'registry',
+  Company = 'company',
+  Certificate = 'certificate',
+  Statement = 'statement',
+  Medical = 'medical',
+  Other = 'other',
 }
 
 // --------------------------
@@ -77,53 +77,53 @@ export interface DashboardCard {
 // --------------------------
 const baseCards: DashboardCard[] = [
   {
-    title: "ทะเบียนพาณิชย์",
-    description: "ข้อมูลทะเบียนพาณิชย์ของบริษัท",
+    title: 'ทะเบียนพาณิชย์',
+    description: 'ข้อมูลทะเบียนพาณิชย์ของบริษัท',
     roles: [UserRole.Admin, UserRole.Manager],
     icon: Building2,
-    route: "/registry",
+    route: '/registry',
     category: DashboardCategory.Registry,
     realtime: true,
     quickActions: [
-      { label: "ดาวน์โหลดเอกสาร", key: "download", color: "bg-blue-500" },
-      { label: "ตรวจสอบสถานะ", key: "check", color: "bg-green-500" },
+      { label: 'ดาวน์โหลดเอกสาร', key: 'download', color: 'bg-blue-500' },
+      { label: 'ตรวจสอบสถานะ', key: 'check', color: 'bg-green-500' },
     ],
   },
   {
-    title: "ทะเบียนบริษัท",
-    description: "รายละเอียดทะเบียนบริษัท",
+    title: 'ทะเบียนบริษัท',
+    description: 'รายละเอียดทะเบียนบริษัท',
     roles: [UserRole.Admin, UserRole.Manager],
     icon: Landmark,
-    route: "/company",
+    route: '/company',
     category: DashboardCategory.Company,
     realtime: true,
-    quickActions: [{ label: "ดาวน์โหลดเอกสาร", key: "download", color: "bg-blue-500" }],
+    quickActions: [{ label: 'ดาวน์โหลดเอกสาร', key: 'download', color: 'bg-blue-500' }],
   },
   {
-    title: "ออกหนังสือรับรองเงินเดือน",
-    description: "พิมพ์เอกสารรับรองเงินเดือน",
+    title: 'ออกหนังสือรับรองเงินเดือน',
+    description: 'พิมพ์เอกสารรับรองเงินเดือน',
     roles: [UserRole.Admin, UserRole.Manager],
     icon: FileText,
-    route: "/salary-certificate",
+    route: '/salary-certificate',
     category: DashboardCategory.Certificate,
     realtime: true,
-    quickActions: [{ label: "พิมพ์เอกสาร", key: "print", color: "bg-green-500" }],
+    quickActions: [{ label: 'พิมพ์เอกสาร', key: 'print', color: 'bg-green-500' }],
   },
   {
-    title: "ออกใบรับรองแพทย์",
-    description: "สร้างเอกสารรับรองการรักษาพยาบาล",
+    title: 'ออกใบรับรองแพทย์',
+    description: 'สร้างเอกสารรับรองการรักษาพยาบาล',
     roles: [UserRole.Admin, UserRole.Manager],
     icon: Stethoscope,
-    route: "/medical-certificate",
+    route: '/medical-certificate',
     category: DashboardCategory.Medical,
     realtime: true,
     quickActions: [
-      { label: "พิมพ์ใบรับรอง", key: "print", color: "bg-green-500" },
-      { label: "แชทกับเรา", key: "chat", color: "bg-gray-500" },
+      { label: 'พิมพ์ใบรับรอง', key: 'print', color: 'bg-green-500' },
+      { label: 'แชทกับเรา', key: 'chat', color: 'bg-gray-500' },
     ],
   },
   // Statements
-  ...["ktb", "kbank", "tmb", "bbl", "ghb", "bay"].map((bank) => ({
+  ...['ktb', 'kbank', 'tmb', 'bbl', 'ghb', 'bay'].map((bank) => ({
     title: `Statement ${bank.toUpperCase()}`,
     description: `ใบแจ้งยอดบัญชี ${bank.toUpperCase()}`,
     roles: [UserRole.Admin, UserRole.Manager],
@@ -132,8 +132,8 @@ const baseCards: DashboardCard[] = [
     category: DashboardCategory.Statement,
     realtime: false,
     quickActions: [
-      { label: "ดาวน์โหลด", key: "download", color: "bg-blue-500" },
-      { label: "ตรวจสอบสถานะ", key: "check", color: "bg-green-500" },
+      { label: 'ดาวน์โหลด', key: 'download', color: 'bg-blue-500' },
+      { label: 'ตรวจสอบสถานะ', key: 'check', color: 'bg-green-500' },
     ],
   })),
 ];

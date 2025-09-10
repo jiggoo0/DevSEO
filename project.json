@@ -5,5 +5,14 @@
   "GITHUB_URL": "https://github.com/jiggoo0/vite-react",
   "WEBSITE_URL": "https://404notfontjp.vercel.app/",
   "DEVELOPER_EMAIL": "jiggo0@outlook.co.th",
-  "VERCEL_PROJECT_ID": "prj_MBF9hbw032OzD2gDVkUQ7mvoYA2t"
+  "PORT": 4000,
+  "VERCEL_ACCOUNT": "jiggoos-projects",
+  "VERCEL_PROJECT_NAME": "vite-react",
+  "VERCEL_PROJECT_ID": "prj_MBF9hbw032OzD2gDVkUQ7mvoYA2t",
+  "VERCEL_ORG_ID": "team_ZKLwuOfMRJYBVAxZoUaKZrhy",
+  "VERCEL_TOKEN": "r2dAJbBV9jV4ANsLY6vdgweS",
+  "VERCEL_OIDC_TOKEN": "<PASTE_YOUR_OIDC_JWT_HERE>",
+  "VITE_API_URL": "http://192.168.1.210:4000",
+  "VITE_APP_BASE_URL": "/",
+  "VITE_APP_NAME": "VisoulDocs"
 }

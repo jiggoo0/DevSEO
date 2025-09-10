@@ -1,10 +1,10 @@
 // src/Home/components/SellingPoints/SpeedGuaranteeBanner.tsx
-"use client";
+'use client';
 
-import { FC } from "react";
-import { Rocket, TimerReset } from "lucide-react";
-import { motion, Variants } from "framer-motion";
-import clsx from "clsx";
+import { FC } from 'react';
+import { Rocket, TimerReset } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+import clsx from 'clsx';
 
 export interface SpeedGuaranteeBannerProps {
   className?: string;
@@ -19,7 +19,7 @@ const bulletVariants: Variants = {
   visible: (i: number) => ({
     opacity: 1,
     x: 0,
-    transition: { delay: i * 0.1, duration: 0.4, ease: "easeOut" },
+    transition: { delay: i * 0.1, duration: 0.4, ease: 'easeOut' },
   }),
 };
 
@@ -32,13 +32,13 @@ const bulletVariants: Variants = {
  */
 const SpeedGuaranteeBanner: FC<SpeedGuaranteeBannerProps> = ({
   className,
-  title = "คิวด่วนพร้อม — งานไว เนียน ส่งตามนัด",
-  desc = "รองรับงานเร่ง 24 ชม.* ตามระดับความยาก + คิวที่ว่าง",
-  bullets = ["จัดคิวทันทีหลังยืนยันขอบเขต", "อัปเดตสถานะโปร่งใส", "ส่งไฟล์ปลอดภัย ลิงก์หมดอายุ"],
-  contactHref = "https://line.me/R/ti/p/@yourid",
+  title = 'คิวด่วนพร้อม — งานไว เนียน ส่งตามนัด',
+  desc = 'รองรับงานเร่ง 24 ชม.* ตามระดับความยาก + คิวที่ว่าง',
+  bullets = ['จัดคิวทันทีหลังยืนยันขอบเขต', 'อัปเดตสถานะโปร่งใส', 'ส่งไฟล์ปลอดภัย ลิงก์หมดอายุ'],
+  contactHref = 'https://line.me/R/ti/p/@yourid',
 }) => (
   <section
-    className={clsx("py-6 bg-base-100", className)}
+    className={clsx('py-6 bg-base-100', className)}
     role="region"
     aria-labelledby="speed-banner-title"
   >
@@ -47,7 +47,7 @@ const SpeedGuaranteeBanner: FC<SpeedGuaranteeBannerProps> = ({
         className="alert flex flex-col md:flex-row items-start md:items-center bg-base-200 shadow-lg rounded-xl gap-4 p-4 md:p-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         {/* Icon */}
         <motion.div
@@ -104,6 +104,6 @@ const SpeedGuaranteeBanner: FC<SpeedGuaranteeBannerProps> = ({
   </section>
 );
 
-SpeedGuaranteeBanner.displayName = "SpeedGuaranteeBanner";
+SpeedGuaranteeBanner.displayName = 'SpeedGuaranteeBanner';
 
 export default SpeedGuaranteeBanner;
