@@ -1,10 +1,10 @@
 // src/Home/components/common/CTAButtons.tsx
-'use client';
+"use client";
 
-import { motion, Variants } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { forwardRef } from 'react';
-import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import { motion, Variants } from "framer-motion";
+import { Link } from "react-router-dom";
+import { forwardRef } from "react";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
 
 /** =======================
  * Motion-enhanced Link
@@ -12,7 +12,7 @@ import { ArrowRightIcon } from '@heroicons/react/24/solid';
 const MotionLink = motion(
   forwardRef<HTMLAnchorElement, React.ComponentProps<typeof Link>>((props, ref) => (
     <Link ref={ref} {...props} />
-  )),
+  ))
 );
 
 /** =======================
@@ -31,7 +31,7 @@ const CTAButtons = () => {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2, duration: 0.5, ease: 'easeOut' }}
+      transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.6 }}
       className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4"
       role="group"

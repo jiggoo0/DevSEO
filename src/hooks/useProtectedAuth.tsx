@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { ReactNode, useState, useCallback } from 'react';
-import { AuthContext, User } from '@/hooks/useAuth';
+import React, { ReactNode, useState, useCallback } from "react";
+import { AuthContext, User } from "@/hooks/useAuth";
 
 interface ProtectedAuthProviderProps {
   children: ReactNode;
@@ -19,16 +19,16 @@ export const ProtectedAuthProvider: React.FC<ProtectedAuthProviderProps> = ({ ch
   const isAuthenticated = !!user;
 
   const hasRole = useCallback(
-    (roles: User['role'] | User['role'][]) => {
+    (roles: User["role"] | User["role"][]) => {
       if (!user) return false;
       if (Array.isArray(roles)) return roles.includes(user.role);
       return roles === user.role;
     },
-    [user],
+    [user]
   );
 
   const logout = useCallback(() => {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     setUser(null);
   }, []);
 
@@ -38,9 +38,9 @@ export const ProtectedAuthProvider: React.FC<ProtectedAuthProviderProps> = ({ ch
       if (!user) return;
       const updated = { ...user, ...data };
       setUser(updated);
-      localStorage.setItem('user', JSON.stringify(updated));
+      localStorage.setItem("user", JSON.stringify(updated));
     },
-    [user],
+    [user]
   );
 
   return (

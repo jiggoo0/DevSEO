@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { FC, useEffect, useMemo, useState, useCallback, KeyboardEvent, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { containerVariants, fadeInUp } from './motionVariants';
+import { FC, useEffect, useMemo, useState, useCallback, KeyboardEvent, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { containerVariants, fadeInUp } from "./motionVariants";
 
 export interface BlurContactProps {
   imageUrl?: string;
@@ -12,24 +12,24 @@ export interface BlurContactProps {
 }
 
 const DEFAULT_IMAGES = [
-  '/images/contact/bg1.jpg',
-  '/images/contact/bg2.jpg',
-  '/images/contact/bg3.jpg',
-  '/images/contact/bg4.jpg',
-  '/images/contact/bg5.jpg',
-  '/images/contact/bg6.jpg',
+  "/images/contact/bg1.jpg",
+  "/images/contact/bg2.jpg",
+  "/images/contact/bg3.jpg",
+  "/images/contact/bg4.jpg",
+  "/images/contact/bg5.jpg",
+  "/images/contact/bg6.jpg",
 ];
 
 const BlurContact: FC<BlurContactProps> = ({
   imageUrl,
-  contactText = 'กรอกรหัส Security Key เพื่อยืนยันความปลอดภัย',
+  contactText = "กรอกรหัส Security Key เพื่อยืนยันความปลอดภัย",
   onSubmitSecurityKey,
-  installPassword = 'สอบถามadmin',
+  installPassword = "สอบถามadmin",
 }) => {
   const images = useMemo(() => (imageUrl ? [imageUrl] : DEFAULT_IMAGES), [imageUrl]);
   const [currentImage, setCurrentImage] = useState(0);
   const [fadeImage, setFadeImage] = useState(false);
-  const [securityKey, setSecurityKey] = useState('');
+  const [securityKey, setSecurityKey] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -64,16 +64,16 @@ const BlurContact: FC<BlurContactProps> = ({
         : securityKey === installPassword;
 
       setSuccess(valid);
-      setError(valid ? null : 'Security Key ไม่ถูกต้อง');
+      setError(valid ? null : "Security Key ไม่ถูกต้อง");
     } catch {
-      setError('เกิดข้อผิดพลาด โปรดลองอีกครั้ง');
+      setError("เกิดข้อผิดพลาด โปรดลองอีกครั้ง");
     } finally {
       setLoading(false);
     }
   }, [securityKey, loading, onSubmitSecurityKey, installPassword]);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') handleSubmit();
+    if (e.key === "Enter") handleSubmit();
   };
 
   return (
@@ -83,7 +83,7 @@ const BlurContact: FC<BlurContactProps> = ({
         src={images[currentImage]}
         alt="Background"
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-          fadeImage ? 'opacity-0' : 'opacity-40'
+          fadeImage ? "opacity-0" : "opacity-40"
         }`}
         draggable={false}
         onError={(e) => ((e.target as HTMLImageElement).src = DEFAULT_IMAGES[0])}
@@ -155,7 +155,7 @@ const BlurContact: FC<BlurContactProps> = ({
             aria-busy={loading}
             tabIndex={0}
           >
-            {loading ? <span className="loading loading-spinner loading-sm" /> : 'ยืนยัน'}
+            {loading ? <span className="loading loading-spinner loading-sm" /> : "ยืนยัน"}
           </button>
           <span className="absolute -top-6 right-0 bg-gray-900 text-white text-xs font-semibold px-2 py-1 rounded shadow-md select-none glow-neon animate-pulse">
             @462fqtfc

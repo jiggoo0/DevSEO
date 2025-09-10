@@ -1,6 +1,6 @@
 // src/api/echo.ts
-import type { Request, Response } from 'express';
-import { z } from 'zod';
+import type { Request, Response } from "express";
+import { z } from "zod";
 
 // --- Request body schema ---
 // keyType = string, valueType = unknown
@@ -15,13 +15,13 @@ export const echoBody = (req: Request, res: Response) => {
 
   if (!parseResult.success) {
     return res.status(400).json({
-      error: 'Invalid request body',
+      error: "Invalid request body",
       details: parseResult.error.format(),
     });
   }
 
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('Received body:', req.body);
+  if (process.env.NODE_ENV !== "production") {
+    console.log("Received body:", req.body);
   }
 
   return res.json({ received: parseResult.data });

@@ -1,12 +1,12 @@
 // RootApp.tsx
-'use client';
+"use client";
 
-import { FC, Suspense } from 'react';
-import AppProviders from '@/context/AppProviders';
-import { ChatProvider } from '@/App/ChatProvider';
-import AppRouter from '@/Router/AppRouter';
-import ErrorBoundary from '@/utils/common/ErrorBoundary';
-import FallbackLoader from '@/utils/common/FallbackLoader';
+import { FC, Suspense } from "react";
+import AppProviders from "@/context/AppProviders";
+import { ChatProvider } from "@/App/ChatProvider";
+import AppRouter from "@/Router/AppRouter";
+import ErrorBoundary from "@/utils/common/ErrorBoundary";
+import FallbackLoader from "@/utils/common/FallbackLoader";
 
 const RootApp: FC = () => (
   <AppProviders>

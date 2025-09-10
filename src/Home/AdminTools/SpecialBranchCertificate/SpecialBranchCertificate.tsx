@@ -1,13 +1,13 @@
 // src/Home/AdminTools/SpecialBranchCertificate/SpecialBranchCertificate.tsx
-'use client';
+"use client";
 
-import { FC, memo, useRef } from 'react';
-import clsx from 'clsx';
-import { useAuth } from '@/hooks/useAuth';
+import { FC, memo, useRef } from "react";
+import clsx from "clsx";
+import { useAuth } from "@/hooks/useAuth";
 import mockCertificateData, {
   SpecialBranchCertificateData,
-} from '@/__mocks__/specialBranchCertificate';
-import { exportCardAsPNG, exportCardAsPDF } from '@/utils/exportCard';
+} from "@/__mocks__/specialBranchCertificate";
+import { exportCardAsPNG, exportCardAsPDF } from "@/utils/exportCard";
 
 // Reusable row component
 const InfoRow: FC<{ label: string; value: string }> = memo(({ label, value }) => (
@@ -16,21 +16,21 @@ const InfoRow: FC<{ label: string; value: string }> = memo(({ label, value }) =>
     <span>{value}</span>
   </p>
 ));
-InfoRow.displayName = 'InfoRow';
+InfoRow.displayName = "InfoRow";
 
 const SpecialBranchCertificate: FC = () => {
   const { user, isAuthenticated } = useAuth();
   const certRef = useRef<HTMLDivElement>(null);
-  const elementId = 'special-branch-cert';
+  const elementId = "special-branch-cert";
 
   if (!isAuthenticated || !user) return null;
 
-  const effectiveRole: 'admin' | 'manager' | 'user' = ['admin', 'manager', 'user'].includes(
-    user.role,
+  const effectiveRole: "admin" | "manager" | "user" = ["admin", "manager", "user"].includes(
+    user.role
   )
     ? user.role
-    : 'user';
-  const isAuthorized = effectiveRole === 'admin' || effectiveRole === 'manager';
+    : "user";
+  const isAuthorized = effectiveRole === "admin" || effectiveRole === "manager";
 
   if (!isAuthorized)
     return (
@@ -41,12 +41,12 @@ const SpecialBranchCertificate: FC = () => {
 
   const handleDownloadPNG = async () => {
     if (!certRef.current) return;
-    await exportCardAsPNG(elementId, 'special-branch-certificate.png', 'light');
+    await exportCardAsPNG(elementId, "special-branch-certificate.png", "light");
   };
 
   const handleDownloadPDF = async () => {
     if (!certRef.current) return;
-    await exportCardAsPDF(elementId, 'special-branch-certificate.pdf', true, 'light');
+    await exportCardAsPDF(elementId, "special-branch-certificate.pdf", true, "light");
   };
 
   return (
@@ -55,7 +55,7 @@ const SpecialBranchCertificate: FC = () => {
         id={elementId}
         ref={certRef}
         className={clsx(
-          'relative overflow-hidden rounded-xl bg-white p-6 shadow-md space-y-6 animate-fadeInUp',
+          "relative overflow-hidden rounded-xl bg-white p-6 shadow-md space-y-6 animate-fadeInUp"
         )}
       >
         {/* Background */}
@@ -63,9 +63,9 @@ const SpecialBranchCertificate: FC = () => {
           className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: "url('/images/certificate-bg.png')",
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
           }}
         />
 
@@ -116,6 +116,6 @@ const SpecialBranchCertificate: FC = () => {
   );
 };
 
-SpecialBranchCertificate.displayName = 'SpecialBranchCertificate';
+SpecialBranchCertificate.displayName = "SpecialBranchCertificate";
 
 export default memo(SpecialBranchCertificate);

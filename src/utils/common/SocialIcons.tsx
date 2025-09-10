@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { FaLine, FaInstagram, FaEnvelope, FaFacebookMessenger } from 'react-icons/fa';
-import { SiTiktok } from 'react-icons/si';
+import { FC } from "react";
+import { FaLine, FaInstagram, FaEnvelope, FaFacebookMessenger } from "react-icons/fa";
+import { SiTiktok } from "react-icons/si";
 
 export interface SocialLink {
   href: string;
   label: string;
-  icon: FC<{ className?: string; 'aria-hidden'?: boolean }>;
+  icon: FC<{ className?: string; "aria-hidden"?: boolean }>;
 }
 
 const defaultLinks: SocialLink[] = [
-  { href: 'https://lin.ee/gVptUhR', label: 'LINE', icon: FaLine },
+  { href: "https://lin.ee/gVptUhR", label: "LINE", icon: FaLine },
   {
-    href: 'https://www.instagram.com/jpsystem.official',
-    label: 'Instagram',
+    href: "https://www.instagram.com/jpsystem.official",
+    label: "Instagram",
     icon: FaInstagram,
   },
-  { href: 'mailto:contact@jpsystem.dev', label: 'Email', icon: FaEnvelope },
+  { href: "mailto:contact@jpsystem.dev", label: "Email", icon: FaEnvelope },
   {
-    href: 'https://m.me/61573307616115',
-    label: 'Messenger',
+    href: "https://m.me/61573307616115",
+    label: "Messenger",
     icon: FaFacebookMessenger,
   },
   {
-    href: 'https://www.tiktok.com/@jaopa.zerofour',
-    label: 'TikTok',
+    href: "https://www.tiktok.com/@jaopa.zerofour",
+    label: "TikTok",
     icon: SiTiktok,
   },
 ];

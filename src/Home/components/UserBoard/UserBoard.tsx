@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { FC, useMemo, useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { FC, useMemo, useState, useCallback } from "react";
+import { motion } from "framer-motion";
 
 // =======================
 // Types
@@ -24,27 +24,27 @@ export interface IUser {
 // =======================
 export const UserBoardDataReadonly: IUser[] = [
   {
-    application_id: 'A001',
-    citizen_id: '1234567890123',
-    full_name: 'สมชาย ใจดี',
-    first_name: 'สมชาย',
-    last_name: 'ใจดี',
-    mobile: '0812345678',
-    address: '123 หมู่ 1 ต.ตัวอย่าง อ.เมือง',
-    province: 'กรุงเทพฯ',
-    status: 'รออนุมัติ',
+    application_id: "A001",
+    citizen_id: "1234567890123",
+    full_name: "สมชาย ใจดี",
+    first_name: "สมชาย",
+    last_name: "ใจดี",
+    mobile: "0812345678",
+    address: "123 หมู่ 1 ต.ตัวอย่าง อ.เมือง",
+    province: "กรุงเทพฯ",
+    status: "รออนุมัติ",
     created_at: new Date().toISOString(),
   },
   {
-    application_id: 'A002',
-    citizen_id: '9876543210987',
-    full_name: 'สมหญิง สบายดี',
-    first_name: 'สมหญิง',
-    last_name: 'สบายดี',
-    mobile: '0898765432',
-    address: '456 หมู่ 2 ต.ตัวอย่าง อ.เมือง',
-    province: 'เชียงใหม่',
-    status: 'อนุมัติแล้ว',
+    application_id: "A002",
+    citizen_id: "9876543210987",
+    full_name: "สมหญิง สบายดี",
+    first_name: "สมหญิง",
+    last_name: "สบายดี",
+    mobile: "0898765432",
+    address: "456 หมู่ 2 ต.ตัวอย่าง อ.เมือง",
+    province: "เชียงใหม่",
+    status: "อนุมัติแล้ว",
     created_at: new Date().toISOString(),
   },
 ];
@@ -53,43 +53,43 @@ export const UserBoardDataReadonly: IUser[] = [
 // Constants
 // =======================
 const DEADLINE_DAYS = 65;
-const CORRECT_CODE = '9780';
+const CORRECT_CODE = "9780";
 
 const getDeadline = (createdAt: string) => {
   const d = new Date(createdAt);
   d.setDate(d.getDate() + DEADLINE_DAYS);
-  return d.toLocaleDateString('th-TH', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
+  return d.toLocaleDateString("th-TH", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
   });
 };
 
 // =======================
 // Table Label Mapping
 // =======================
-type DisplayKey = keyof IUser | 'deadline';
+type DisplayKey = keyof IUser | "deadline";
 
 const labelMap: Record<
   DisplayKey,
   { label: string; compute?: (val: unknown, row?: IUser) => string }
 > = {
-  application_id: { label: 'รหัสใบสมัคร' },
-  full_name: { label: 'ชื่อ-นามสกุล' },
-  first_name: { label: 'ชื่อ' },
-  last_name: { label: 'นามสกุล' },
-  citizen_id: { label: 'เลขบัตร' },
-  mobile: { label: 'เบอร์มือถือ' },
-  address: { label: 'ที่อยู่' },
-  province: { label: 'จังหวัด' },
-  status: { label: 'สถานะ' },
+  application_id: { label: "รหัสใบสมัคร" },
+  full_name: { label: "ชื่อ-นามสกุล" },
+  first_name: { label: "ชื่อ" },
+  last_name: { label: "นามสกุล" },
+  citizen_id: { label: "เลขบัตร" },
+  mobile: { label: "เบอร์มือถือ" },
+  address: { label: "ที่อยู่" },
+  province: { label: "จังหวัด" },
+  status: { label: "สถานะ" },
   created_at: {
-    label: 'วันที่ยื่น',
+    label: "วันที่ยื่น",
     compute: (val) =>
-      new Date(val as string).toLocaleDateString('th-TH', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
+      new Date(val as string).toLocaleDateString("th-TH", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
       }),
   },
   deadline: {
@@ -111,15 +111,15 @@ interface UserBoardProps {
 // =======================
 const UserBoard: FC<UserBoardProps> = ({ data, pageSize = 10 }) => {
   const [page, setPage] = useState(1);
-  const [codeInput, setCodeInput] = useState('');
+  const [codeInput, setCodeInput] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
 
   const displayKeys = useMemo(() => Object.keys(labelMap) as DisplayKey[], []);
   const totalPages = useMemo(() => Math.ceil(data.length / pageSize), [data.length, pageSize]);
   const pageData = useMemo(
     () => data.slice((page - 1) * pageSize, page * pageSize),
-    [data, page, pageSize],
+    [data, page, pageSize]
   );
 
   // -----------------------
@@ -129,23 +129,23 @@ const UserBoard: FC<UserBoardProps> = ({ data, pageSize = 10 }) => {
     (num: number) => {
       if (num < 1 || num > totalPages) return;
       setPage(num);
-      document.getElementById('user-table')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById("user-table")?.scrollIntoView({ behavior: "smooth", block: "start" });
     },
-    [totalPages],
+    [totalPages]
   );
 
   const _getPageNumbers = useCallback(() => {
     const delta = 2;
     const start = Math.max(1, page - delta);
     const end = Math.min(totalPages, page + delta);
-    const pages: (number | '...')[] = [];
+    const pages: (number | "...")[] = [];
     if (start > 1) {
       pages.push(1);
-      if (start > 2) pages.push('...');
+      if (start > 2) pages.push("...");
     }
     for (let i = start; i <= end; i++) pages.push(i);
     if (end < totalPages) {
-      if (end < totalPages - 1) pages.push('...');
+      if (end < totalPages - 1) pages.push("...");
       pages.push(totalPages);
     }
     return pages;
@@ -156,10 +156,10 @@ const UserBoard: FC<UserBoardProps> = ({ data, pageSize = 10 }) => {
       e.preventDefault();
       const isValid = codeInput.trim() === CORRECT_CODE;
       setIsAuthorized(isValid);
-      setErrorMsg(isValid ? '' : 'รหัสไม่ถูกต้อง กรุณาลองใหม่');
-      if (isValid) setCodeInput('');
+      setErrorMsg(isValid ? "" : "รหัสไม่ถูกต้อง กรุณาลองใหม่");
+      if (isValid) setCodeInput("");
     },
-    [codeInput],
+    [codeInput]
   );
 
   // -----------------------
@@ -202,7 +202,7 @@ const UserBoard: FC<UserBoardProps> = ({ data, pageSize = 10 }) => {
       <motion.div
         id="user-table"
         className={`overflow-x-auto rounded-lg shadow-md bg-white transition-all duration-500 ${
-          isAuthorized ? 'blur-0' : 'blur-md pointer-events-none select-none'
+          isAuthorized ? "blur-0" : "blur-md pointer-events-none select-none"
         }`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -219,12 +219,12 @@ const UserBoard: FC<UserBoardProps> = ({ data, pageSize = 10 }) => {
             <tr className="bg-gray-100">
               {displayKeys.map((key) => {
                 const style: React.CSSProperties =
-                  key === 'full_name'
-                    ? { width: '20%' }
-                    : key === 'address'
-                      ? { width: '25%' }
-                      : key === 'status' || key === 'province'
-                        ? { width: '10%' }
+                  key === "full_name"
+                    ? { width: "20%" }
+                    : key === "address"
+                      ? { width: "25%" }
+                      : key === "status" || key === "province"
+                        ? { width: "10%" }
                         : {};
                 return (
                   <th
@@ -248,7 +248,7 @@ const UserBoard: FC<UserBoardProps> = ({ data, pageSize = 10 }) => {
                   const compute = labelMap[key]?.compute;
                   const value = compute
                     ? compute(user[key as keyof IUser], user)
-                    : (user[key as keyof IUser] ?? '');
+                    : (user[key as keyof IUser] ?? "");
                   return (
                     <td
                       key={key}

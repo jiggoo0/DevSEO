@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { Upload, FileText, Settings, MailCheck, Hash, Key } from 'lucide-react'; // ใช้ Key icon สำหรับ OTP
+import { FC } from "react";
+import { Upload, FileText, Settings, MailCheck, Hash, Key } from "lucide-react"; // ใช้ Key icon สำหรับ OTP
 
 interface QuickActionsProps {
   onContact?: () => void;
@@ -16,54 +16,54 @@ interface QuickActionsProps {
 // กำหนดปุ่ม Quick Actions ใหม่
 const actions = [
   {
-    label: 'ติดต่อทีมงาน',
+    label: "ติดต่อทีมงาน",
     icon: Settings,
-    key: 'contact',
-    color: 'bg-gray-500',
-    hover: 'hover:bg-gray-600',
+    key: "contact",
+    color: "bg-gray-500",
+    hover: "hover:bg-gray-600",
   },
   {
-    label: 'สอบสถานะ (รอยืนยัน)',
+    label: "สอบสถานะ (รอยืนยัน)",
     icon: FileText,
-    key: 'check',
-    color: 'bg-green-500',
-    hover: 'hover:bg-green-600',
+    key: "check",
+    color: "bg-green-500",
+    hover: "hover:bg-green-600",
   },
   {
-    label: 'ดาวน์โหลดเอกสาร',
+    label: "ดาวน์โหลดเอกสาร",
     icon: Upload,
-    key: 'download',
-    color: 'bg-blue-500',
-    hover: 'hover:bg-blue-600',
+    key: "download",
+    color: "bg-blue-500",
+    hover: "hover:bg-blue-600",
   },
   {
-    label: 'ชำระเงินส่วนค้าง',
+    label: "ชำระเงินส่วนค้าง",
     icon: FileText,
-    key: 'pay',
-    color: 'bg-red-500',
-    hover: 'hover:bg-red-600',
+    key: "pay",
+    color: "bg-red-500",
+    hover: "hover:bg-red-600",
   },
   {
-    label: 'ยืนยัน Email บัญชีสัญญา',
+    label: "ยืนยัน Email บัญชีสัญญา",
     icon: MailCheck,
-    key: 'verify',
-    color: 'bg-purple-500',
-    hover: 'hover:bg-purple-600',
-    extraText: '✅ veeto666@gmail.com',
+    key: "verify",
+    color: "bg-purple-500",
+    hover: "hover:bg-purple-600",
+    extraText: "✅ veeto666@gmail.com",
   },
   {
-    label: 'หมายเลขสัญญากู้ยืม (รอยืนยัน)',
+    label: "หมายเลขสัญญากู้ยืม (รอยืนยัน)",
     icon: Hash,
-    key: 'contract',
-    color: 'bg-yellow-500',
-    hover: 'hover:bg-yellow-600',
+    key: "contract",
+    color: "bg-yellow-500",
+    hover: "hover:bg-yellow-600",
   },
   {
-    label: 'รับ OTP',
+    label: "รับ OTP",
     icon: Key,
-    key: 'otp',
-    color: 'bg-indigo-500',
-    hover: 'hover:bg-indigo-600',
+    key: "otp",
+    color: "bg-indigo-500",
+    hover: "hover:bg-indigo-600",
   },
 ];
 
@@ -78,25 +78,25 @@ const QuickActions: FC<QuickActionsProps> = ({
 }) => {
   const handleClick = (key: string) => {
     switch (key) {
-      case 'contact':
+      case "contact":
         onContact?.();
         break;
-      case 'check':
+      case "check":
         onCheckStatus?.();
         break;
-      case 'download':
+      case "download":
         onDownload?.();
         break;
-      case 'pay':
+      case "pay":
         onPay?.();
         break;
-      case 'verify':
+      case "verify":
         onVerifyEmail?.();
         break;
-      case 'contract':
+      case "contract":
         onContractNumber?.();
         break;
-      case 'otp':
+      case "otp":
         onRequestOTP?.();
         break;
     }

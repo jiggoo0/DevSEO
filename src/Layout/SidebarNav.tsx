@@ -1,9 +1,9 @@
 // src/Layout/SidebarNav.tsx
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
+import { FC } from "react";
+import { NavLink } from "react-router-dom";
+import clsx from "clsx";
 
 interface SidebarNavItem {
   to: string;
@@ -11,9 +11,9 @@ interface SidebarNavItem {
 }
 
 const navItems: SidebarNavItem[] = [
-  { to: '/', label: 'หน้าแรก' },
-  { to: '/form', label: 'ประเมินลูกค้า' },
-  { to: '/login', label: 'เข้าสู่ระบบ' },
+  { to: "/", label: "หน้าแรก" },
+  { to: "/form", label: "ประเมินลูกค้า" },
+  { to: "/login", label: "เข้าสู่ระบบ" },
 ];
 
 /**
@@ -39,10 +39,10 @@ const SidebarNav: FC = () => {
               end
               className={({ isActive }) =>
                 clsx(
-                  'block px-3 py-2 text-sm font-medium transition-colors duration-150',
+                  "block px-3 py-2 text-sm font-medium transition-colors duration-150",
                   isActive
-                    ? 'bg-gray-100 text-black font-semibold'
-                    : 'text-gray-700 hover:bg-gray-50 hover:text-black',
+                    ? "bg-gray-100 text-black font-semibold"
+                    : "text-gray-700 hover:bg-gray-50 hover:text-black"
                 )
               }
             >
@@ -55,5 +55,5 @@ const SidebarNav: FC = () => {
   );
 };
 
-SidebarNav.displayName = 'SidebarNav';
+SidebarNav.displayName = "SidebarNav";
 export default SidebarNav;

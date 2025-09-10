@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { FC, ReactNode } from 'react';
-import clsx from 'clsx';
+import { FC, ReactNode } from "react";
+import clsx from "clsx";
 
 interface WithBlurIfUserProps {
   isBlurred?: boolean;
@@ -21,11 +21,11 @@ const WithBlurIfUser: FC<WithBlurIfUserProps> = ({
   children,
 }) => {
   return (
-    <div className={clsx('relative', className)}>
+    <div className={clsx("relative", className)}>
       {/* Content */}
       <div
         className={clsx({
-          'filter blur-sm pointer-events-none select-none': isBlurred,
+          "filter blur-sm pointer-events-none select-none": isBlurred,
         })}
       >
         {children}
@@ -44,6 +44,6 @@ const WithBlurIfUser: FC<WithBlurIfUserProps> = ({
   );
 };
 
-WithBlurIfUser.displayName = 'WithBlurIfUser';
+WithBlurIfUser.displayName = "WithBlurIfUser";
 
 export default WithBlurIfUser;

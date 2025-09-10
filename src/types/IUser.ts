@@ -1,21 +1,21 @@
 /** 🔹 สิทธิ์ผู้ใช้งานในระบบ */
 export enum UserRole {
-  ADMIN = 'admin',
-  USER = 'user',
-  MANAGER = 'manager', // ✅ รองรับ role ใหม่
+  ADMIN = "admin",
+  USER = "user",
+  MANAGER = "manager", // ✅ รองรับ role ใหม่
 }
 
 /** 🔹 สถานะผู้ใช้งาน */
 export enum UserStatus {
-  APPROVED = 'approved',
-  PENDING = 'pending',
-  REJECTED = 'rejected',
+  APPROVED = "approved",
+  PENDING = "pending",
+  REJECTED = "rejected",
 }
 
 /** 🔹 เพศ */
 export enum Gender {
-  MALE = 'male',
-  FEMALE = 'female',
+  MALE = "male",
+  FEMALE = "female",
 }
 
 /** 🔹 Interface ข้อมูลผู้ใช้งาน */

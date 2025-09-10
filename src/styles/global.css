@@ -36,13 +36,13 @@
   --radius-md: 0.5rem;
   --transition-base: 250ms;
   --transition-fast: 200ms;
-  --font-family-base: 'Kanit', 'Noto Sans Thai', system-ui, sans-serif;
+  --font-family-base: "Kanit", "Noto Sans Thai", system-ui, sans-serif;
 }
 
 /* ==============================
    Dark Mode Variables
 ============================== */
-[data-theme='dark'],
+[data-theme="dark"],
 .dark {
   --color-primary: #1f2937;
   --color-primary-hover: #111827;
@@ -127,10 +127,10 @@ body {
   border-radius: 4px;
   transition: background-color var(--transition-base) ease;
 }
-[data-theme='dark'] ::-webkit-scrollbar-track {
+[data-theme="dark"] ::-webkit-scrollbar-track {
   background: var(--color-bg);
 }
-[data-theme='dark'] ::-webkit-scrollbar-thumb {
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
   background-color: var(--color-primary-hover);
 }
 

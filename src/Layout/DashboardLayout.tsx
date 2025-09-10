@@ -4,13 +4,13 @@
 // รองรับ Header, Sidebar (Responsive), และ Content
 // ==============================
 
-'use client';
+"use client";
 
-import React, { FC, ReactNode, useState } from 'react';
-import ThemeToggle from '@/Home/components/common/ThemeToggle';
-import LogoutButton from '@/Home/components/common/LogoutButton';
-import TabPanel from '@/Home/components/common/TabPanel';
-import { Menu } from 'lucide-react';
+import React, { FC, ReactNode, useState } from "react";
+import ThemeToggle from "@/Home/components/common/ThemeToggle";
+import LogoutButton from "@/Home/components/common/LogoutButton";
+import TabPanel from "@/Home/components/common/TabPanel";
+import { Menu } from "lucide-react";
 
 interface DashboardLayoutProps {
   children: ReactNode;

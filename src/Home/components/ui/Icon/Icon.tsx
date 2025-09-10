@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
+import { FC } from "react";
 import {
   CheckIcon,
   XMarkIcon,
@@ -8,9 +8,9 @@ import {
   UserIcon,
   ShieldCheckIcon,
   CheckCircleIcon,
-} from '@heroicons/react/24/solid';
+} from "@heroicons/react/24/solid";
 
-export type IconName = 'check' | 'cross' | 'edit' | 'user' | 'shield' | 'check-circle';
+export type IconName = "check" | "cross" | "edit" | "user" | "shield" | "check-circle";
 
 interface IconProps {
   name: IconName;
@@ -22,23 +22,23 @@ const Icon: FC<IconProps> = ({ name, size = 24, className }) => {
   const style = { width: size, height: size };
 
   switch (name) {
-    case 'check':
+    case "check":
       return <CheckIcon style={style} className={className} />;
-    case 'cross':
+    case "cross":
       return <XMarkIcon style={style} className={className} />;
-    case 'edit':
+    case "edit":
       return <PencilIcon style={style} className={className} />;
-    case 'user':
+    case "user":
       return <UserIcon style={style} className={className} />;
-    case 'shield':
+    case "shield":
       return <ShieldCheckIcon style={style} className={className} />;
-    case 'check-circle':
+    case "check-circle":
       return <CheckCircleIcon style={style} className={className} />;
     default:
       return null;
   }
 };
 
-Icon.displayName = 'Icon';
+Icon.displayName = "Icon";
 
 export default Icon;

@@ -1,20 +1,20 @@
 export interface ChatMessage {
   id: string;
-  sender: 'user' | 'bot';
+  sender: "user" | "bot";
   text: string;
   timestamp: number;
 }
 
 export interface WSMessagePayload {
   id?: string;
-  user: 'user' | 'bot';
+  user: "user" | "bot";
   text?: string;
   timestamp?: number;
   createdAt?: number;
 }
 
 export interface WSMessage {
-  type: 'history' | 'message' | 'error';
+  type: "history" | "message" | "error";
   payload?: WSMessagePayload | WSMessagePayload[];
   error?: string;
 }

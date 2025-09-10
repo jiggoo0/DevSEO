@@ -1,11 +1,11 @@
 // src/App/ChatProvider.tsx
-'use client';
+"use client";
 
-import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from "react";
 
 export interface ChatMessage {
   id: string;
-  sender: 'user' | 'bot';
+  sender: "user" | "bot";
   text: string;
   timestamp: number;
 }
@@ -18,7 +18,7 @@ interface WSChatMessage {
 }
 
 interface WSMessageEvent {
-  type: 'history' | 'message' | 'error';
+  type: "history" | "message" | "error";
   payload: WSChatMessage | WSChatMessage[];
   error?: string;
 }
@@ -34,7 +34,7 @@ function mapPayloadToMessages(payload: WSChatMessage | WSChatMessage[]): ChatMes
   const arr = Array.isArray(payload) ? payload : [payload];
   return arr.map((m) => ({
     id: m.id,
-    sender: m.user === 'user' ? 'user' : 'bot',
+    sender: m.user === "user" ? "user" : "bot",
     text: m.text,
     timestamp: m.timestamp,
   }));
@@ -46,7 +46,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Connect WebSocket once
   useEffect(() => {
-    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
     const wsUrl = `${protocol}://${window.location.host}/ws`;
     const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
@@ -55,27 +55,27 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const data: WSMessageEvent = JSON.parse(event.data);
         switch (data.type) {
-          case 'history':
+          case "history":
             setMessages(mapPayloadToMessages(data.payload));
             break;
-          case 'message':
+          case "message":
             setMessages((prev) => {
               const newMsgs = mapPayloadToMessages(data.payload);
               const existingIds = new Set(prev.map((m) => m.id));
               return [...prev, ...newMsgs.filter((m) => !existingIds.has(m.id))];
             });
             break;
-          case 'error':
-            console.error('WS error:', data.error);
+          case "error":
+            console.error("WS error:", data.error);
             break;
         }
       } catch (err) {
-        console.error('Failed to parse WS message', err);
+        console.error("Failed to parse WS message", err);
       }
     };
 
-    ws.onclose = () => console.log('Chat WS closed');
-    ws.onerror = (e) => console.error('Chat WS error', e);
+    ws.onclose = () => console.log("Chat WS closed");
+    ws.onerror = (e) => console.error("Chat WS error", e);
 
     return () => {
       if (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING) ws.close();
@@ -89,7 +89,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
     const tempMsg: ChatMessage = {
       id: crypto.randomUUID(),
-      sender: 'user',
+      sender: "user",
       text: cleanText,
       timestamp: Date.now(),
     };
@@ -98,24 +98,28 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
     try {
       if (wsRef.current?.readyState === WebSocket.OPEN) {
-        wsRef.current.send(JSON.stringify({ user: 'user', text: cleanText }));
+        wsRef.current.send(JSON.stringify({ user: "user", text: cleanText }));
       } else {
-        throw new Error('WS not open');
+        throw new Error("WS not open");
       }
     } catch {
-      await fetch('/api/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user: 'user', text: cleanText }),
+      await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user: "user", text: cleanText }),
       });
     }
   }, []);
 
-  return <ChatContext.Provider value={{ messages, sendMessage }}>{children}</ChatContext.Provider>;
+  return (
+    <ChatContext.Provider value={{ messages, sendMessage }}>
+      {children}
+    </ChatContext.Provider>
+  );
 };
 
 export const useChat = (): ChatContextProps => {
   const ctx = useContext(ChatContext);
-  if (!ctx) throw new Error('useChat must be used within ChatProvider');
+  if (!ctx) throw new Error("useChat must be used within ChatProvider");
   return ctx;
 };

@@ -1,16 +1,16 @@
 // src/Router/PublicRoute.tsx
-'use client';
+"use client";
 
-import { FC, ReactNode, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { parseUserFromStorage, User } from '@/utils/auth';
+import { FC, ReactNode, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { parseUserFromStorage, User } from "@/utils/auth";
 
 interface PublicRouteProps {
   children: ReactNode;
   redirectTo?: string;
 }
 
-const PublicRoute: FC<PublicRouteProps> = ({ children, redirectTo = '/secret' }) => {
+const PublicRoute: FC<PublicRouteProps> = ({ children, redirectTo = "/secret" }) => {
   const navigate = useNavigate();
   const [isReady, setIsReady] = useState(false);
 

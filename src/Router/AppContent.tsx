@@ -1,7 +1,7 @@
-import { FC, Suspense } from 'react';
-import AppRouter from '@/Router/AppRouter';
-import ErrorBoundary from '@/utils/common/ErrorBoundary';
-import FallbackLoader from '@/utils/common/FallbackLoader';
+import { FC, Suspense } from "react";
+import AppRouter from "@/Router/AppRouter";
+import ErrorBoundary from "@/utils/common/ErrorBoundary";
+import FallbackLoader from "@/utils/common/FallbackLoader";
 
 /**
  * AppContent

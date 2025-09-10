@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { FC, memo } from 'react';
-import { motion, Variants } from 'framer-motion';
+import { FC, memo } from "react";
+import { motion, Variants } from "framer-motion";
 
 export interface Review {
   id: string;
@@ -49,17 +49,17 @@ const ReviewsGallery: FC<ReviewsGalleryProps> = ({ reviews }) => {
         >
           <div className="flex items-center gap-4 mb-4">
             <img
-              src={review.avatarUrl || '/images/default-avatar.png'}
+              src={review.avatarUrl || "/images/default-avatar.png"}
               alt={`${review.reviewerName} avatar`}
               className="w-12 h-12 rounded-full object-cover"
             />
             <div>
               <p className="font-semibold text-gray-900 dark:text-white">{review.reviewerName}</p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {new Date(review.date).toLocaleDateString('th-TH', {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
+                {new Date(review.date).toLocaleDateString("th-TH", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
                 })}
               </p>
             </div>
@@ -69,7 +69,7 @@ const ReviewsGallery: FC<ReviewsGalleryProps> = ({ reviews }) => {
             {Array.from({ length: 5 }).map((_, i) => (
               <span
                 key={i}
-                className={`text-yellow-400 ${i < review.rating ? 'opacity-100' : 'opacity-30'}`}
+                className={`text-yellow-400 ${i < review.rating ? "opacity-100" : "opacity-30"}`}
                 aria-hidden="true"
               >
                 ★
@@ -84,5 +84,5 @@ const ReviewsGallery: FC<ReviewsGalleryProps> = ({ reviews }) => {
   );
 };
 
-ReviewsGallery.displayName = 'ReviewsGallery';
+ReviewsGallery.displayName = "ReviewsGallery";
 export default memo(ReviewsGallery);

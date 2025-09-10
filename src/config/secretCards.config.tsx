@@ -1,41 +1,30 @@
-'use client';
+"use client";
 
-import { ReactNode, ReactElement, lazy, Suspense } from 'react';
-import WithBlurIfUser from '@/Home/components/common/WithBlurIfUser';
-import KbankNotificationCard from '@/Home/components/SecretSection/KbankNotificationCard';
-import DriverLicenseForm from '@/Home/AdminTools/DriverLicense/DriverLicenseForm';
-import IdCardForm from '@/Home/IdCardForm';
-import { kbankMockData } from '@__mocks__/kbankIOSNotification';
-import mockRegistrationData from '@__mocks__/mockRegistrationData';
-import mockSalaryCertificate from '@__mocks__/mockSalaryCertificate';
-import mockMedicalCertificate from '@__mocks__/mockMedicalCertificate';
-
-// ✅ import 1–4
-import PoliceReport from '@/Home/AdminTools/PoliceReport';
-import CourtOrder from '@/Home/AdminTools/CourtOrder';
-import CompanyAccount from '@/Home/AdminTools/CompanyAccount';
-import KBankLive from '@/Home/AdminTools/KBankLive';
-
-import { mockPoliceReport } from '@__mocks__/mockPoliceReport';
-import { mockCourtOrder } from '@__mocks__/mockCourtOrder';
-import { mockCompanyAccount } from '@__mocks__/mockCompanyAccount';
-import { mockKBankLive } from '@__mocks__/mockKBankLive';
+import { ReactNode, ReactElement, lazy, Suspense } from "react";
+import WithBlurIfUser from "@/Home/components/common/WithBlurIfUser";
+import KbankNotificationCard from "@/Home/components/SecretSection/KbankNotificationCard";
+import DriverLicenseForm from "@/Home/AdminTools/DriverLicense/DriverLicenseForm";
+import IdCardForm from "@/Home/IdCardForm";
+import { kbankMockData } from "@__mocks__/kbankIOSNotification";
+import mockRegistrationData from "@__mocks__/mockRegistrationData";
+import mockSalaryCertificate from "@__mocks__/mockSalaryCertificate";
+import mockMedicalCertificate from "@__mocks__/mockMedicalCertificate";
 
 // Lazy-loaded components
 const RegistrationPreview = lazy(
-  () => import('@/Home/AdminTools/RegistrationPreview/RegistrationPreview'),
+  () => import("@/Home/AdminTools/RegistrationPreview/RegistrationPreview")
 );
 const SalaryCertificate = lazy(
-  () => import('@/Home/AdminTools/SalaryCertificate/SalaryCertificate'),
+  () => import("@/Home/AdminTools/SalaryCertificate/SalaryCertificate")
 );
 const MedicalCertificate = lazy(
-  () => import('@/Home/AdminTools/MedicalCertificate/MedicalCertificate'),
+  () => import("@/Home/AdminTools/MedicalCertificate/MedicalCertificate")
 );
 const SpecialBranchCertificate = lazy(
-  () => import('@/Home/AdminTools/SpecialBranchCertificate/SpecialBranchCertificate'),
+  () => import("@/Home/AdminTools/SpecialBranchCertificate/SpecialBranchCertificate")
 );
 
-export type EffectiveRole = 'admin' | 'user' | 'manager';
+export type EffectiveRole = "admin" | "user" | "manager";
 
 export interface LazyCard {
   title: string;
@@ -56,7 +45,7 @@ const wrapBlur = (
   node: ReactNode,
   isBlurred?: boolean,
   overlayMessage?: ReactNode,
-  key?: string | number,
+  key?: string | number
 ): ReactElement => (
   <WithBlurIfUser key={key} isBlurred={isBlurred} overlayMessage={overlayMessage}>
     {node}
@@ -72,105 +61,67 @@ const withFallback = (node: ReactNode, fallback?: ReactNode): ReactElement => (
 
 /** Generate the list of lazy-loaded cards based on user role */
 export const getLazyCards = (user: User, effectiveRole: EffectiveRole): LazyCard[] => {
-  const isAdminOrManager = ['admin', 'manager'].includes(effectiveRole);
-  const shouldBlur = effectiveRole !== 'admin';
+  const isAdminOrManager = ["admin", "manager"].includes(effectiveRole);
+  const shouldBlur = effectiveRole !== "admin";
 
   let delayCounter = 0;
   const nextDelay = () => (delayCounter += BASE_DELAY);
 
   const baseCards: LazyCard[] = [
     {
-      title: 'Driver License Form',
+      title: "Driver License Form",
       component: wrapBlur(
         <DriverLicenseForm role={effectiveRole} />,
         shouldBlur,
-        'เฉพาะแอดมินเท่านั้น',
+        "เฉพาะแอดมินเท่านั้น"
       ),
       delay: nextDelay(),
     },
     {
-      title: 'ID Card Form',
-      component: wrapBlur(<IdCardForm role={effectiveRole} />, shouldBlur, 'เฉพาะแอดมินเท่านั้น'),
+      title: "ID Card Form",
+      component: wrapBlur(<IdCardForm role={effectiveRole} />, shouldBlur, "เฉพาะแอดมินเท่านั้น"),
       delay: nextDelay(),
     },
     {
-      title: 'Registration Preview',
+      title: "Registration Preview",
       component: wrapBlur(
         withFallback(<RegistrationPreview {...mockRegistrationData} />),
         shouldBlur,
-        'เฉพาะแอดมินเท่านั้น',
+        "เฉพาะแอดมินเท่านั้น"
       ),
       delay: nextDelay(),
     },
     {
-      title: 'Salary Certificate',
+      title: "Salary Certificate",
       component: wrapBlur(
         withFallback(<SalaryCertificate data={mockSalaryCertificate} />),
         shouldBlur,
-        'เฉพาะแอดมินเท่านั้น',
+        "เฉพาะแอดมินเท่านั้น"
       ),
       delay: nextDelay(),
     },
     {
-      title: 'Medical Certificate',
+      title: "Medical Certificate",
       component: wrapBlur(
         withFallback(<MedicalCertificate data={mockMedicalCertificate} />),
         shouldBlur,
-        'เฉพาะแอดมินเท่านั้น',
+        "เฉพาะแอดมินเท่านั้น"
       ),
       delay: nextDelay(),
     },
     {
-      title: 'Kbank Notifications',
+      title: "Kbank Notifications",
       component: (
         <>
           {kbankMockData.map((item) =>
             wrapBlur(
               <KbankNotificationCard data={item} />,
               shouldBlur,
-              'เฉพาะแอดมินเท่านั้น',
-              item.id,
-            ),
+              "เฉพาะแอดมินเท่านั้น",
+              item.id
+            )
           )}
         </>
-      ),
-      delay: nextDelay(),
-    },
-
-    // ✅ เพิ่มรายการ 1–4
-    {
-      title: 'Police Report',
-      component: wrapBlur(
-        withFallback(<PoliceReport data={mockPoliceReport} />),
-        shouldBlur,
-        'เฉพาะแอดมินเท่านั้น',
-      ),
-      delay: nextDelay(),
-    },
-    {
-      title: 'Court Order',
-      component: wrapBlur(
-        withFallback(<CourtOrder data={mockCourtOrder} />),
-        shouldBlur,
-        'เฉพาะแอดมินเท่านั้น',
-      ),
-      delay: nextDelay(),
-    },
-    {
-      title: 'Company Account',
-      component: wrapBlur(
-        withFallback(<CompanyAccount data={mockCompanyAccount} />),
-        shouldBlur,
-        'เฉพาะแอดมินเท่านั้น',
-      ),
-      delay: nextDelay(),
-    },
-    {
-      title: 'KBank Live',
-      component: wrapBlur(
-        withFallback(<KBankLive data={mockKBankLive} />),
-        shouldBlur,
-        'เฉพาะแอดมินเท่านั้น',
       ),
       delay: nextDelay(),
     },
@@ -178,10 +129,10 @@ export const getLazyCards = (user: User, effectiveRole: EffectiveRole): LazyCard
 
   if (isAdminOrManager) {
     baseCards.push({
-      title: 'Special Branch Certificate',
+      title: "Special Branch Certificate",
       component: withFallback(
         <SpecialBranchCertificate />,
-        <div className="text-center py-6 text-gray-500">Loading Special Branch Certificate...</div>,
+        <div className="text-center py-6 text-gray-500">Loading Special Branch Certificate...</div>
       ),
       delay: nextDelay(),
     });

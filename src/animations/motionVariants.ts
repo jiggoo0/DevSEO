@@ -1,12 +1,12 @@
 // src/animations/motionVariants.ts
-import type { Variants, Transition } from 'framer-motion';
+import type { Variants, Transition } from "framer-motion";
 
 /** =======================
  * Default transition settings
  * ======================= */
 export const defaultTransition: Transition = {
   duration: 0.6,
-  ease: 'easeOut',
+  ease: "easeOut",
 };
 
 /** =======================
@@ -72,7 +72,7 @@ export const heroContainerVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { staggerChildren: 0.15, when: 'beforeChildren' },
+    transition: { staggerChildren: 0.15, when: "beforeChildren" },
   },
 };
 

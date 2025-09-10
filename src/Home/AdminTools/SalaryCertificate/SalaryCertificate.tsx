@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { FC, memo } from 'react';
-import { SalaryCertificateData } from './types/salaryCertificate';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { FC, memo } from "react";
+import { SalaryCertificateData } from "./types/salaryCertificate";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 interface SalaryCertificateProps {
   data: SalaryCertificateData;
@@ -11,45 +11,45 @@ interface SalaryCertificateProps {
 
 const SalaryCertificate: FC<SalaryCertificateProps> = ({ data }) => {
   const {
-    companyName = '',
-    companyNameEn = '',
-    certificateNumber = '',
-    employeeName = '',
-    startDate = '',
-    position = '',
-    department = '',
+    companyName = "",
+    companyNameEn = "",
+    certificateNumber = "",
+    employeeName = "",
+    startDate = "",
+    position = "",
+    department = "",
     salary = 0,
     positionAllowance = 0,
     costOfLiving = 0,
-    issueDate = '',
-    signPosition = '',
-    phone = '',
-    addressLine1 = '',
-    addressLine2 = '',
+    issueDate = "",
+    signPosition = "",
+    phone = "",
+    addressLine1 = "",
+    addressLine2 = "",
   } = data;
 
   const downloadPDF = async () => {
-    const element = document.getElementById('salary-certificate');
+    const element = document.getElementById("salary-certificate");
     if (!element) return;
 
     const canvas = await html2canvas(element, { scale: 2 });
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF('p', 'mm', 'a4');
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
     const imgProps = pdf.getImageProperties(imgData);
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save(`SalaryCertificate_${employeeName}.pdf`);
   };
 
   const downloadPNG = async () => {
-    const element = document.getElementById('salary-certificate');
+    const element = document.getElementById("salary-certificate");
     if (!element) return;
 
     const canvas = await html2canvas(element, { scale: 2 });
-    const imgData = canvas.toDataURL('image/png');
+    const imgData = canvas.toDataURL("image/png");
 
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = imgData;
     link.download = `SalaryCertificate_${employeeName}.png`;
     link.click();
@@ -79,7 +79,7 @@ const SalaryCertificate: FC<SalaryCertificateProps> = ({ data }) => {
         {/* Main Content */}
         <main className="whitespace-pre-line text-justify tracking-wide">
           บริษัทฯ ขอรับรองว่า <strong>นาย {employeeName}</strong> เป็นพนักงานของบริษัทฯ
-          โดยเริ่มปฏิบัติงานตั้งแต่วันที่ {startDate} จนถึงปัจจุบัน ดำรงตำแหน่ง {position}{' '}
+          โดยเริ่มปฏิบัติงานตั้งแต่วันที่ {startDate} จนถึงปัจจุบัน ดำรงตำแหน่ง {position}{" "}
           สังกัดแผนก {department}.
           <br />
           <br />
@@ -139,6 +139,6 @@ const SalaryCertificate: FC<SalaryCertificateProps> = ({ data }) => {
   );
 };
 
-SalaryCertificate.displayName = 'SalaryCertificate';
+SalaryCertificate.displayName = "SalaryCertificate";
 
 export default memo(SalaryCertificate);

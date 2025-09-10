@@ -1,14 +1,14 @@
 // src/Router/ProtectedRoute.tsx
-'use client';
+"use client";
 
-import { FC, ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
-import { parseUserFromStorage, User } from '@/utils/auth';
+import { FC, ReactNode } from "react";
+import { Navigate } from "react-router-dom";
+import { parseUserFromStorage, User } from "@/utils/auth";
 
 export interface ProtectedRouteProps {
   children: ReactNode;
   /** Roles ที่สามารถเข้าถึงเส้นทางนี้ได้ */
-  allowedRoles: readonly User['role'][];
+  allowedRoles: readonly User["role"][];
 }
 
 /**

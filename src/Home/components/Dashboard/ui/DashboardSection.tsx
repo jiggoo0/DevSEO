@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode } from "react";
 
 interface DashboardSectionProps {
   title?: string;
@@ -14,9 +14,9 @@ const DashboardSection: FC<DashboardSectionProps> = ({ title, children, cols }) 
   const lgCols = cols?.lg ?? 3;
 
   const gridColsClass = `grid grid-cols-1 ${
-    smCols === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3'
-  } ${mdCols === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} ${
-    lgCols === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'
+    smCols === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"
+  } ${mdCols === 2 ? "md:grid-cols-2" : "md:grid-cols-3"} ${
+    lgCols === 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"
   } gap-6`;
 
   return (

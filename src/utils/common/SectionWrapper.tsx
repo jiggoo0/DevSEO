@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { FC, ElementType, ReactNode } from 'react';
-import { cn } from '@/utils/cn';
+import { FC, ElementType, ReactNode } from "react";
+import { cn } from "@/utils/cn";
 
 interface SectionWrapperProps {
   /** 🎨 เพิ่ม className สำหรับปรับแต่ง container */
@@ -25,7 +25,7 @@ interface SectionWrapperProps {
 const SectionWrapper: FC<SectionWrapperProps> = ({
   children,
   className,
-  as: Tag = 'section',
+  as: Tag = "section",
   id,
   ariaLabel,
 }) => {
@@ -33,7 +33,7 @@ const SectionWrapper: FC<SectionWrapperProps> = ({
     <Tag
       id={id}
       aria-label={ariaLabel}
-      className={cn('w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8', className)}
+      className={cn("w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8", className)}
     >
       {children}
     </Tag>

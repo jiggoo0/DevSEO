@@ -1,9 +1,9 @@
 // src/ThemeProvider/ThemeProvider.tsx
-'use client';
+"use client";
 
-import { ReactNode, useState, useEffect, useCallback } from 'react';
-import { ThemeContext, ThemeContextType } from './ThemeContext';
-import type { ThemeMode } from './types';
+import { ReactNode, useState, useEffect, useCallback } from "react";
+import { ThemeContext, ThemeContextType } from "./ThemeContext";
+import type { ThemeMode } from "./types";
 
 /** 🧩 Props ของ ThemeProvider */
 interface ThemeProviderProps {
@@ -18,11 +18,11 @@ interface ThemeProviderProps {
  * - Sync กับ DOM และ localStorage
  * - ปลอดภัย ไม่ทำให้หน้าจอขาว
  */
-const ThemeProvider = ({ children, defaultTheme = 'light' }: ThemeProviderProps) => {
+const ThemeProvider = ({ children, defaultTheme = "light" }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<ThemeMode>(() => {
-    if (typeof window === 'undefined') return defaultTheme;
+    if (typeof window === "undefined") return defaultTheme;
     try {
-      const stored = localStorage.getItem('app-theme') as ThemeMode | null;
+      const stored = localStorage.getItem("app-theme") as ThemeMode | null;
       return stored ?? defaultTheme;
     } catch {
       return defaultTheme;
@@ -30,40 +30,40 @@ const ThemeProvider = ({ children, defaultTheme = 'light' }: ThemeProviderProps)
   });
 
   /** 🔹 Resolve system theme ("light" | "dark") */
-  const resolveTheme = useCallback((mode: ThemeMode): 'light' | 'dark' => {
-    if (mode === 'system' && typeof window !== 'undefined') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const resolveTheme = useCallback((mode: ThemeMode): "light" | "dark" => {
+    if (mode === "system" && typeof window !== "undefined") {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
-    return mode === 'light' ? 'light' : 'dark';
+    return mode === "light" ? "light" : "dark";
   }, []);
 
   /** 🔹 Apply theme to DOM and localStorage */
   const applyTheme = useCallback(
     (newTheme: ThemeMode) => {
-      if (typeof document === 'undefined') return;
+      if (typeof document === "undefined") return;
 
       const root = document.documentElement;
-      const resolvedTheme: 'light' | 'dark' =
-        newTheme === 'business' ? 'light' : resolveTheme(newTheme);
+      const resolvedTheme: "light" | "dark" =
+        newTheme === "business" ? "light" : resolveTheme(newTheme);
 
       // Remove all previous classes
-      root.classList.remove('light', 'dark', 'business');
+      root.classList.remove("light", "dark", "business");
       root.classList.add(newTheme);
 
       // Sync DaisyUI / Tailwind dataset
       root.dataset.theme = newTheme;
 
       // Fallback background/text
-      root.style.backgroundColor = resolvedTheme === 'dark' ? '#1f2937' : '#ffffff';
-      root.style.color = resolvedTheme === 'dark' ? '#f3f4f6' : '#111827';
+      root.style.backgroundColor = resolvedTheme === "dark" ? "#1f2937" : "#ffffff";
+      root.style.color = resolvedTheme === "dark" ? "#f3f4f6" : "#111827";
 
       try {
-        localStorage.setItem('app-theme', newTheme);
+        localStorage.setItem("app-theme", newTheme);
       } catch (err) {
-        console.warn('⚠️ Failed to save theme:', err);
+        console.warn("⚠️ Failed to save theme:", err);
       }
     },
-    [resolveTheme],
+    [resolveTheme]
   );
 
   /** Apply theme on mount & when theme changes */

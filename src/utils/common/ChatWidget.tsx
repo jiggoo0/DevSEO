@@ -1,11 +1,11 @@
 // src/utils/common/ChatWidget.tsx
-'use client';
+"use client";
 
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { MessageCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import SocialIcons from './SocialIcons';
-import { useChat } from '@/App/ChatProvider';
+import { useState, useRef, useEffect, useCallback } from "react";
+import { MessageCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import SocialIcons from "./SocialIcons";
+import { useChat } from "@/App/ChatProvider";
 
 interface ChatWidgetProps {
   autoCloseMs?: number;
@@ -13,7 +13,7 @@ interface ChatWidgetProps {
 
 const ChatWidget = ({ autoCloseMs = 15000 }: ChatWidgetProps) => {
   const { messages, sendMessage } = useChat();
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -35,16 +35,16 @@ const ChatWidget = ({ autoCloseMs = 15000 }: ChatWidgetProps) => {
 
   // Close on ESC key
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => e.key === 'Escape' && setIsOpen(false);
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    const handleKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
   // Auto-scroll to bottom
   useEffect(() => {
     if (scrollRef.current) {
       requestAnimationFrame(() =>
-        scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' }),
+        scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" })
       );
     }
   }, [messages]);
@@ -57,7 +57,7 @@ const ChatWidget = ({ autoCloseMs = 15000 }: ChatWidgetProps) => {
   const handleSend = () => {
     if (!input.trim()) return;
     sendMessage(input);
-    setInput('');
+    setInput("");
   };
 
   return (
@@ -85,7 +85,7 @@ const ChatWidget = ({ autoCloseMs = 15000 }: ChatWidgetProps) => {
                 <div
                   key={msg.id}
                   className={`p-2 rounded-lg max-w-[75%] ${
-                    msg.sender === 'user' ? 'ml-auto bg-primary text-white' : 'mr-auto bg-base-200'
+                    msg.sender === "user" ? "ml-auto bg-primary text-white" : "mr-auto bg-base-200"
                   }`}
                 >
                   <div>{msg.text}</div>
@@ -102,7 +102,7 @@ const ChatWidget = ({ autoCloseMs = 15000 }: ChatWidgetProps) => {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                onKeyDown={(e) => e.key === "Enter" && handleSend()}
                 className="flex-1 input input-sm input-bordered rounded-l-lg"
                 placeholder="พิมพ์ข้อความ..."
               />

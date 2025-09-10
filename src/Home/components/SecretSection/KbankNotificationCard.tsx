@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import { FC, useMemo, useRef } from 'react';
-import QRCode from 'react-qr-code';
-import html2canvas from 'html2canvas';
+import { FC, useMemo, useRef } from "react";
+import QRCode from "react-qr-code";
+import html2canvas from "html2canvas";
 
 // ==============================
 // Helpers
 // ==============================
 const formatCurrency = (value?: string | number): string | null => {
   if (value === undefined || isNaN(Number(value))) return null;
-  return Number(value).toLocaleString('th-TH', {
-    style: 'currency',
-    currency: 'THB',
+  return Number(value).toLocaleString("th-TH", {
+    style: "currency",
+    currency: "THB",
     minimumFractionDigits: 2,
   });
 };
 
 const formatTime = (iso: string): string => {
   try {
-    return new Intl.DateTimeFormat('th-TH', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+    return new Intl.DateTimeFormat("th-TH", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: false,
     }).format(new Date(iso));
   } catch {
@@ -46,9 +46,9 @@ const Amount: FC<AmountProps> = ({ amount }) => {
   return (
     <p
       className={`my-3 text-lg font-bold select-text ${
-        isPositive ? 'text-green-600' : 'text-red-600'
+        isPositive ? "text-green-600" : "text-red-600"
       }`}
-      aria-label={`จำนวนเงิน ${isPositive ? 'ได้รับ' : 'ใช้จ่าย'} ${formatted}`}
+      aria-label={`จำนวนเงิน ${isPositive ? "ได้รับ" : "ใช้จ่าย"} ${formatted}`}
     >
       {formatted}
     </p>
@@ -98,7 +98,7 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({
           )}
           <div>
             <span className="font-medium">รหัสธุรกรรม: </span>
-            {transactionId || '-'}
+            {transactionId || "-"}
           </div>
         </div>
 
@@ -110,7 +110,7 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({
             <QRCode
               value={qrCodeUrl}
               size={64}
-              style={{ width: '100%', height: '100%', maxWidth: '100%' }}
+              style={{ width: "100%", height: "100%", maxWidth: "100%" }}
             />
           </div>
         )}
@@ -124,7 +124,7 @@ const AdditionalInfo: FC<AdditionalInfoProps> = ({
 // ==============================
 export interface KbankNotificationData {
   id: string;
-  type?: 'incoming' | 'outgoing' | 'failed';
+  type?: "incoming" | "outgoing" | "failed";
   title?: string;
   subtitle?: string;
   message?: string;
@@ -147,8 +147,8 @@ const KbankNotificationCard: FC<KbankNotificationCardProps> = ({ data }) => {
     if (!cardRef.current) return;
 
     const canvas = await html2canvas(cardRef.current, { scale: 2, useCORS: true });
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/png');
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
     link.download = `kbank-notification-${data.id}.png`;
     link.click();
   };
@@ -178,7 +178,7 @@ const KbankNotificationCard: FC<KbankNotificationCardProps> = ({ data }) => {
             className="text-base sm:text-lg font-semibold text-gray-900 truncate select-text"
             title={data.title}
           >
-            {data.title || 'แจ้งเตือนธุรกรรม'}
+            {data.title || "แจ้งเตือนธุรกรรม"}
           </h2>
           {data.subtitle && (
             <p className="text-xs text-gray-500 truncate mt-0.5 select-text" title={data.subtitle}>
@@ -190,11 +190,11 @@ const KbankNotificationCard: FC<KbankNotificationCardProps> = ({ data }) => {
 
       {/* Message */}
       <p className="text-sm text-gray-800 mb-3 leading-relaxed select-text border-b border-gray-200 pb-3">
-        {data.message || '-'}
+        {data.message || "-"}
       </p>
 
       {/* Amount */}
-      {data.type !== 'failed' && <Amount amount={data.amount} />}
+      {data.type !== "failed" && <Amount amount={data.amount} />}
 
       {/* Additional Info + QR Code */}
       <AdditionalInfo

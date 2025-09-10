@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { FC, useEffect, useRef } from 'react';
-import { cn } from '@/utils/cn';
+import { FC, useEffect, useRef } from "react";
+import { cn } from "@/utils/cn";
 
 interface MobileMenuProps {
   open: boolean;
@@ -25,15 +25,15 @@ const MobileMenu: FC<MobileMenuProps> = ({ open, onClose }) => {
     if (!open) return;
 
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
     };
 
-    document.addEventListener('keydown', handleEsc);
-    document.body.style.overflow = 'hidden';
+    document.addEventListener("keydown", handleEsc);
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = '';
+      document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "";
     };
   }, [open, onClose]);
 
@@ -43,17 +43,17 @@ const MobileMenu: FC<MobileMenuProps> = ({ open, onClose }) => {
   useEffect(() => {
     if (open && drawerRef.current) {
       const firstFocusable = drawerRef.current.querySelector<HTMLElement>(
-        "a, button, input, [tabindex]:not([tabindex='-1'])",
+        "a, button, input, [tabindex]:not([tabindex='-1'])"
       );
       firstFocusable?.focus();
     }
   }, [open]);
 
-  const menuItems = ['หน้าแรก', 'ผลงาน', 'บริการ', 'เกี่ยวกับเรา'];
+  const menuItems = ["หน้าแรก", "ผลงาน", "บริการ", "เกี่ยวกับเรา"];
 
   return (
     <div
-      className={cn('fixed inset-0 z-50 flex pointer-events-none', open && 'pointer-events-auto')}
+      className={cn("fixed inset-0 z-50 flex pointer-events-none", open && "pointer-events-auto")}
       aria-hidden={!open}
     >
       {/* Backdrop */}
@@ -66,8 +66,8 @@ const MobileMenu: FC<MobileMenuProps> = ({ open, onClose }) => {
       <aside
         ref={drawerRef}
         className={cn(
-          'relative ml-auto h-full w-72 bg-base-100 px-6 py-8 shadow-2xl transform transition-transform duration-300',
-          open ? 'translate-x-0' : 'translate-x-full',
+          "relative ml-auto h-full w-72 bg-base-100 px-6 py-8 shadow-2xl transform transition-transform duration-300",
+          open ? "translate-x-0" : "translate-x-full"
         )}
         role="menu"
         aria-modal="true"

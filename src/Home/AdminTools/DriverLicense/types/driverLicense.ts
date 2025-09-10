@@ -33,7 +33,7 @@ export interface DriverLicenseFieldConfig {
   fontSize?: string;
   fontWeight?: string;
   color?: string;
-  type?: 'text' | 'date' | 'photo' | 'select';
+  type?: "text" | "date" | "photo" | "select";
   options?: string[]; // for select fields
 }
 
@@ -41,13 +41,13 @@ export interface DriverLicenseFieldConfig {
  * Mock Data for Testing / Preview
  * ----------------------------- */
 export const mockDriverLicense: DriverLicenseData = {
-  fullName: 'John Doe',
-  idNumber: '1234567890123',
-  dob: '1990-01-01',
-  issueDate: '2023-01-01',
-  expiryDate: '2028-01-01',
-  address: '123 Main Street, City, Country',
-  photo: '/assets/images/driver-photo.webp',
-  licenseType: 'B',
-  bloodType: 'O',
+  fullName: "John Doe",
+  idNumber: "1234567890123",
+  dob: "1990-01-01",
+  issueDate: "2023-01-01",
+  expiryDate: "2028-01-01",
+  address: "123 Main Street, City, Country",
+  photo: "/assets/images/driver-photo.webp",
+  licenseType: "B",
+  bloodType: "O",
 };

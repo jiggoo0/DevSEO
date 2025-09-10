@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from "react";
 
 interface FieldDraggableProps {
   top: string;
@@ -64,11 +64,11 @@ const FieldDraggable: React.FC<FieldDraggableProps> = ({
 
       const clampedX = Math.max(
         0,
-        Math.min(adjustedX, containerRect.width / scaleRef.current - fieldRect.width),
+        Math.min(adjustedX, containerRect.width / scaleRef.current - fieldRect.width)
       );
       const clampedY = Math.max(
         0,
-        Math.min(adjustedY, containerRect.height / scaleRef.current - fieldRect.height),
+        Math.min(adjustedY, containerRect.height / scaleRef.current - fieldRect.height)
       );
 
       const newLeft = `${((clampedX / (containerRect.width / scaleRef.current)) * 100).toFixed(2)}%`;
@@ -76,21 +76,21 @@ const FieldDraggable: React.FC<FieldDraggableProps> = ({
 
       onPositionChange(newTop, newLeft);
     },
-    [onPositionChange],
+    [onPositionChange]
   );
 
   /** Attach and clean up event listeners */
   useEffect(() => {
-    window.addEventListener('mousemove', onDragMove, { passive: false });
-    window.addEventListener('touchmove', onDragMove, { passive: false });
-    window.addEventListener('mouseup', stopDrag);
-    window.addEventListener('touchend', stopDrag);
+    window.addEventListener("mousemove", onDragMove, { passive: false });
+    window.addEventListener("touchmove", onDragMove, { passive: false });
+    window.addEventListener("mouseup", stopDrag);
+    window.addEventListener("touchend", stopDrag);
 
     return () => {
-      window.removeEventListener('mousemove', onDragMove);
-      window.removeEventListener('touchmove', onDragMove);
-      window.removeEventListener('mouseup', stopDrag);
-      window.removeEventListener('touchend', stopDrag);
+      window.removeEventListener("mousemove", onDragMove);
+      window.removeEventListener("touchmove", onDragMove);
+      window.removeEventListener("mouseup", stopDrag);
+      window.removeEventListener("touchend", stopDrag);
     };
   }, [onDragMove, stopDrag]);
 
@@ -98,12 +98,12 @@ const FieldDraggable: React.FC<FieldDraggableProps> = ({
     <div
       ref={fieldRef}
       style={{
-        position: 'absolute',
+        position: "absolute",
         top,
         left,
-        cursor: isDraggingRef.current ? 'grabbing' : 'grab',
-        touchAction: 'none',
-        userSelect: 'none',
+        cursor: isDraggingRef.current ? "grabbing" : "grab",
+        touchAction: "none",
+        userSelect: "none",
       }}
       onMouseDown={startDrag}
       onTouchStart={startDrag}

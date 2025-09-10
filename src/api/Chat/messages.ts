@@ -1,9 +1,9 @@
 // src/api/Chat/messages.ts
-import fs from 'fs';
-import path from 'path';
-import { ChatMessage } from './types';
+import fs from "fs";
+import path from "path";
+import { ChatMessage } from "./types";
 
-const STORE_PATH = path.resolve(process.cwd(), 'chat-history.json');
+const STORE_PATH = path.resolve(process.cwd(), "chat-history.json");
 
 let messageStore: ChatMessage[] = [];
 const listeners = new Set<(messages: ChatMessage[]) => void>();
@@ -12,19 +12,19 @@ const listeners = new Set<(messages: ChatMessage[]) => void>();
 (() => {
   if (fs.existsSync(STORE_PATH)) {
     try {
-      const data = JSON.parse(fs.readFileSync(STORE_PATH, 'utf-8')) as ChatMessage[];
+      const data = JSON.parse(fs.readFileSync(STORE_PATH, "utf-8")) as ChatMessage[];
       messageStore = Array.isArray(data) ? data : [];
     } catch (err) {
-      console.error('⚠️ Failed to load chat-history.json:', err);
+      console.error("⚠️ Failed to load chat-history.json:", err);
     }
   }
 })();
 
 function persist() {
   try {
-    fs.writeFileSync(STORE_PATH, JSON.stringify(messageStore, null, 2), 'utf-8');
+    fs.writeFileSync(STORE_PATH, JSON.stringify(messageStore, null, 2), "utf-8");
   } catch (err) {
-    console.error('⚠️ Failed to save chat-history.json:', err);
+    console.error("⚠️ Failed to save chat-history.json:", err);
   }
 }
 

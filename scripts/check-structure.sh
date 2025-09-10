@@ -10,8 +10,10 @@ term_log() { echo -e "$1"; }
 # -----------------------------
 # 0️⃣ Safe load .env
 # -----------------------------
+# Safe load .env
 if [ -f .env ]; then
   while IFS='=' read -r key value; do
+    # Ignore comments and empty lines
     [[ "$key" =~ ^#.*$ ]] && continue
     if [[ "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
       export "$key=$value"
@@ -96,7 +98,7 @@ fi
 # 6️⃣ Project Info
 # -----------------------------
 GITHUB_URL="${GITHUB_URL:-https://github.com/jiggoo0/vite-react}"
-DEVELOPER_EMAIL="${DEVELOPER_EMAIL:-you@example.com}"
+DEVELOPER_EMAIL="${DEVELOPER_EMAIL:-jiggo0@outlook.co.th}"
 WEBSITE_URL="${WEBSITE_URL:-https://404notfontjp.vercel.app/}"
 VERCEL_ACCOUNT="${VERCEL_ACCOUNT:-jiggoos-projects}"
 VERCEL_PROJECT_NAME="${VERCEL_PROJECT_NAME:-vite-react}"
@@ -149,11 +151,11 @@ $TREE_CONTENT
 $PROJECT_INFO
 
 ## 6️⃣ Notes
-- ROADMAP.md & WORKFLOW.md included if present
+- RODEMAP.md & WORKFLOW.md included if present
 EOF
 
 # Append RODEMAP.md and WORKFLOW.md if exists
-for file in ROADMAP.md WORKFLOW.md; do
+for file in RODEMAP.md WORKFLOW.md; do
   [ -f "$file" ] && echo -e "\n## 📝 $file\n$(cat "$file")" >> "$REPORT"
 done
 

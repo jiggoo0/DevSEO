@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import DriverLicensePreview from './DriverLicensePreview';
-import type { DriverLicenseData } from '@/Home/AdminTools/DriverLicense/types/driverLicense'; // ✅ updated
+import { FC } from "react";
+import DriverLicensePreview from "./DriverLicensePreview";
+import type { DriverLicenseData } from "@/Home/AdminTools/DriverLicense/types/driverLicense"; // ✅ updated
 
 interface Props {
   className?: string;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const DriverLicensePreviewWithActions: FC<Props> = ({
-  className = '',
+  className = "",
   isBlurred = false,
   data,
   onEdit,

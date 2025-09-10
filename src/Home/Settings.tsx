@@ -1,32 +1,32 @@
 // src/Home/Settings.tsx
-'use client';
+"use client";
 
-import React, { FC, useState, FormEvent } from 'react';
-import PageSection from '@/Home/components/common/PageSection';
+import React, { FC, useState, FormEvent } from "react";
+import PageSection from "@/Home/components/common/PageSection";
 
 const Settings: FC = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     if (!password.trim() || !confirmPassword.trim()) {
-      setMessage('กรุณากรอกข้อมูลให้ครบถ้วน');
+      setMessage("กรุณากรอกข้อมูลให้ครบถ้วน");
       return;
     }
 
     if (password !== confirmPassword) {
-      setMessage('รหัสผ่านไม่ตรงกัน ❌');
+      setMessage("รหัสผ่านไม่ตรงกัน ❌");
       return;
     }
 
     // ✅ Mock update password
-    // Production: เรียก API อัปเดตรหัสผ่านจริง
-    setMessage('บันทึกรหัสผ่านเรียบร้อย ✅');
-    setPassword('');
-    setConfirmPassword('');
+    // ใน production: เรียก API เพื่ออัปเดตรหัสผ่าน
+    setMessage("บันทึกรหัสผ่านเรียบร้อย ✅");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   return (

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { FC, memo, useCallback } from 'react';
-import { exportCardAsPDF, exportCardAsPNG } from '@/utils/exportCard';
-import { driverLicenseFields } from '@/config/driverLicenseConfig';
-import type { DriverLicenseData } from '@/Home/AdminTools/DriverLicense/types/driverLicense';
+import { FC, memo, useCallback } from "react";
+import { exportCardAsPDF, exportCardAsPNG } from "@/utils/exportCard";
+import { driverLicenseFields } from "@/config/driverLicenseConfig";
+import type { DriverLicenseData } from "@/Home/AdminTools/DriverLicense/types/driverLicense";
 
 interface Props {
   data: DriverLicenseData;
@@ -14,20 +14,20 @@ interface Props {
 
 const DriverLicensePreview: FC<Props> = ({
   data,
-  className = '',
+  className = "",
   isBlurred = false,
-  cardId = 'driver-license-preview-card',
+  cardId = "driver-license-preview-card",
 }) => {
-  const blurClass = isBlurred ? 'filter blur-sm' : '';
+  const blurClass = isBlurred ? "filter blur-sm" : "";
 
   const handleDownloadPNG = useCallback(
-    async () => await exportCardAsPNG(cardId, 'driver_license.webp'),
-    [cardId],
+    async () => await exportCardAsPNG(cardId, "driver_license.webp"),
+    [cardId]
   );
 
   const handleDownloadPDF = useCallback(
-    async () => await exportCardAsPDF(cardId, 'driver_license.pdf'),
-    [cardId],
+    async () => await exportCardAsPDF(cardId, "driver_license.pdf"),
+    [cardId]
   );
 
   return (
@@ -48,7 +48,7 @@ const DriverLicensePreview: FC<Props> = ({
 
         <dl className="space-y-1">
           {driverLicenseFields
-            .filter((f) => f.id !== 'photo')
+            .filter((f) => f.id !== "photo")
             .map((field) => {
               const value = data[field.id as keyof DriverLicenseData];
               return (

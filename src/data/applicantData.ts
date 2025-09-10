@@ -1,5 +1,5 @@
 // src/data/applicantData.ts
-import { z } from 'zod';
+import { z } from "zod";
 
 /**
  * ApplicantData - ข้อมูลผู้ขอสินเชื่อ

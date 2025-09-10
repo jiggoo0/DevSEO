@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { forwardRef } from 'react';
-import type { ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
+import React, { forwardRef } from "react";
+import type { ControllerRenderProps, FieldValues, Path } from "react-hook-form";
 
 export type InputFieldProps<T extends FieldValues = FieldValues> =
   React.InputHTMLAttributes<HTMLInputElement> & {
@@ -14,10 +14,10 @@ export type InputFieldProps<T extends FieldValues = FieldValues> =
   };
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ label, name, error = null, required = false, className = '', field, ...rest }, ref) => {
+  ({ label, name, error = null, required = false, className = "", field, ...rest }, ref) => {
     const inputProps = field
       ? {
-          value: field.value ?? '',
+          value: field.value ?? "",
           onChange: field.onChange,
           onBlur: field.onBlur,
         }
@@ -35,7 +35,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           ref={ref}
           required={required}
           className={`px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500
-            ${error ? 'border-red-500' : 'border-gray-300'} bg-white`}
+            ${error ? "border-red-500" : "border-gray-300"} bg-white`}
           {...inputProps}
           {...rest}
         />
@@ -43,9 +43,9 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
         {error && <span className="mt-1 text-sm text-red-500">{error}</span>}
       </div>
     );
-  },
+  }
 );
 
-InputField.displayName = 'InputField';
+InputField.displayName = "InputField";
 
 export default InputField;

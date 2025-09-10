@@ -1,8 +1,8 @@
 // src/context/AuthProvider.tsx
-'use client';
+"use client";
 
-import React, { ReactNode, useState, useEffect, useCallback } from 'react';
-import { AuthContext, parseUserFromStorage, User } from '@/hooks/useAuth';
+import React, { ReactNode, useState, useEffect, useCallback } from "react";
+import { AuthContext, parseUserFromStorage, User } from "@/hooks/useAuth";
 
 /** 🛡️ AuthProvider
  * - ครอบ component ด้วย context สำหรับจัดการ authentication
@@ -24,16 +24,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const isAuthenticated = !!user;
 
   const hasRole = useCallback(
-    (roles: User['role'] | User['role'][]) => {
+    (roles: User["role"] | User["role"][]) => {
       if (!user) return false;
       if (Array.isArray(roles)) return roles.includes(user.role);
       return user.role === roles;
     },
-    [user],
+    [user]
   );
 
   const logout = useCallback(() => {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     setUser(null);
   }, []);
 
@@ -43,9 +43,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (!user) return;
       const updated = { ...user, ...data };
       setUser(updated);
-      localStorage.setItem('user', JSON.stringify(updated));
+      localStorage.setItem("user", JSON.stringify(updated));
     },
-    [user],
+    [user]
   );
 
   return (

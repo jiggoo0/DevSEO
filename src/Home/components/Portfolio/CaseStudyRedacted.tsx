@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import clsx from 'clsx';
+import { FC } from "react";
+import { motion } from "framer-motion";
+import clsx from "clsx";
 
 export type CaseItem = {
   id: string;
@@ -27,18 +27,18 @@ const variants = {
 };
 
 // REDACTED label component
-const Redact: FC<{ label?: string }> = ({ label = 'REDACTED' }) => (
+const Redact: FC<{ label?: string }> = ({ label = "REDACTED" }) => (
   <span className="bg-black text-black px-1 rounded-sm select-none">{label}</span>
 );
 
 const CaseStudyRedacted: FC<CaseStudyRedactedProps> = ({
   className,
   items,
-  headline = 'ตัวอย่างผลงานของเรา',
-  subline = 'บางข้อมูลถูกซ่อนเพื่อความเป็นส่วนตัวและปลอดภัย',
+  headline = "ตัวอย่างผลงานของเรา",
+  subline = "บางข้อมูลถูกซ่อนเพื่อความเป็นส่วนตัวและปลอดภัย",
 }) => {
   return (
-    <section className={clsx('py-12 md:py-16', className)}>
+    <section className={clsx("py-12 md:py-16", className)}>
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
@@ -76,11 +76,11 @@ const CaseStudyRedacted: FC<CaseStudyRedactedProps> = ({
               <div className="p-5">
                 <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
                   {item.title}
-                  {item.redactedFields?.includes('client') && <Redact />}
+                  {item.redactedFields?.includes("client") && <Redact />}
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 opacity-90 mb-3">
-                  {item.summary}{' '}
-                  {item.redactedFields?.includes('brand') && <Redact label="BRAND" />}
+                  {item.summary}{" "}
+                  {item.redactedFields?.includes("brand") && <Redact label="BRAND" />}
                 </p>
 
                 {/* Tags */}
@@ -105,6 +105,6 @@ const CaseStudyRedacted: FC<CaseStudyRedactedProps> = ({
   );
 };
 
-CaseStudyRedacted.displayName = 'CaseStudyRedacted';
+CaseStudyRedacted.displayName = "CaseStudyRedacted";
 
 export default CaseStudyRedacted;

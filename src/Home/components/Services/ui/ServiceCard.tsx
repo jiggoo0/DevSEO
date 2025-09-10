@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import { ServiceType } from '@/config/jpServices.config';
+import { FC } from "react";
+import { motion } from "framer-motion";
+import { ServiceType } from "@/config/jpServices.config";
 
 interface ServiceCardProps {
   service: ServiceType;
 }
 
 // LINE OA ID ของคุณ (ไม่ต้องมี @)
-const lineOAId = '462fqtfc';
+const lineOAId = "462fqtfc";
 
 // ฟังก์ชันสร้างลิงก์ LINE OA พร้อมข้อความอัตโนมัติ
 const createLineLink = (message: string) =>
@@ -24,7 +24,7 @@ const ServiceCard: FC<ServiceCardProps> = ({ service }) => {
       <motion.article
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.3 }}
         tabIndex={0}
         aria-label={`บริการ ${service.title} กำลังจะเปิดให้บริการเร็ว ๆ นี้`}
@@ -84,6 +84,6 @@ const ServiceCard: FC<ServiceCardProps> = ({ service }) => {
   );
 };
 
-ServiceCard.displayName = 'ServiceCard';
+ServiceCard.displayName = "ServiceCard";
 
 export default ServiceCard;

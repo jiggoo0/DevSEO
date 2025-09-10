@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { FC, memo } from 'react';
+import { FC, memo } from "react";
 
 interface StickyTableHeaderProps {
   headers: string[];
@@ -14,7 +14,7 @@ interface StickyTableHeaderProps {
  * - รองรับ dark mode
  * - รองรับการปรับ className ภายนอก
  */
-const StickyTableHeader: FC<StickyTableHeaderProps> = ({ headers, className = '' }) => {
+const StickyTableHeader: FC<StickyTableHeaderProps> = ({ headers, className = "" }) => {
   return (
     <thead className={`bg-gray-100 dark:bg-gray-800 ${className}`}>
       <tr className="sticky top-0 z-10">
@@ -32,6 +32,6 @@ const StickyTableHeader: FC<StickyTableHeaderProps> = ({ headers, className = ''
   );
 };
 
-StickyTableHeader.displayName = 'StickyTableHeader';
+StickyTableHeader.displayName = "StickyTableHeader";
 
 export default memo(StickyTableHeader);

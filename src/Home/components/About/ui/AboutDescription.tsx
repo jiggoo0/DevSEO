@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { motion, Variants, easeOut } from 'framer-motion';
+import { motion, Variants, easeOut } from "framer-motion";
 
 // ======================= Variants =======================
 const fadeInUp: Variants = {
@@ -16,21 +16,21 @@ const fadeInUp: Variants = {
 const AboutDescription = () => {
   const texts = [
     {
-      type: 'blockquote',
-      content: '“ยกระดับธุรกิจเฉพาะทางให้มีมาตรฐานระดับมืออาชีพ”',
+      type: "blockquote",
+      content: "“ยกระดับธุรกิจเฉพาะทางให้มีมาตรฐานระดับมืออาชีพ”",
     },
-    { type: 'label', content: 'JP - VISUAL & DOCS' },
+    { type: "label", content: "JP - VISUAL & DOCS" },
     {
-      type: 'p',
+      type: "p",
       content:
-        'รวมทีมตัวจริงที่เชี่ยวชาญงานออกแบบและสร้างภาพลักษณ์ดิจิทัล ให้ธุรกิจดูมืออาชีพ มีมาตรฐาน น่าเชื่อถือ และปลอดภัยต่อการทำงาน',
+        "รวมทีมตัวจริงที่เชี่ยวชาญงานออกแบบและสร้างภาพลักษณ์ดิจิทัล ให้ธุรกิจดูมืออาชีพ มีมาตรฐาน น่าเชื่อถือ และปลอดภัยต่อการทำงาน",
     },
     {
-      type: 'p',
+      type: "p",
       content:
-        'แม้ธุรกิจจะอยู่นอกระบบกฎหมายทั่วไป แต่เราทำให้มันดูดีได้ในแบบที่หาไม่ได้จาก Google หรือ YouTube การันตีด้วยประสบการณ์ในวงการมากกว่า 8 ปี',
+        "แม้ธุรกิจจะอยู่นอกระบบกฎหมายทั่วไป แต่เราทำให้มันดูดีได้ในแบบที่หาไม่ได้จาก Google หรือ YouTube การันตีด้วยประสบการณ์ในวงการมากกว่า 8 ปี",
     },
-    { type: 'small', content: 'ผมไม่ใช่คนเก่ง แต่ทีมงานผมเก่งแน่นอน' },
+    { type: "small", content: "ผมไม่ใช่คนเก่ง แต่ทีมงานผมเก่งแน่นอน" },
   ];
 
   return (
@@ -49,23 +49,23 @@ const AboutDescription = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {item.type === 'blockquote' && (
+          {item.type === "blockquote" && (
             <blockquote
-              id={i === 0 ? 'about-description-title' : undefined}
+              id={i === 0 ? "about-description-title" : undefined}
               className="text-lg md:text-xl font-medium leading-relaxed text-base-content/80"
             >
               {item.content}
             </blockquote>
           )}
-          {item.type === 'label' && (
+          {item.type === "label" && (
             <p className="text-sm md:text-base font-semibold uppercase tracking-wide text-base-content/60">
               {item.content}
             </p>
           )}
-          {item.type === 'p' && (
+          {item.type === "p" && (
             <p className="leading-relaxed text-base-content/60">{item.content}</p>
           )}
-          {item.type === 'small' && (
+          {item.type === "small" && (
             <p className="text-sm italic leading-snug text-base-content/50">{item.content}</p>
           )}
         </motion.div>

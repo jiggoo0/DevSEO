@@ -11,7 +11,7 @@
 
     <title>JP - VISOUL & DOSC</title>
 
-    <!-- Favicon / PWA -->
+    <!-- Favicon -->
     <link rel="icon" type="image/webp" href="/logo.webp" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
@@ -24,7 +24,7 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/logo.webp" />
-    <meta property="og:url" content="https://404notfontjp.vercel.app/" />
+    <meta property="og:url" content="https://your-domain.com" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -35,12 +35,7 @@
     />
     <meta name="twitter:image" content="/logo.webp" />
 
-    <!-- Fonts (preload + preconnect) -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap"
-    />
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -48,10 +43,10 @@
       rel="stylesheet"
     />
 
-    <!-- Tailwind CSS (built via Vite) -->
+    <!-- Tailwind CSS (generated via Vite build) -->
   </head>
-  <body class="antialiased bg-bg text-text font-[Kanit] min-h-screen flex flex-col">
-    <div id="root" class="flex-1"></div>
+  <body class="antialiased bg-bg text-text font-[Kanit]">
+    <div id="root"></div>
 
     <!-- Entry point -->
     <script type="module" src="/src/main.tsx"></script>

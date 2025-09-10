@@ -1,41 +1,41 @@
 // src/Layout/partials/Footer.tsx
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { FaLine, FaInstagram, FaEnvelope, FaFacebookMessenger } from 'react-icons/fa';
-import { SiTiktok } from 'react-icons/si';
+import { FC } from "react";
+import { FaLine, FaInstagram, FaEnvelope, FaFacebookMessenger } from "react-icons/fa";
+import { SiTiktok } from "react-icons/si";
 
 interface SocialLink {
   href: string;
   label: string;
   text: string;
-  icon: FC<{ className?: string; 'aria-hidden'?: boolean }>;
+  icon: FC<{ className?: string; "aria-hidden"?: boolean }>;
 }
 
 const socialLinks: SocialLink[] = [
-  { href: 'https://lin.ee/gVptUhR', label: 'LINE', text: 'LINE: @462FQFC', icon: FaLine },
+  { href: "https://lin.ee/gVptUhR", label: "LINE", text: "LINE: @462FQFC", icon: FaLine },
   {
-    href: 'https://www.instagram.com/jpsystem.official',
-    label: 'Instagram',
-    text: '@jpsystem.official',
+    href: "https://www.instagram.com/jpsystem.official",
+    label: "Instagram",
+    text: "@jpsystem.official",
     icon: FaInstagram,
   },
   {
-    href: 'mailto:jpvisouldocs@outlook.co.th',
-    label: 'Email',
-    text: 'contact@jpsystem.dev',
+    href: "mailto:jpvisouldocs@outlook.co.th",
+    label: "Email",
+    text: "contact@jpsystem.dev",
     icon: FaEnvelope,
   },
   {
-    href: 'https://m.me/61573307616115?hash=AbZf0L5cSZ8XvIYw&source=qr_link_share',
-    label: 'Messenger',
-    text: 'Messenger',
+    href: "https://m.me/61573307616115?hash=AbZf0L5cSZ8XvIYw&source=qr_link_share",
+    label: "Messenger",
+    text: "Messenger",
     icon: FaFacebookMessenger,
   },
   {
-    href: 'https://www.tiktok.com/@jaopa.zerofour',
-    label: 'TikTok',
-    text: '@jaopa.zerofour',
+    href: "https://www.tiktok.com/@jaopa.zerofour",
+    label: "TikTok",
+    text: "@jaopa.zerofour",
     icon: SiTiktok,
   },
 ];
@@ -79,7 +79,7 @@ const Footer: FC = () => {
 
         {/* Copyright */}
         <p className="text-xs text-neutral-500 dark:text-neutral-400 select-none leading-relaxed">
-          &copy; {year} <span className="font-semibold">JP Visual & Docs</span> — Powered by{' '}
+          &copy; {year} <span className="font-semibold">JP Visual & Docs</span> — Powered by{" "}
           <a
             href="https://applicationlab.dev"
             target="_blank"
@@ -95,5 +95,5 @@ const Footer: FC = () => {
   );
 };
 
-Footer.displayName = 'Footer';
+Footer.displayName = "Footer";
 export default Footer;

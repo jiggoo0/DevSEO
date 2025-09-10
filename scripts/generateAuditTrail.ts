@@ -1,28 +1,28 @@
-import { writeFileSync } from 'fs';
-import { join } from 'path';
-import { faker } from '@faker-js/faker';
+import { writeFileSync } from "fs";
+import { join } from "path";
+import { faker } from "@faker-js/faker";
 
-faker.locale = 'th';
+faker.locale = "th";
 
 const users = [
-  'สมชาย จ.',
-  'สมหญิง ป.',
-  'อรรถพล ส.',
-  'ปวีณา ท.',
-  'นรินทร์ ร.',
-  'ธนพล ว.',
-  'มธุรส ช.',
-  'สุนิสา พ.',
-  'รชต ก.',
-  'อนุชา บ.',
+  "สมชาย จ.",
+  "สมหญิง ป.",
+  "อรรถพล ส.",
+  "ปวีณา ท.",
+  "นรินทร์ ร.",
+  "ธนพล ว.",
+  "มธุรส ช.",
+  "สุนิสา พ.",
+  "รชต ก.",
+  "อนุชา บ.",
 ];
 
 const activities = [
-  'เข้าสู่ระบบ',
-  'ส่งเอกสาร',
-  'ดาวน์โหลดรายงาน',
-  'แก้ไขโปรไฟล์',
-  'เปิดหน้าแดชบอร์ด',
+  "เข้าสู่ระบบ",
+  "ส่งเอกสาร",
+  "ดาวน์โหลดรายงาน",
+  "แก้ไขโปรไฟล์",
+  "เปิดหน้าแดชบอร์ด",
 ];
 
 function generateUserActions(count: number) {
@@ -47,11 +47,11 @@ const fileContent = `export interface การกระทำผู้ใช้
 export const mockUserActions: การกระทำผู้ใช้[] = ${JSON.stringify(ข้อมูลผู้ใช้งาน, null, 2)};
 `;
 
-const outputFilePath = join(process.cwd(), 'src/data/userBehaviorData.ts');
+const outputFilePath = join(process.cwd(), "src/data/userBehaviorData.ts");
 
 try {
-  writeFileSync(outputFilePath, fileContent, 'utf8');
+  writeFileSync(outputFilePath, fileContent, "utf8");
   console.log(`✅ สร้างข้อมูลผู้ใช้งานสมมติภาษาไทย (${จำนวนรายการ} รายการ) ที่ ${outputFilePath}`);
 } catch (error) {
-  console.error('❌ เกิดข้อผิดพลาดในการเขียนไฟล์:', error);
+  console.error("❌ เกิดข้อผิดพลาดในการเขียนไฟล์:", error);
 }

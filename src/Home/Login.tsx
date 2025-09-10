@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import React, { useState, FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import bcrypt from 'bcryptjs';
-import { useAuth } from '@/hooks/useAuth';
-import { users, UserData } from '@/data/users';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import bcrypt from "bcryptjs";
+import { users, UserData } from "@/data/users";
+import { useAuth } from "@/hooks/useAuth";
 
 const adminRoutes = [
-  { label: 'Dashboard', path: '/admin/dashboard' },
-  { label: 'Admin Tools', path: '/admin/secret' },
+  { label: "Dashboard", path: "/admin/dashboard" },
+  { label: "Secret Page", path: "/admin/secret" },
 ];
 
-const Login: FC = () => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const { setUser } = useAuth();
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -30,50 +30,38 @@ const Login: FC = () => {
 
     try {
       const trimmedUsername = username.trim();
-      let authUser: { username: string; role: 'admin' | 'manager' | 'user' };
+      const userData: UserData | undefined = users[trimmedUsername];
+      if (!userData) throw new Error("ไม่พบผู้ใช้นี้ในระบบ");
 
-      if (process.env.NODE_ENV === 'production') {
-        // Production API login
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: trimmedUsername, password }),
-        });
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          throw new Error(data.message || 'Login failed');
-        }
-        const data = await res.json();
-        authUser = { username: data.username, role: data.role };
-      } else {
-        // Dev Mode: Mock login
-        const userData: UserData | undefined = users[trimmedUsername];
-        if (!userData) throw new Error('ไม่พบผู้ใช้นี้ในระบบ');
-        const match = await bcrypt.compare(password, userData.hash);
-        if (!match) throw new Error('รหัสผ่านไม่ถูกต้อง');
-        authUser = { username: trimmedUsername, role: userData.role as 'admin' | 'manager' | 'user' };
-      }
+      const match = await bcrypt.compare(password, userData.hash);
+      if (!match) throw new Error("รหัสผ่านไม่ถูกต้อง");
 
-      // Handle admin role
-      if (authUser.role === 'admin') {
+      const authUser = {
+        username: trimmedUsername,
+        role: userData.role as "admin" | "manager" | "user",
+      };
+
+      // Admin จะยังไม่ redirect อัตโนมัติ
+      if (authUser.role === "admin") {
         setShowAdminChoice(true);
-        setUser(authUser);
+        setUser(authUser); // เก็บใน context แต่ยังไม่เซฟ localStorage
       } else {
+        localStorage.setItem("user", JSON.stringify(authUser));
         setUser(authUser);
-        localStorage.setItem('user', JSON.stringify(authUser));
-        navigate(authUser.role === 'manager' ? '/manager' : '/user', { replace: true });
+        navigate(authUser.role === "manager" ? "/manager" : "/user", { replace: true });
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+      setError(err instanceof Error ? err.message : "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
     } finally {
       setLoading(false);
     }
   };
 
   const handleAdminConfirm = () => {
-    const user = { username: username.trim(), role: 'admin' as const };
-    setUser(user);
-    localStorage.setItem('user', JSON.stringify(user));
+    const authUser = users[username.trim()];
+    if (!authUser) return;
+    const user = { username: username.trim(), role: "admin" as const };
+    localStorage.setItem("user", JSON.stringify(user));
     navigate(adminRedirect, { replace: true });
   };
 
@@ -102,7 +90,7 @@ const Login: FC = () => {
             />
             <div className="relative">
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 placeholder="รหัสผ่าน"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -116,19 +104,17 @@ const Login: FC = () => {
                 className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-gray-500 dark:text-gray-300"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
-                {showPassword ? 'ซ่อน' : 'แสดง'}
+                {showPassword ? "ซ่อน" : "แสดง"}
               </button>
             </div>
 
             <button type="submit" className="btn btn-primary w-full" disabled={loading}>
-              {loading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'}
+              {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
             </button>
           </form>
         ) : (
           <div className="space-y-4">
-            <p className="text-center font-semibold">
-              กรุณาเลือกหน้าที่ Admin ที่ต้องการเข้าใช้งาน
-            </p>
+            <p className="text-center">เลือกหน้าที่ต้องการเข้า (Admin)</p>
             <select
               className="input input-bordered w-full"
               value={adminRedirect}

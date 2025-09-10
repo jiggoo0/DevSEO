@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import CardWrapper from '@/Home/components/common/CardWrapper';
+import { FC } from "react";
+import { motion } from "framer-motion";
+import CardWrapper from "@/Home/components/common/CardWrapper";
 
 export interface AuditTrailItem {
   id: string | number;
   action: string;
   user: string;
   timestamp: string;
-  type?: 'info' | 'warning' | 'success';
+  type?: "info" | "warning" | "success";
 }
 
 interface AuditTrailViewerProps {
@@ -17,9 +17,9 @@ interface AuditTrailViewerProps {
 }
 
 const typeColors = {
-  info: 'bg-blue-500 dark:bg-blue-400',
-  warning: 'bg-yellow-500 dark:bg-yellow-400',
-  success: 'bg-green-500 dark:bg-green-400',
+  info: "bg-blue-500 dark:bg-blue-400",
+  warning: "bg-yellow-500 dark:bg-yellow-400",
+  success: "bg-green-500 dark:bg-green-400",
 };
 
 const AuditTrailViewer: FC<AuditTrailViewerProps> = ({ items }) => {
@@ -64,6 +64,6 @@ const AuditTrailViewer: FC<AuditTrailViewerProps> = ({ items }) => {
   );
 };
 
-AuditTrailViewer.displayName = 'AuditTrailViewer';
+AuditTrailViewer.displayName = "AuditTrailViewer";
 
 export default AuditTrailViewer;

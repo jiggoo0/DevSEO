@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { FC, memo } from 'react';
-import { EffectiveRole } from '@/config/secretCards.config';
+import React, { FC, memo } from "react";
+import { EffectiveRole } from "@/config/secretCards.config";
 
 interface SecretDescriptionProps {
   user: {
@@ -23,6 +23,6 @@ const SecretDescription: FC<SecretDescriptionProps> = ({ user }) => {
   );
 };
 
-SecretDescription.displayName = 'SecretDescription';
+SecretDescription.displayName = "SecretDescription";
 
 export default memo(SecretDescription);

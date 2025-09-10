@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { FC, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { FC, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * DocumentDownload
@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
  * - Accessible: aria-labelledby, aria-live, role
  */
 const DocumentDownload: FC = () => {
-  const [docCode, setDocCode] = useState('');
+  const [docCode, setDocCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -23,18 +23,18 @@ const DocumentDownload: FC = () => {
     setSuccess(false);
 
     if (!docCode.trim()) {
-      setError('กรุณากรอกรหัสเอกสาร');
+      setError("กรุณากรอกรหัสเอกสาร");
       return;
     }
 
     setLoading(true);
     try {
       await new Promise<void>((res) => setTimeout(res, 800));
-      const isValid = docCode === 'ADMIN123';
+      const isValid = docCode === "ADMIN123";
       if (isValid) setSuccess(true);
-      else setError('รหัสเอกสารถูกต้องไม่ถูกต้อง กรุณาลองใหม่');
+      else setError("รหัสเอกสารถูกต้องไม่ถูกต้อง กรุณาลองใหม่");
     } catch {
-      setError('เกิดข้อผิดพลาด โปรดลองอีกครั้ง');
+      setError("เกิดข้อผิดพลาด โปรดลองอีกครั้ง");
     } finally {
       setLoading(false);
     }
@@ -45,7 +45,7 @@ const DocumentDownload: FC = () => {
       className="max-w-lg mx-auto p-6 bg-base-100 rounded-xl shadow-lg"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       aria-labelledby="document-download-title"
     >
       <h2
@@ -76,7 +76,7 @@ const DocumentDownload: FC = () => {
           disabled={loading}
           aria-label="ตรวจสอบรหัสเอกสาร"
         >
-          {loading ? <span className="loading loading-spinner loading-sm" /> : 'ตรวจสอบรหัสเอกสาร'}
+          {loading ? <span className="loading loading-spinner loading-sm" /> : "ตรวจสอบรหัสเอกสาร"}
         </button>
       </form>
 
@@ -121,6 +121,6 @@ const DocumentDownload: FC = () => {
   );
 };
 
-DocumentDownload.displayName = 'DocumentDownload';
+DocumentDownload.displayName = "DocumentDownload";
 
 export default DocumentDownload;

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { forwardRef, ReactNode, HTMLAttributes } from 'react';
-import clsx from 'clsx';
-import { cardVariantClasses, cardSizeClasses, CardVariant, CardSize } from './Card.styles';
+import { forwardRef, ReactNode, HTMLAttributes } from "react";
+import clsx from "clsx";
+import { cardVariantClasses, cardSizeClasses, CardVariant, CardSize } from "./Card.styles";
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -12,15 +12,15 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ children, variant = 'default', size = 'md', className, ...props }, ref) => {
+  ({ children, variant = "default", size = "md", className, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={clsx(
-          'rounded-2xl transition-colors duration-200',
+          "rounded-2xl transition-colors duration-200",
           cardVariantClasses[variant],
           cardSizeClasses[size],
-          className,
+          className
         )}
         role="region"
         {...props}
@@ -28,9 +28,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         {children}
       </div>
     );
-  },
+  }
 );
 
-Card.displayName = 'Card';
+Card.displayName = "Card";
 
 export default Card;

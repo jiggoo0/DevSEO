@@ -1,7 +1,7 @@
 // src/api/Chat/index.ts
 export interface ChatMessage {
   id: string;
-  sender: 'user' | 'bot';
+  sender: "user" | "bot";
   text: string;
   timestamp: number;
 }
@@ -31,7 +31,7 @@ export const chatAPI = {
   async sendMessage(text: string): Promise<ChatMessage> {
     const userMsg: ChatMessage = {
       id: crypto.randomUUID(),
-      sender: 'user',
+      sender: "user",
       text,
       timestamp: Date.now(),
     };
@@ -42,7 +42,7 @@ export const chatAPI = {
     setTimeout(() => {
       const botMsg: ChatMessage = {
         id: crypto.randomUUID(),
-        sender: 'bot',
+        sender: "bot",
         text: `🤖 ตอบกลับ: ${text}`,
         timestamp: Date.now(),
       };

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { FC } from 'react';
-import clsx from 'clsx';
-import { IdCardData } from '@/Home/types/idCard';
+import React, { FC } from "react";
+import clsx from "clsx";
+import { IdCardData } from "@/Home/types/idCard";
 
 interface Props {
   data: IdCardData;
@@ -16,7 +16,7 @@ const IdCardSection: FC<Props> = ({ data, className, onChange }) => {
   };
 
   return (
-    <div className={clsx('bg-white p-4 rounded-xl shadow-md space-y-4', className)}>
+    <div className={clsx("bg-white p-4 rounded-xl shadow-md space-y-4", className)}>
       <h3 className="text-lg font-semibold">แสดงข้อมูลบัตรประชาชน</h3>
 
       <div className="space-y-3">
@@ -26,7 +26,7 @@ const IdCardSection: FC<Props> = ({ data, className, onChange }) => {
           <input
             type="text"
             value={data.fullName}
-            onChange={(e) => handleInputChange('fullName', e.target.value)}
+            onChange={(e) => handleInputChange("fullName", e.target.value)}
             className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
@@ -37,7 +37,7 @@ const IdCardSection: FC<Props> = ({ data, className, onChange }) => {
           <input
             type="text"
             value={data.idNumber}
-            onChange={(e) => handleInputChange('idNumber', e.target.value)}
+            onChange={(e) => handleInputChange("idNumber", e.target.value)}
             className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
@@ -48,7 +48,7 @@ const IdCardSection: FC<Props> = ({ data, className, onChange }) => {
           <input
             type="date"
             value={data.birthDate}
-            onChange={(e) => handleInputChange('birthDate', e.target.value)}
+            onChange={(e) => handleInputChange("birthDate", e.target.value)}
             className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
@@ -58,7 +58,7 @@ const IdCardSection: FC<Props> = ({ data, className, onChange }) => {
           <label className="font-medium">ที่อยู่</label>
           <textarea
             value={data.address}
-            onChange={(e) => handleInputChange('address', e.target.value)}
+            onChange={(e) => handleInputChange("address", e.target.value)}
             className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
@@ -81,5 +81,5 @@ const IdCardSection: FC<Props> = ({ data, className, onChange }) => {
   );
 };
 
-IdCardSection.displayName = 'IdCardSection';
+IdCardSection.displayName = "IdCardSection";
 export default IdCardSection;

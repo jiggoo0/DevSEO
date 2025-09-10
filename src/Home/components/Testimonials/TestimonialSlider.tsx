@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { FC, useState, useMemo } from 'react';
-import { testimonials } from '@data/testimonialsData';
-import { motion, AnimatePresence } from 'framer-motion';
-import { carouselVariants } from '@/animations/motionVariants';
-import { cn } from '@/utils/cn';
+import { FC, useState, useMemo } from "react";
+import { testimonials } from "@data/testimonialsData";
+import { motion, AnimatePresence } from "framer-motion";
+import { carouselVariants } from "@/animations/motionVariants";
+import { cn } from "@/utils/cn";
 
 interface Testimonial {
   name: string;
@@ -89,7 +89,7 @@ const TestimonialSlider: FC = () => {
           type="button"
           onClick={prev}
           className={cn(
-            'px-3 py-1 border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 rounded',
+            "px-3 py-1 border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 rounded"
           )}
           aria-label="Previous testimonial"
         >
@@ -99,7 +99,7 @@ const TestimonialSlider: FC = () => {
           type="button"
           onClick={next}
           className={cn(
-            'px-3 py-1 border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 rounded',
+            "px-3 py-1 border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 rounded"
           )}
           aria-label="Next testimonial"
         >
@@ -110,6 +110,6 @@ const TestimonialSlider: FC = () => {
   );
 };
 
-TestimonialSlider.displayName = 'TestimonialSlider';
+TestimonialSlider.displayName = "TestimonialSlider";
 
 export default TestimonialSlider;

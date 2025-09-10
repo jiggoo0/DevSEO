@@ -1,12 +1,12 @@
 // src/Home/components/SecretSection/KbankIOSNotification.tsx
-'use client';
+"use client";
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from "react";
 import {
   KbankIOSNotification as NotificationType,
   kbankMockData,
-} from '@__mocks__/KbankIOSNotification.mock';
-import KbankNotificationCard from './KbankNotificationCard';
+} from "@__mocks__/KbankIOSNotification.mock";
+import KbankNotificationCard from "./KbankNotificationCard";
 
 const LOAD_DELAY_MS = 700;
 

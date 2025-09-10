@@ -1,9 +1,9 @@
 // src/Home/components/SellingPoints/SellingPoints.tsx
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { motion, Variants } from 'framer-motion';
-import { sellingPointsData } from './points';
+import { FC } from "react";
+import { motion, Variants } from "framer-motion";
+import { sellingPointsData } from "./points";
 
 // =======================
 // Framer Motion Variants
@@ -15,7 +15,7 @@ const containerVariants: Variants = {
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 // =======================
@@ -71,6 +71,6 @@ const SellingPoints: FC = () => (
   </motion.section>
 );
 
-SellingPoints.displayName = 'SellingPoints';
+SellingPoints.displayName = "SellingPoints";
 
 export default SellingPoints;

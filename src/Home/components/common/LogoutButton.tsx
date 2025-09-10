@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState, FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { LogOut } from 'lucide-react';
+import { useState, FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { LogOut } from "lucide-react";
 
-import { useAuth } from '@/hooks/useAuth';
-import Button from '@/Home/components/ui/Button';
+import { useAuth } from "@/hooks/useAuth";
+import Button from "@/Home/components/ui/Button";
 
 /**
  * LogoutButton
@@ -23,9 +23,9 @@ const LogoutButton: FC = () => {
     setLoading(true);
     try {
       if (logout) await logout();
-      navigate('/login', { replace: true });
+      navigate("/login", { replace: true });
     } catch (err) {
-      console.error('Logout failed:', err);
+      console.error("Logout failed:", err);
     } finally {
       setLoading(false);
     }
@@ -44,11 +44,11 @@ const LogoutButton: FC = () => {
       {/* ไอคอน Logout */}
       <LogOut className="w-4 h-4" aria-hidden="true" />
       {/* ข้อความ */}
-      <span className={loading ? 'opacity-70' : ''}>ออกจากระบบ</span>
+      <span className={loading ? "opacity-70" : ""}>ออกจากระบบ</span>
     </Button>
   );
 };
 
-LogoutButton.displayName = 'LogoutButton';
+LogoutButton.displayName = "LogoutButton";
 
 export default LogoutButton;

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import { ShieldCheck, Clock4, Zap } from 'lucide-react';
+import { FC } from "react";
+import { motion } from "framer-motion";
+import { ShieldCheck, Clock4, Zap } from "lucide-react";
 
 /** =======================
  * Hero Stats Data
@@ -10,18 +10,18 @@ import { ShieldCheck, Clock4, Zap } from 'lucide-react';
 const stats = [
   {
     icon: ShieldCheck,
-    color: 'text-green-500',
-    label: 'ความลับปลอดภัย',
+    color: "text-green-500",
+    label: "ความลับปลอดภัย",
   },
   {
     icon: Clock4,
-    color: 'text-yellow-400',
-    label: 'งานไวใน 24 ชม.',
+    color: "text-yellow-400",
+    label: "งานไวใน 24 ชม.",
   },
   {
     icon: Zap,
-    color: 'text-blue-500',
-    label: 'พร้อมลุยทุกเคส',
+    color: "text-blue-500",
+    label: "พร้อมลุยทุกเคส",
   },
 ];
 
@@ -35,7 +35,7 @@ const containerVariants = {
     y: 0,
     transition: {
       staggerChildren: 0.15,
-      when: 'beforeChildren',
+      when: "beforeChildren",
     },
   },
 };

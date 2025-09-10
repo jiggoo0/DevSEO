@@ -1,9 +1,9 @@
 // src/Home/components/Forms/IdCardFormWithOCR.tsx
-'use client';
+"use client";
 
-import { FC, useState, ChangeEvent, FormEvent } from 'react';
-import clsx from 'clsx';
-import IdCardPreview, { IdCardData } from './IdCardPreview';
+import { FC, useState, ChangeEvent, FormEvent } from "react";
+import clsx from "clsx";
+import IdCardPreview, { IdCardData } from "./IdCardPreview";
 
 // =======================
 // OCR Mock (แทน driverLicenseOcr)
@@ -12,12 +12,12 @@ const mockOCR = async (): Promise<IdCardData> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        name: 'สมชาย',
-        surname: 'ใจดี',
-        idNumber: '1234567890123',
-        dob: '1990-01-01',
-        issueDate: '2020-01-01',
-        expiryDate: '2030-01-01',
+        name: "สมชาย",
+        surname: "ใจดี",
+        idNumber: "1234567890123",
+        dob: "1990-01-01",
+        issueDate: "2020-01-01",
+        expiryDate: "2030-01-01",
       });
     }, 1500);
   });
@@ -28,12 +28,12 @@ const mockOCR = async (): Promise<IdCardData> => {
 // =======================
 const IdCardFormWithOCR: FC<{ className?: string }> = ({ className }) => {
   const [formData, setFormData] = useState<IdCardData>({
-    name: '',
-    surname: '',
-    idNumber: '',
-    dob: '',
-    issueDate: '',
-    expiryDate: '',
+    name: "",
+    surname: "",
+    idNumber: "",
+    dob: "",
+    issueDate: "",
+    expiryDate: "",
   });
 
   const [ocrLoading, setOcrLoading] = useState(false);
@@ -52,11 +52,11 @@ const IdCardFormWithOCR: FC<{ className?: string }> = ({ className }) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log('Submitted:', formData);
+    console.log("Submitted:", formData);
   };
 
   return (
-    <div className={clsx('space-y-6', className)}>
+    <div className={clsx("space-y-6", className)}>
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md space-y-4">
         <h2 className="text-xl font-semibold">ฟอร์มบัตรประชาชน (OCR)</h2>
 
@@ -65,7 +65,7 @@ const IdCardFormWithOCR: FC<{ className?: string }> = ({ className }) => {
           onClick={handleOCR}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
         >
-          {ocrLoading ? 'กำลังอ่านข้อมูล...' : 'Simulate OCR'}
+          {ocrLoading ? "กำลังอ่านข้อมูล..." : "Simulate OCR"}
         </button>
 
         <input

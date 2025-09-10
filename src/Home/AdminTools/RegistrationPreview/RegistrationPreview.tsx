@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { FC, useRef } from 'react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { FC, useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export type Address = {
   houseNumber?: string;
@@ -23,7 +23,7 @@ export type RegistrationPreviewProps = {
   registrarName?: string;
 };
 
-const DEFAULT_TEXT = '—';
+const DEFAULT_TEXT = "—";
 const withFallback = (value?: string) => value?.trim() || DEFAULT_TEXT;
 
 const RegistrationPreview: FC<RegistrationPreviewProps> = ({
@@ -42,22 +42,22 @@ const RegistrationPreview: FC<RegistrationPreviewProps> = ({
     const canvas = await html2canvas(ref.current, {
       scale: 2,
       useCORS: true,
-      backgroundColor: '#fff',
+      backgroundColor: "#fff",
     });
     const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'pt',
+      orientation: "portrait",
+      unit: "pt",
       format: [(canvas.width * 72) / 96, (canvas.height * 72) / 96],
     });
     pdf.addImage(
-      canvas.toDataURL('image/png'),
-      'PNG',
+      canvas.toDataURL("image/png"),
+      "PNG",
       0,
       0,
       (canvas.width * 72) / 96,
-      (canvas.height * 72) / 96,
+      (canvas.height * 72) / 96
     );
-    pdf.save('registration-preview.pdf');
+    pdf.save("registration-preview.pdf");
   };
 
   const handleDownloadPng = async () => {
@@ -65,11 +65,11 @@ const RegistrationPreview: FC<RegistrationPreviewProps> = ({
     const canvas = await html2canvas(ref.current, {
       scale: 2,
       useCORS: true,
-      backgroundColor: '#fff',
+      backgroundColor: "#fff",
     });
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/png');
-    link.download = 'registration-preview.png';
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "registration-preview.png";
     link.click();
   };
 
@@ -81,7 +81,7 @@ const RegistrationPreview: FC<RegistrationPreviewProps> = ({
         style={{
           fontFamily: '"THSarabunNew", sans-serif',
           lineHeight: 1.8,
-          fontSize: '18pt',
+          fontSize: "18pt",
           minHeight: 1200,
         }}
       >
@@ -89,7 +89,7 @@ const RegistrationPreview: FC<RegistrationPreviewProps> = ({
         <div className="absolute left-12 top-8 text-[14pt] leading-snug">
           <p className="mb-2">ทะเบียนเลขที่ {withFallback(registrationNumber)}</p>
           <p>
-            คำขอที่{' '}
+            คำขอที่{" "}
             <span className="inline-block h-[1.7em] min-w-[160px] border-b border-gray-300" />
           </p>
         </div>
@@ -128,8 +128,8 @@ const RegistrationPreview: FC<RegistrationPreviewProps> = ({
           <p>{withFallback(businessName?.toUpperCase())}</p>
           <p className="mt-6 font-semibold">ที่ตั้งสถานประกอบการ</p>
           <p className="mx-auto max-w-[720px] indent-12 text-left leading-relaxed">
-            เลขที่ {withFallback(address.houseNumber)} หมู่ที่ {withFallback(address.villageNo)}{' '}
-            ตรอก/ซอย {withFallback(address.alley)} ตำบล/แขวง {withFallback(address.subDistrict)}{' '}
+            เลขที่ {withFallback(address.houseNumber)} หมู่ที่ {withFallback(address.villageNo)}{" "}
+            ตรอก/ซอย {withFallback(address.alley)} ตำบล/แขวง {withFallback(address.subDistrict)}{" "}
             อำเภอ/เขต {withFallback(address.district)} จังหวัด {withFallback(address.province)}
           </p>
         </div>

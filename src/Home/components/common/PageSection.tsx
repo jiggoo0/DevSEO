@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { FC, ReactNode, memo } from 'react';
-import { motion } from 'framer-motion';
+import { FC, ReactNode, memo } from "react";
+import { motion } from "framer-motion";
 
 interface PageSectionProps {
   children: ReactNode;
@@ -17,7 +17,7 @@ const PageSection: FC<PageSectionProps> = ({
   children,
   title,
   hideTitle = false,
-  className = '',
+  className = "",
   id,
   delay = 0,
 }) => {
@@ -27,7 +27,7 @@ const PageSection: FC<PageSectionProps> = ({
       className={`w-full bg-white rounded-xl shadow-md p-6 sm:p-8 ${className}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut', delay }}
+      transition={{ duration: 0.6, ease: "easeOut", delay }}
     >
       {!hideTitle && title && (
         <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
@@ -39,6 +39,6 @@ const PageSection: FC<PageSectionProps> = ({
   );
 };
 
-PageSection.displayName = 'PageSection';
+PageSection.displayName = "PageSection";
 
 export default memo(PageSection);

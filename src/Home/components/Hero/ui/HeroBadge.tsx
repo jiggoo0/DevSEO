@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import { BadgeCheck } from 'lucide-react';
+import { FC } from "react";
+import { motion } from "framer-motion";
+import { BadgeCheck } from "lucide-react";
 
 /** =======================
  * Hero Badge Component
@@ -14,7 +14,7 @@ const HeroBadge: FC = () => {
       aria-label="พร้อมลุยแบบมืออาชีพ"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
       whileHover={{ scale: 1.05 }}
       className="
         inline-flex items-center gap-2 rounded-full

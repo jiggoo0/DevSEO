@@ -1,15 +1,15 @@
 // src/App/ChatProvider.tsx
-'use client';
+"use client";
 
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { connectWS, subscribeWS, sendWS, WSMessage, WSMessagePayload } from '@/utils/wsClient';
+import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
+import { connectWS, subscribeWS, sendWS, WSMessage, WSMessagePayload } from "@/utils/wsClient";
 
 // ------------------------------
 // Types
 // ------------------------------
 export interface ChatMessage {
   id: string;
-  sender: 'user' | 'bot';
+  sender: "user" | "bot";
   text: string;
   timestamp: number;
 }
@@ -41,15 +41,15 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 
       const msg: ChatMessage = {
         id: crypto.randomUUID(),
-        sender: 'user',
+        sender: "user",
         text,
         timestamp: Date.now(),
       };
 
       addMessage(msg);
-      sendWS({ user: 'user', text });
+      sendWS({ user: "user", text });
     },
-    [addMessage],
+    [addMessage]
   );
 
   useEffect(() => {
@@ -58,14 +58,14 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     const unsub = subscribeWS((data: WSMessage) => {
       if (!data) return;
 
-      if (data.type === 'history' || data.type === 'message') {
+      if (data.type === "history" || data.type === "message") {
         const payloadArray = Array.isArray(data.payload) ? data.payload : [data.payload];
         const validMessages = payloadArray.filter((m): m is WSMessagePayload => !!m);
 
         const newMessages: ChatMessage[] = validMessages.map((m) => ({
           id: m.id ?? crypto.randomUUID(),
-          sender: m.user === 'user' ? 'user' : 'bot',
-          text: m.text ?? '',
+          sender: m.user === "user" ? "user" : "bot",
+          text: m.text ?? "",
           timestamp: m.timestamp ?? m.createdAt ?? Date.now(),
         }));
 
@@ -73,8 +73,8 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
           const existingIds = new Set(prev.map((m) => m.id));
           return [...prev, ...newMessages.filter((m) => !existingIds.has(m.id))];
         });
-      } else if (data.type === 'error') {
-        console.error('❌ WS error:', data.error ?? 'Unknown error');
+      } else if (data.type === "error") {
+        console.error("❌ WS error:", data.error ?? "Unknown error");
       }
     });
 
@@ -96,6 +96,6 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 // ------------------------------
 export const useChat = (): ChatContextProps => {
   const ctx = useContext(ChatContext);
-  if (!ctx) throw new Error('useChat must be used within ChatProvider');
+  if (!ctx) throw new Error("useChat must be used within ChatProvider");
   return ctx;
 };

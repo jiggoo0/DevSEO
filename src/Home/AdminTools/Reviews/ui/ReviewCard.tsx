@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { FC, memo } from 'react';
+import { FC, memo } from "react";
 
 export interface ReviewCardProps {
   id?: string | number;
@@ -27,5 +27,5 @@ const ReviewCard: FC<ReviewCardProps> = ({ id, name, image, comment }) => (
   </article>
 );
 
-ReviewCard.displayName = 'ReviewCard';
+ReviewCard.displayName = "ReviewCard";
 export default memo(ReviewCard);
