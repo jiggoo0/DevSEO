@@ -1,12 +1,13 @@
 # Project Structure
 
-_Generated at: 2025-09-10 18:54:11_
+_Generated at: 2025-09-11 07:03:52_
 
 ```
 src
 ├── App
 │   ├── ChatProvider.tsx
-│   └── RootApp.tsx
+│   ├── RootApp.tsx
+│   └── types.ts
 ├── Home
 │   ├── AdminTools
 │   │   ├── CompanyAccount
@@ -48,7 +49,9 @@ src
 │   │   │   └── types
 │   │   │       └── PoliceReport.ts
 │   │   ├── RegistrationPreview
-│   │   │   └── RegistrationPreview.tsx
+│   │   │   ├── RegistrationPreview.d.ts
+│   │   │   ├── RegistrationPreview.tsx
+│   │   │   └── types.ts
 │   │   ├── Reviews
 │   │   │   ├── ReviewsGallery.tsx
 │   │   │   └── ui
@@ -56,6 +59,7 @@ src
 │   │   ├── SalaryCertificate
 │   │   │   ├── SalaryCertificate.tsx
 │   │   │   └── types
+│   │   │       ├── salaryCertificate.d.ts
 │   │   │       └── salaryCertificate.ts
 │   │   └── SpecialBranchCertificate
 │   │       └── SpecialBranchCertificate.tsx
@@ -125,6 +129,9 @@ src
 │   │   ├── SecretSection
 │   │   │   ├── AuditTrailViewer.tsx
 │   │   │   ├── KbankIOSNotification.tsx
+│   │   │   ├── KbankNotificationCard
+│   │   │   │   └── types.ts
+│   │   │   ├── KbankNotificationCard.d.ts
 │   │   │   ├── KbankNotificationCard.tsx
 │   │   │   └── SecretDescription.tsx
 │   │   ├── SellingPoints
@@ -218,7 +225,15 @@ src
 ├── animations
 │   └── motionVariants.ts
 ├── api
-│   └── server.ts
+│   ├── Chat
+│   │   └── types.ts
+│   ├── auth
+│   │   ├── login.ts
+│   │   └── me.ts
+│   ├── client.ts
+│   ├── ping.ts
+│   ├── server.ts
+│   └── testimonials.ts
 ├── assets
 │   ├── images
 │   │   └── hero-bg.webp
@@ -252,6 +267,9 @@ src
 │   └── useTempCodeAuth.ts
 ├── index.css
 ├── main.tsx
+├── server
+│   └── auth
+│       └── login.ts
 ├── services
 │   └── driverLicenseOcr.ts
 ├── styles
@@ -265,7 +283,6 @@ src
 │   ├── declarations.d.ts
 │   └── sqljs.d.ts
 ├── utils
-│   ├── auth.ts
 │   ├── calculations.ts
 │   ├── cn.ts
 │   ├── common
@@ -284,7 +301,7 @@ src
 │   │   └── SocialIcons.tsx
 │   ├── exportCard.ts
 │   ├── index.ts
-│   └── wsClient.ts
+│   └── wsClient.tsx
 └── vite-env.d.ts
 
 ```

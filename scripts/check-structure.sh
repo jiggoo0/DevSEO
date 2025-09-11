@@ -95,29 +95,37 @@ fi
 # -----------------------------
 # 6️⃣ Project Info
 # -----------------------------
-GITHUB_URL="${GITHUB_URL:-https://github.com/jiggoo0/vite-react}"
-DEVELOPER_EMAIL="${DEVELOPER_EMAIL:-you@example.com}"
+
+GITHUB_URL="${GITHUB_URL:-https://github.com/jiggoo0/DevSEO}"
+DEVELOPER_EMAIL="${DEVELOPER_EMAIL:-jiggoo0@outlook.co.th}"
 WEBSITE_URL="${WEBSITE_URL:-https://404notfontjp.vercel.app/}"
 VERCEL_ACCOUNT="${VERCEL_ACCOUNT:-jiggoos-projects}"
-VERCEL_PROJECT_NAME="${VERCEL_PROJECT_NAME:-vite-react}"
-VERCEL_PROJECT_ID="${VERCEL_PROJECT_ID:-prj_MBF9hbw032OzD2gDVkUQ7mvoYA2t}"
+VERCEL_PROJECT_NAME="${VERCEL_PROJECT_NAME:-dev-seo}"
+VERCEL_PROJECT_ID="${VERCEL_PROJECT_ID:-prj_xMJupCGo41mdyaOFeEkB7vYXtHsQ}"
 
+# ---------------------------------------------
+# Read package.json info safely
+# ---------------------------------------------
 PKG_NAME=$(jq -r '.name // "vite-react"' package.json 2>/dev/null)
-PKG_VER=$(jq -r '.version // "7.1.1"' package.json 2>/dev/null)
+PKG_VER=$(jq -r '.version // "1.0.0"' package.json 2>/dev/null)
 PKG_DESC=$(jq -r '.description // "N/A"' package.json 2>/dev/null)
 
+# ---------------------------------------------
+# Display Project Info
+# ---------------------------------------------
 PROJECT_INFO=$(cat <<EOF
-| Item | Value |
-|------|-------|
-| Project Name | $PKG_NAME |
-| Version | $PKG_VER |
-| Description | $PKG_DESC |
-| GitHub URL | $GITHUB_URL |
-| Developer Email | $DEVELOPER_EMAIL |
-| Website URL | $WEBSITE_URL |
-| Vercel Account | $VERCEL_ACCOUNT |
-| Vercel Project Name | $VERCEL_PROJECT_NAME |
-| Vercel Project ID | $VERCEL_PROJECT_ID |
+| Item                 | Value |
+|----------------------|-------|
+| Project Name         | $PKG_NAME |
+| Version              | $PKG_VER |
+| Description          | $PKG_DESC |
+| GitHub URL           | $GITHUB_URL |
+| Developer Email      | $DEVELOPER_EMAIL |
+| Website URL          | $WEBSITE_URL |
+| Vercel Account       | $VERCEL_ACCOUNT |
+| Vercel Project Name  | $VERCEL_PROJECT_NAME |
+| Vercel Project ID    | $VERCEL_PROJECT_ID |
+gh repo clone jiggoo0/DevSEO
 EOF
 )
 
@@ -149,7 +157,8 @@ $TREE_CONTENT
 $PROJECT_INFO
 
 ## 6️⃣ Notes
-- ROADMAP.md & WORKFLOW.md included if present
+- > “Static Frontend SPA with React + TypeScript, PWA-ready, environment-configurable, using local/mocked data only.”
+
 EOF
 
 # Append RODEMAP.md and WORKFLOW.md if exists
